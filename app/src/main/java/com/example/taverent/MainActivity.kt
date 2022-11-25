@@ -15,7 +15,7 @@ import com.example.taverent.databinding.ActivityMainBinding
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var pagerAdapter: ViewPagerAdapter
-    val WS_HOST = "http://10.0.2.2:8000/api"
+    var WS_HOST = ""
 
     var position = 0
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +24,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        WS_HOST = resources.getString(R.string.WS_HOST)
 
 
         val fragments: ArrayList<Fragment> = arrayListOf(Onboarding1(),Onboarding2(),Onboarding3())

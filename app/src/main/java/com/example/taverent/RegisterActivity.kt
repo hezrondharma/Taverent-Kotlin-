@@ -15,7 +15,7 @@ import org.json.JSONArray
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    val WS_HOST = "http://10.0.2.2:8000/api"
+    val WS_HOST = resources.getString(R.string.app_name)
 
     var pemiliks: ArrayList<Pemilik> = ArrayList()
     var penginaps: ArrayList<Penginap> = ArrayList()

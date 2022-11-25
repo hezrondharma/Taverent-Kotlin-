@@ -1,5 +1,6 @@
 package com.example.taverent
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -18,7 +19,7 @@ import org.json.JSONArray
 class LoginChoose1 : Fragment() {
 
     private lateinit var binding: FragmentLoginChoose1Binding
-    val WS_HOST = "http://10.0.2.2:8000/api"
+    var WS_HOST = ""
 
     var pemiliks: ArrayList<Pemilik> = ArrayList()
     var penginaps: ArrayList<Penginap> = ArrayList()
@@ -39,8 +40,11 @@ class LoginChoose1 : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        WS_HOST = resources.getString(R.string.WS_HOST)
+
         refreshPemilik(view)
         refreshPenginap(view)
+
 
         binding.imageButton.setOnClickListener {
             val fragment  = LoginChoose2()
@@ -52,14 +56,15 @@ class LoginChoose1 : Fragment() {
         }
 
         val tipe = arguments?.getString("tipe")
-        binding.textView.setText("Selamat Kembali $tipe.")
+        binding.textView.setText("Selamat Kembali $tipe")
         if (tipe!=null) {
             binding.btnLogin.setOnClickListener {
                 val email = binding.etEmail.text.toString().trim()
                 val password = binding.etPassword.text.toString().trim()
                 if (email != "" && password != "") {
                     if (email=="admin"&&password=="admin") {
-                        //goto admin
+                        val intent = Intent(view.context,AdminActivity::class.java)
+                        activity?.runOnUiThread { startActivity(intent) }
                     }else{
                         var exist = false
                         if (tipe == "pemilik") {

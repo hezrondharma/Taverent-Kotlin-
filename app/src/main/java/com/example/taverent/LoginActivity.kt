@@ -7,7 +7,7 @@ import com.example.taverent.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginBinding
-    val WS_HOST = "http://10.0.2.2:8000/api"
+    var WS_HOST = ""
 
     var pemiliks: ArrayList<Pemilik> = ArrayList()
     var penginaps: ArrayList<Penginap> = ArrayList()
@@ -17,6 +17,7 @@ class LoginActivity : AppCompatActivity() {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        WS_HOST = resources.getString(R.string.WS_HOST)
 
         setfrag()
         binding.button2.setOnClickListener {
