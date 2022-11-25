@@ -1,3 +1,11 @@
 <resources>
     <string name="app_name">TAVERENT</string>
+    <string name="title1">Search Anywhere in Surabaya</string>
+    <string name="title2">Quick and Easy</string>
+    <string name="title3">Affordable Prices</string>
+    <string name="desc1">wifowejfoi wjeoi fjwoie jfiowejofwejifoiwe joifwje oifjo iwejf iowjef j</string>
+    <string name="desc2">wifowejfoi wjeoi fjwoie jfiowejofwejifoiwe joifwje oifjo iwejf iowjef j</string>
+    <string name="desc3">wifowejfoi wjeoi fjwoie jfiowejofwejifoiwe joifwje oifjo iwejf iowjef j</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
