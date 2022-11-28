@@ -15,7 +15,7 @@ import org.json.JSONArray
 
 class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
-    val WS_HOST = resources.getString(R.string.app_name)
+    var WS_HOST = ""
 
     var pemiliks: ArrayList<Pemilik> = ArrayList()
     var penginaps: ArrayList<Penginap> = ArrayList()
@@ -24,6 +24,8 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        WS_HOST = resources.getString(R.string.WS_HOST)
 
         refreshPemilik()
         refreshPenginap()
@@ -120,7 +122,7 @@ class RegisterActivity : AppCompatActivity() {
                     params["email"] = email
                     params["no_telp"] = notelp
                     params["username"] = username
-                    params["nama_lengkap"] = namalengkap
+                    params["nam     a_lengkap"] = namalengkap
                     params["password"] = password
                     return params
                 }

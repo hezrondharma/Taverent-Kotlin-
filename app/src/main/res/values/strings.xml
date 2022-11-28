@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">TAVERENT</string>
     <string name="WS_HOST">http://10.0.2.2:8000/api</string>
-<!--    <string name="WS_HOST">https://brummagem-damage.000webhostapp.com/api</string>-->
+    <!--    <string name="WS_HOST">https://brummagem-damage.000webhostapp.com/api</string>-->
     <string name="title1">Search Anywhere in Surabaya</string>
     <string name="title2">Quick and Easy</string>
     <string name="title3">Affordable Prices</string>

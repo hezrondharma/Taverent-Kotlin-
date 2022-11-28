@@ -29,7 +29,10 @@ class AdminActivity : AppCompatActivity() {
                     ).setReorderingAllowed(true).commit()
                 }
                 R.id.listitem->{
-
+                    val fragment = AdminListFragment()
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.frag2,fragment
+                    ).setReorderingAllowed(true).commit()
                 }
                 R.id.gameitem->{
 

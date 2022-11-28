@@ -35,6 +35,10 @@ android {
     buildFeatures {
         viewBinding true
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
 
 }
 
@@ -52,13 +56,20 @@ dependencies {
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
 
+    //connect laravel
     implementation 'com.android.volley:volley:1.2.1'
 
+    //api
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
     implementation 'com.squareup.okhttp3:logging-interceptor:4.9.0'
 
+    //chart
     implementation 'io.data2viz.charts:core:1.1.0-eap1'
     implementation 'io.data2viz.d2v:viz:0.8.12'
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
+
+    //heremaps
+    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+
 }

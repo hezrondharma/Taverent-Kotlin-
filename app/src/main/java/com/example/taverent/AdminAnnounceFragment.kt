@@ -10,6 +10,8 @@ import com.example.taverent.databinding.FragmentAdminListBinding
 
 class AdminAnnounceFragment : Fragment() {
     private lateinit var binding: FragmentAdminAnnounceBinding
+    var WS_HOST = ""
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,7 +28,11 @@ class AdminAnnounceFragment : Fragment() {
         return view
     }
 
+    
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        WS_HOST = resources.getString(R.string.WS_HOST)
+
+
     }
 }

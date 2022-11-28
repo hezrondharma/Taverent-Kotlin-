@@ -1,6 +1,5 @@
 package com.example.taverent
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -14,13 +13,12 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.taverent.databinding.FragmentAdminHomeBinding
-import com.example.taverent.databinding.FragmentLoginChoose1Binding
 import org.json.JSONArray
 
 
 class AdminHomeFragment : Fragment() {
     private lateinit var binding: FragmentAdminHomeBinding
-    private lateinit var rvUserAdminHome: RVUserAdminHome
+    private lateinit var rvPenginapAdminHome: RVPenginapAdminHome
 
     var WS_HOST = ""
 
@@ -45,10 +43,11 @@ class AdminHomeFragment : Fragment() {
 
         WS_HOST = resources.getString(R.string.WS_HOST)
 
-        binding.linearbottom.addView(Chart(view.context))
+//        binding.linearbottom.addView(Chart(view.context))
+//        binding.linearbottom.addView(Chart(view.context))
         refreshPenginap(view)
 
-        rvUserAdminHome = RVUserAdminHome(penginaps,R.layout.rv_user_admin_home){view, idx ->
+        rvPenginapAdminHome = RVPenginapAdminHome(penginaps,R.layout.rv_user_admin_home){ view, idx ->
             val popup = PopupMenu(view.context,view)
             popup.inflate(R.menu.popupmenu1)
 
@@ -60,7 +59,7 @@ class AdminHomeFragment : Fragment() {
                     R.id.menuban->{
                         //ban user
                         activity?.runOnUiThread {
-                        rvUserAdminHome.notifyDataSetChanged()}
+                        rvPenginapAdminHome.notifyDataSetChanged()}
                     }
                 }
                 true
@@ -68,7 +67,7 @@ class AdminHomeFragment : Fragment() {
             popup.show()
         }
 
-        binding.rv1.adapter = rvUserAdminHome
+        binding.rv1.adapter = rvPenginapAdminHome
         binding.rv1.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
     }
     fun refreshPenginap(view:View){
@@ -90,7 +89,7 @@ class AdminHomeFragment : Fragment() {
                     }
                     val p = Penginap(username,password,nama_lengkap,email,no_telp,deleted_at)
                     penginaps.add(p)
-                    rvUserAdminHome.notifyDataSetChanged()
+                    rvPenginapAdminHome.notifyDataSetChanged()
                 }
             },
             Response.ErrorListener {

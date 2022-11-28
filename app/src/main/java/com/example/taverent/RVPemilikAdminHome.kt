@@ -5,16 +5,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
-import android.widget.PopupMenu
 import android.widget.TextView
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class RVUserAdminHome(
-    private val songs: ArrayList<Penginap>,
+class RVPemilikAdminHome(
+    private val songs: ArrayList<Pemilik>,
     private val layout: Int,
     private val onMoreClickListener: (view: View, idx:Int)->Unit,
-): RecyclerView.Adapter<RVUserAdminHome.CustomViewHolder>(){
+): RecyclerView.Adapter<RVPemilikAdminHome.CustomViewHolder>(){
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
