@@ -71,8 +71,9 @@ class LoginChoose1 : Fragment() {
                             for (i in 0 until pemiliks.size) {
                                 if (pemiliks[i].email == email) {
                                     if (pemiliks[i].password == password) {
-                                        Toast.makeText(view.context, "Success", Toast.LENGTH_SHORT)
-                                            .show()
+                                        Toast.makeText(view.context, "Success", Toast.LENGTH_SHORT).show()
+                                        val intent = Intent(view.context,SewaMain::class.java)
+                                        activity?.runOnUiThread { startActivity(intent) }
                                     } else {
                                         Toast.makeText(view.context,
                                             "Paasword Incorrect",
