@@ -24,9 +24,7 @@ class RegisterActivity : AppCompatActivity() {
         binding = ActivityRegisterBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
-        WS_HOST = resources.getString(R.string.WS_HOST)
-
+        WS_HOST=resources.getString(R.string.WS_HOST)
         refreshPemilik()
         refreshPenginap()
 
