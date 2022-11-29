@@ -42,15 +42,17 @@
                     android:background="#FFFFFF"
                     android:scaleX="1.5"
                     android:scaleY="1.5"
-                    android:src="@drawable/ic_baseline_add_circle_outline_24" />
+                    android:src="@drawable/ic_baseline_add_circle_outline_24"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck,TouchTargetSizeCheck" />
             </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvpengumuman"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="30dp"
-                android:paddingLeft="30dp"
-                android:paddingRight="30dp" />
+                android:paddingLeft="10dp"
+                android:paddingRight="20dp" />
 
         </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

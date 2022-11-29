@@ -1,18 +1,22 @@
 package com.example.taverent
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.taverent.databinding.FragmentAdminHomeBinding
+import com.here.sdk.core.GeoCoordinates
+import com.here.sdk.mapviewlite.MapScene.LoadSceneCallback
+import com.here.sdk.mapviewlite.MapStyle
 import org.json.JSONArray
 
 
@@ -67,8 +71,22 @@ class AdminHomeFragment : Fragment() {
             popup.show()
         }
 
+        binding.mapView.onCreate(savedInstanceState)
+        loadMapScene()
         binding.rv1.adapter = rvPenginapAdminHome
         binding.rv1.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
+    }
+    private fun loadMapScene() {
+        // Load a scene from the SDK to render the map with a map style.
+        binding.mapView.getMapScene().loadScene(MapStyle.NORMAL_DAY,
+            LoadSceneCallback { errorCode ->
+                if (errorCode == null) {
+                    binding.mapView.getCamera().setTarget(GeoCoordinates(52.530932, 13.384915))
+                    binding.mapView.getCamera().setZoomLevel(14.0)
+                } else {
+                    Log.d("loadMapScene()", "onLoadScene failed: $errorCode")
+                }
+            })
     }
     fun refreshPenginap(view:View){
         val strReq = object : StringRequest(
@@ -78,6 +96,7 @@ class AdminHomeFragment : Fragment() {
                 penginaps.clear()
                 for (i in 0 until obj.length()){
                     val o = obj.getJSONObject(i)
+                    val id = o.getInt("id")
                     val username = o.getString("username")
                     val password = o.getString("password")
                     val nama_lengkap = o.getString("nama_lengkap")
@@ -87,7 +106,7 @@ class AdminHomeFragment : Fragment() {
                     if (o.has("deleted_at")) {
                         deleted_at = o.getString("deleted_at")
                     }
-                    val p = Penginap(username,password,nama_lengkap,email,no_telp,deleted_at)
+                    val p = Penginap(id,username,password,nama_lengkap,email,no_telp,deleted_at)
                     penginaps.add(p)
                     rvPenginapAdminHome.notifyDataSetChanged()
                 }

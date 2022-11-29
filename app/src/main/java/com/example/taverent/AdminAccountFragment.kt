@@ -29,5 +29,12 @@ class AdminAccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        binding.button8.setOnClickListener{
+
+        }
+        binding.button9.setOnClickListener {
+
+        }
     }
 }

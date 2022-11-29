@@ -126,6 +126,7 @@ class LoginChoose1 : Fragment() {
                 pemiliks.clear()
                 for (i in 0 until obj.length()){
                     val o = obj.getJSONObject(i)
+                    val id = o.getInt("id")
                     val username = o.getString("username")
                     val password = o.getString("password")
                     val nama_lengkap = o.getString("nama_lengkap")
@@ -135,7 +136,7 @@ class LoginChoose1 : Fragment() {
                     if (o.has("deleted_at")) {
                         deleted_at = o.getString("deleted_at")
                     }
-                    val p = Pemilik(username,password,nama_lengkap,email,no_telp,deleted_at)
+                    val p = Pemilik(id,username,password,nama_lengkap,email,no_telp,deleted_at)
                     pemiliks.add(p)
                 }
             },
@@ -154,6 +155,7 @@ class LoginChoose1 : Fragment() {
                 penginaps.clear()
                 for (i in 0 until obj.length()){
                     val o = obj.getJSONObject(i)
+                    val id = o.getInt("id")
                     val username = o.getString("username")
                     val password = o.getString("password")
                     val nama_lengkap = o.getString("nama_lengkap")
@@ -163,7 +165,7 @@ class LoginChoose1 : Fragment() {
                     if (o.has("deleted_at")) {
                         deleted_at = o.getString("deleted_at")
                     }
-                    val p = Penginap(username,password,nama_lengkap,email,no_telp,deleted_at)
+                    val p = Penginap(id,username,password,nama_lengkap,email,no_telp,deleted_at)
                     penginaps.add(p)
                 }
             },

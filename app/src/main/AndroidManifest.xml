@@ -3,11 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.taverent">
 
-    <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -21,25 +20,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
-            android:name=".StatistikSewa"
+            android:name=".PenginapActivity"
             android:exported="false" />
         <activity
+            android:name=".AddAnnounceActivity"
+            android:exported="false" />
+
+        <provider
+            android:name="com.here.sdk.engine.InitProvider"
+            android:authorities="com.here.sdk.engine.InitProvider"
+            android:exported="false"
+            tools:node="remove" />
+
+        <activity
             android:name=".SewaMain"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-        <meta-data
-            android:name="com.here.sdk.access_key_id"
-            android:value="HvBSWvTW-ajXnBs6abqRLw" />
-        <meta-data
-            android:name="com.here.sdk.access_key_secret"
-            android:value="5pdus4zHhrkbdIggtB8K5svsGc7BMGc2GZpJuX4XSQQXF16CSCRGmeqoJmRnfSdYtyjRACVFHzchzABZEmnGTQ" />
-
+            android:exported="false" />
         <activity
             android:name=".AdminActivity"
             android:exported="false" />
@@ -51,8 +46,14 @@
             android:exported="false" />
         <activity
             android:name=".MainActivity"
-            android:exported="false"
-            android:theme="@style/Theme.App.Starting" />
+            android:exported="true"
+            android:theme="@style/Theme.App.Starting">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

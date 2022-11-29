@@ -1,15 +1,15 @@
 package com.example.taverent
 
 import android.content.Intent
-import android.graphics.Color
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
-import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.example.taverent.databinding.ActivityMainBinding
+import com.here.sdk.core.engine.SDKNativeEngine
+import com.here.sdk.core.engine.SDKOptions
+import com.here.sdk.core.errors.InstantiationErrorException
 
 
 class MainActivity : AppCompatActivity() {
@@ -26,15 +26,17 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         WS_HOST = resources.getString(R.string.WS_HOST)
 
-
+        initializeHERESDK()
         val fragments: ArrayList<Fragment> = arrayListOf(Onboarding1(),Onboarding2(),Onboarding3())
         pagerAdapter = ViewPagerAdapter(fragments,this@MainActivity)
 
         binding.viewPager.adapter = pagerAdapter
         binding.viewPager?.registerOnPageChangeCallback(object : ViewPager2.OnPageChangeCallback() {
-            override fun onPageScrolled(position: Int,
-                                        positionOffset: Float,
-                                        positionOffsetPixels: Int) {
+            override fun onPageScrolled(
+                position: Int,
+                positionOffset: Float,
+                positionOffsetPixels: Int,
+            ) {
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
                 this@MainActivity.position = position
                 if (position==2){
@@ -68,6 +70,36 @@ class MainActivity : AppCompatActivity() {
         }
 
     }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        disposeHERESDK()
+    }
+
+    private fun initializeHERESDK() {
+        // Set your credentials for the HERE SDK.
+        val accessKeyID = "HvBSWvTW-ajXnBs6abqRLw"
+        val accessKeySecret = "5pdus4zHhrkbdIggtB8K5svsGc7BMGc2GZpJuX4XSQQXF16CSCRGmeqoJmRnfSdYtyjRACVFHzchzABZEmnGTQ"
+        val options = SDKOptions(accessKeyID, accessKeySecret)
+        try {
+            SDKNativeEngine.makeSharedInstance(this@MainActivity, options)
+        } catch (e: InstantiationErrorException) {
+            throw RuntimeException("Initialization of HERE SDK failed: " + e.error.name.toString())
+        }
+    }
+    private fun disposeHERESDK() {
+        // Free HERE SDK resources before the application shuts down.
+        // Usually, this should be called only on application termination.
+        // Afterwards, the HERE SDK is no longer usable unless it is initialized again.
+        val sdkNativeEngine: SDKNativeEngine? = SDKNativeEngine.getSharedInstance()
+        if (sdkNativeEngine != null) {
+            sdkNativeEngine.dispose()
+            // For safety reasons, we explicitly set the shared instance to null to avoid situations,
+            // where a disposed instance is accidentally reused.
+            SDKNativeEngine.setSharedInstance(null)
+        }
+    }
+
     fun buttoncontinue(){
         binding.btnNext.animate().apply {
             duration = 200

@@ -22,7 +22,7 @@ class AdminActivity : AppCompatActivity() {
         ).setReorderingAllowed(true).commit()
         binding.bottomNavAdmin.setOnItemSelectedListener {
             when (it.itemId){
-                R.id.homeitem->{
+                R.id.searchitem->{
                     val fragment = AdminHomeFragment()
                     supportFragmentManager.beginTransaction().replace(
                         R.id.frag2,fragment
@@ -38,10 +38,16 @@ class AdminActivity : AppCompatActivity() {
 
                 }
                 R.id.notifitem->{
-
+                    val fragment = AdminAnnounceFragment()
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.frag2,fragment
+                    ).setReorderingAllowed(true).commit()
                 }
                 R.id.adminitem->{
-
+                    val fragment = AdminAccountFragment()
+                    supportFragmentManager.beginTransaction().replace(
+                        R.id.frag2,fragment
+                    ).setReorderingAllowed(true).commit()
                 }
             }
             return@setOnItemSelectedListener true

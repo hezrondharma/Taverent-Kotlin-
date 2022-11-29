@@ -14,8 +14,6 @@ class AdminListFragment : Fragment() {
     private lateinit var binding: FragmentAdminListBinding
     var WS_HOST = ""
 
-    var penginaps: ArrayList<Penginap> = ArrayList()
-    var pemiliks: ArrayList<Pemilik> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 

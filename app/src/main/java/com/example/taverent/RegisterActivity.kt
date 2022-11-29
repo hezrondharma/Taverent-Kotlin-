@@ -112,7 +112,7 @@ class RegisterActivity : AppCompatActivity() {
                         Toast.makeText(this@RegisterActivity, "User created", Toast.LENGTH_SHORT).show() }
                 },
                 Response.ErrorListener {
-                    Toast.makeText(this, "WS_ERROR", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
                 }
             ){
                 override fun getParams(): MutableMap<String, String>? {
@@ -120,7 +120,7 @@ class RegisterActivity : AppCompatActivity() {
                     params["email"] = email
                     params["no_telp"] = notelp
                     params["username"] = username
-                    params["nam     a_lengkap"] = namalengkap
+                    params["nama_lengkap"] = namalengkap
                     params["password"] = password
                     return params
                 }
@@ -141,6 +141,7 @@ class RegisterActivity : AppCompatActivity() {
                 pemiliks.clear()
                 for (i in 0 until obj.length()){
                     val o = obj.getJSONObject(i)
+                    val id = o.getInt("id")
                     val username = o.getString("username")
                     val password = o.getString("password")
                     val nama_lengkap = o.getString("nama_lengkap")
@@ -150,7 +151,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (o.has("deleted_at")) {
                         deleted_at = o.getString("deleted_at")
                     }
-                    val p = Pemilik(username,password,nama_lengkap,email,no_telp,deleted_at)
+                    val p = Pemilik(id,username,password,nama_lengkap,email,no_telp,deleted_at)
                     pemiliks.add(p)
                 }
             },
@@ -169,6 +170,7 @@ class RegisterActivity : AppCompatActivity() {
                 penginaps.clear()
                 for (i in 0 until obj.length()){
                     val o = obj.getJSONObject(i)
+                    val id = o.getInt("id")
                     val username = o.getString("username")
                     val password = o.getString("password")
                     val nama_lengkap = o.getString("nama_lengkap")
@@ -178,7 +180,7 @@ class RegisterActivity : AppCompatActivity() {
                     if (o.has("deleted_at")) {
                         deleted_at = o.getString("deleted_at")
                     }
-                    val p = Penginap(username,password,nama_lengkap,email,no_telp,deleted_at)
+                    val p = Penginap(id,username,password,nama_lengkap,email,no_telp,deleted_at)
                     penginaps.add(p)
                 }
             },
