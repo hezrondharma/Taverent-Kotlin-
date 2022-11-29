@@ -7,6 +7,7 @@
     tools:context=".SewaMain">
 
     <View
+        android:id="@+id/view2"
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="@color/black"
@@ -18,6 +19,7 @@
         app:layout_constraintVertical_bias="0.906" />
 
     <LinearLayout
+        android:id="@+id/linearLayout3"
         android:layout_width="411dp"
         android:layout_height="60dp"
         android:gravity="center"
@@ -155,4 +157,15 @@
         </LinearLayout>
 
     </LinearLayout>
+
+    <androidx.fragment.app.FragmentContainerView
+        android:id="@+id/fragmentContainerView3"
+        android:name="com.example.taverent.HomeSewa"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/view2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
