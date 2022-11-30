@@ -1,7 +1,10 @@
 package com.example.taverent
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.os.Bundle
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.fragment.app.Fragment
@@ -24,6 +27,17 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        val sharedPreference =  getSharedPreferences("PREFERENCE", Context.MODE_PRIVATE)
+        val first = sharedPreference.getString("FirstTimeInstall","")
+        if(first.equals("Yes")){
+            val intent = Intent(this@MainActivity, LoginActivity::class.java)
+            startActivity(intent)
+        }else{
+            binding.btnNext.visibility= View.VISIBLE
+            binding.btnSkip.visibility= View.VISIBLE
+            binding.viewPager.visibility= View.VISIBLE
+
+        }
         WS_HOST = resources.getString(R.string.WS_HOST)
 
         val fragments: ArrayList<Fragment> = arrayListOf(Onboarding1(),Onboarding2(),Onboarding3())
@@ -57,6 +71,9 @@ class MainActivity : AppCompatActivity() {
             if (binding.btnNext.text=="Continue"){
                 val intent = Intent(this@MainActivity, LoginActivity::class.java)
                 runOnUiThread {
+                    val edit = sharedPreference.edit()
+                    edit.putString("FirstTimeInstall","Yes")
+                    edit.apply()
                     startActivity(intent)
                 }
             }
