@@ -114,7 +114,7 @@ class MapActivity : AppCompatActivity(){
             }
         }
 
-        autocompleteLocation.addTextChangedListener {
+        autocompleteLocation.setOnClickListener {
             autoSuggestExample(autocompleteLocation.text.toString())
         }
 
