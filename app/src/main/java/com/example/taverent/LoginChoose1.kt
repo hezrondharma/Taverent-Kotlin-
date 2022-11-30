@@ -76,7 +76,7 @@ class LoginChoose1 : Fragment() {
                                         activity?.runOnUiThread { startActivity(intent) }
                                     } else {
                                         Toast.makeText(view.context,
-                                            "Paasword Incorrect",
+                                            "Password Incorrect",
                                             Toast.LENGTH_SHORT).show()
                                     }
                                     exist = true
@@ -94,6 +94,8 @@ class LoginChoose1 : Fragment() {
                                     if (penginaps[i].password == password) {
                                         Toast.makeText(view.context, "Success", Toast.LENGTH_SHORT)
                                             .show()
+                                        val intent = Intent(view.context,PenginapActivity::class.java)
+                                        activity?.runOnUiThread { startActivity(intent) }
                                     } else {
                                         Toast.makeText(view.context,
                                             "Paasword Incorrect",
@@ -105,7 +107,7 @@ class LoginChoose1 : Fragment() {
                             }
                             if (!exist) {
                                 Toast.makeText(view.context,
-                                    "Email not registered",
+                                    "Email not registered" + penginaps[0].toString(),
                                     Toast.LENGTH_SHORT).show()
                             }
                         }

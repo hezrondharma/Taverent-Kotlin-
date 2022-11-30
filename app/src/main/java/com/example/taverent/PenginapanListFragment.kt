@@ -69,7 +69,7 @@ class PenginapanListFragment : Fragment() {
             })
             popup.show()
         }
-        binding.rv.adapter = rvPenginapanAdminHome
+        binding.rvPenginapan.adapter = rvPenginapanAdminHome
         binding.editTextTextPersonName.addTextChangedListener {object: TextWatcher{
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
                 TODO("Not yet implemented")
@@ -84,7 +84,7 @@ class PenginapanListFragment : Fragment() {
             }
         }}
 
-        binding.rv.layoutManager = LinearLayoutManager(view.context,
+        binding.rvPenginapan.layoutManager = LinearLayoutManager(view.context,
             LinearLayoutManager.VERTICAL,false)
 
         search("")

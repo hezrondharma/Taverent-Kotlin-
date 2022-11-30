@@ -26,7 +26,6 @@ class MainActivity : AppCompatActivity() {
         setContentView(view)
         WS_HOST = resources.getString(R.string.WS_HOST)
 
-        initializeHERESDK()
         val fragments: ArrayList<Fragment> = arrayListOf(Onboarding1(),Onboarding2(),Onboarding3())
         pagerAdapter = ViewPagerAdapter(fragments,this@MainActivity)
 
@@ -71,34 +70,9 @@ class MainActivity : AppCompatActivity() {
 
     }
 
-    override fun onDestroy() {
-        super.onDestroy()
-        disposeHERESDK()
-    }
 
-    private fun initializeHERESDK() {
-        // Set your credentials for the HERE SDK.
-        val accessKeyID = "HvBSWvTW-ajXnBs6abqRLw"
-        val accessKeySecret = "5pdus4zHhrkbdIggtB8K5svsGc7BMGc2GZpJuX4XSQQXF16CSCRGmeqoJmRnfSdYtyjRACVFHzchzABZEmnGTQ"
-        val options = SDKOptions(accessKeyID, accessKeySecret)
-        try {
-            SDKNativeEngine.makeSharedInstance(this@MainActivity, options)
-        } catch (e: InstantiationErrorException) {
-            throw RuntimeException("Initialization of HERE SDK failed: " + e.error.name.toString())
-        }
-    }
-    private fun disposeHERESDK() {
-        // Free HERE SDK resources before the application shuts down.
-        // Usually, this should be called only on application termination.
-        // Afterwards, the HERE SDK is no longer usable unless it is initialized again.
-        val sdkNativeEngine: SDKNativeEngine? = SDKNativeEngine.getSharedInstance()
-        if (sdkNativeEngine != null) {
-            sdkNativeEngine.dispose()
-            // For safety reasons, we explicitly set the shared instance to null to avoid situations,
-            // where a disposed instance is accidentally reused.
-            SDKNativeEngine.setSharedInstance(null)
-        }
-    }
+
+
 
     fun buttoncontinue(){
         binding.btnNext.animate().apply {

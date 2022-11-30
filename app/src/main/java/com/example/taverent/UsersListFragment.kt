@@ -110,17 +110,17 @@ class UsersListFragment : Fragment() {
             popup.show()
         }
         binding.radioButton3.isChecked = true
-        binding.rv.adapter  = rvPenginapAdminHome
+        binding.rvPenginapan.adapter  = rvPenginapAdminHome
 
         binding.radioButton3.setOnCheckedChangeListener { compoundButton, b ->
             if (compoundButton.isChecked){
-                binding.rv.adapter = rvPenginapAdminHome
-                binding.rv.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
+                binding.rvPenginapan.adapter = rvPenginapAdminHome
+                binding.rvPenginapan.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
 
                 rvPenginapAdminHome.notifyDataSetChanged()
             }else{
-                binding.rv.adapter = rvPemilikAdminHome
-                binding.rv.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
+                binding.rvPenginapan.adapter = rvPemilikAdminHome
+                binding.rvPenginapan.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
 
                 rvPemilikAdminHome.notifyDataSetChanged()
             }
@@ -140,7 +140,7 @@ class UsersListFragment : Fragment() {
             }
         }}
 
-        binding.rv.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
+        binding.rvPenginapan.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
 
     }
     fun refreshPenginap(view:View){

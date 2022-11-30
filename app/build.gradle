@@ -42,8 +42,6 @@ android {
 
 }
 
-
-
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -55,6 +53,7 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+
 
     //local database/room
     implementation "androidx.room:room-runtime:2.4.3"
@@ -76,6 +75,6 @@ dependencies {
     coreLibraryDesugaring 'com.android.tools:desugar_jdk_libs:1.1.5'
 
     //heremaps
-    implementation fileTree(dir: 'libs', include: ['*.jar', '*.aar'])
+    implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude : ['*mock*.jar'])
 
 }
