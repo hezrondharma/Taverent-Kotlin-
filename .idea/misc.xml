@@ -3,15 +3,22 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable/akunsewaselector.xml" value="0.1" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable/bottom_navigation_selector.xml" value="0.1" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable/chatsewaselector.xml" value="0.1" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable/homesewaselector.xml" value="0.1" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable/kelolasewaselector.xml" value="0.1" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable/sewaselector.xml" value="0.1" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable/statistiksewaselector.xml" value="0.1" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_add_announce.xml" value="0.12158054711246201" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_admin.xml" value="0.176" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_admin.xml" value="0.264" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_login.xml" value="0.12158054711246201" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_main.xml" value="0.176" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_map.xml" value="0.12158054711246201" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_penginap.xml" value="0.12158054711246201" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_penginap.xml" value="0.264" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_register.xml" value="0.12158054711246201" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_search.xml" value="0.12158054711246201" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_sewa_main.xml" value="0.12158054711246201" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_sewa_main.xml" value="0.264" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_akun_sewa.xml" value="0.12158054711246201" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_chat_sewa.xml" value="0.12158054711246201" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_home_sewa.xml" value="0.2" />
@@ -35,6 +42,10 @@
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/rv_penginapan_penginap_cari.xml" value="0.12158054711246201" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/rv_pengumuman.xml" value="0.12158054711246201" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/rv_user_admin_home.xml" value="0.12158054711246201" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/menu/adminbottomnav.xml" value="0.21296296296296297" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/menu/pemilikbottomnav.xml" value="0.24615384615384617" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/menu/penginapbottomnav.xml" value="0.21296296296296297" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/menu/penyewabottomnav.xml" value="0.21296296296296297" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/custom_edit_text1.xml" value="0.143" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/custom_edit_text2.xml" value="0.143" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/ic_baseline_key_24.xml" value="0.2305" />
@@ -46,7 +57,6 @@
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/rectangle_white_with_bottom_border.xml" value="0.2305" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/spinner_simple.xml" value="0.2305" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_add_announce.xml" value="0.2" />
-        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_admin.xml" value="0.14444444444444443" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_login.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_map.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_penginap.xml" value="0.264" />
