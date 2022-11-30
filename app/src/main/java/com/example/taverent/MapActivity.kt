@@ -119,7 +119,6 @@ class MapActivity : AppCompatActivity(){
         }
 
         autocompleteLocation.setOnItemClickListener { adapterView, view, i, l ->
-
             geocodeAddressAtLocation(autocompleteLocation.text.toString(),mapView.camera.target)
         }
 
