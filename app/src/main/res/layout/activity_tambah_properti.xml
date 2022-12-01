@@ -1,0 +1,365 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".TambahProperti">
+
+    <RadioButton
+        android:id="@+id/rbApartemen"
+        android:layout_width="141dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="56dp"
+        android:layout_weight="1"
+        android:text="Apartemen"
+        app:layout_constraintBottom_toTopOf="@+id/button11"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.985" />
+
+    <Button
+        android:id="@+id/button11"
+        android:layout_width="299dp"
+        android:layout_height="49dp"
+        android:background="@drawable/rounded_corner3"
+        android:text="Tambah"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <RadioButton
+        android:id="@+id/rbKos"
+        android:layout_width="141dp"
+        android:layout_height="53dp"
+        android:layout_marginStart="16dp"
+        android:layout_weight="1"
+        android:text="Kos"
+        app:layout_constraintBottom_toTopOf="@+id/button11"
+        app:layout_constraintStart_toEndOf="@+id/rbApartemen"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.985" />
+
+    <EditText
+        android:id="@+id/etNamaTempat"
+        android:layout_width="362dp"
+        android:layout_height="49dp"
+        android:background="@drawable/rounded_corner2"
+        android:drawableStart="@drawable/ic_baseline_homegray_24"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="Nama Tempat"
+        android:inputType="textPersonName"
+        android:paddingLeft="12dp"
+        android:paddingEnd="12dp"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.08" />
+
+    <Button
+        android:id="@+id/button15"
+        android:layout_width="107dp"
+        android:layout_height="40dp"
+        android:text="Pilih"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.078"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView33"
+        app:layout_constraintVertical_bias="0.01" />
+
+    <TextView
+        android:id="@+id/textView34"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Fasilitas"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button15"
+        app:layout_constraintVertical_bias="0.032" />
+
+    <LinearLayout
+        android:id="@+id/btncurrentLocation"
+        android:layout_width="362dp"
+        android:layout_height="49dp"
+        android:background="@drawable/rounded_corner2"
+        android:gravity="center"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNamaTempat2"
+        app:layout_constraintVertical_bias="0.02">
+
+        <ImageView
+            android:id="@+id/imageView19"
+            android:layout_width="1dp"
+            android:layout_height="31dp"
+            android:layout_weight="1"
+            app:srcCompat="@drawable/current" />
+
+        <TextView
+            android:id="@+id/textView32"
+            android:layout_width="220dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center|left"
+            android:text="Lokasi saat ini"
+            android:textColor="#000000"
+            android:textSize="20sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView33"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pilih Gambar"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btncurrentLocation"
+        app:layout_constraintVertical_bias="0.026" />
+
+    <TextView
+        android:id="@+id/btnF1"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Air Conditioner"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView34"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/btnF3"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Termasuk Listrik"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toEndOf="@+id/btnF2"
+        app:layout_constraintTop_toBottomOf="@+id/textView34"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/btnF2"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:layout_marginTop="16dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="K. Mandi Dalam"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintStart_toEndOf="@+id/btnF1"
+        app:layout_constraintTop_toBottomOf="@+id/textView34"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/btnF4"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Wifi"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnF1"
+        app:layout_constraintVertical_bias="0.046" />
+
+    <TextView
+        android:id="@+id/btnF8"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Kasur Single"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintStart_toEndOf="@+id/btnF7"
+        app:layout_constraintTop_toBottomOf="@+id/btnF5"
+        app:layout_constraintVertical_bias="0.036" />
+
+    <TextView
+        android:id="@+id/btnF5"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Kursi"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintStart_toEndOf="@+id/btnF4"
+        app:layout_constraintTop_toBottomOf="@+id/btnF2"
+        app:layout_constraintVertical_bias="0.046" />
+
+    <TextView
+        android:id="@+id/btnF7"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Tv"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnF4"
+        app:layout_constraintVertical_bias="0.036" />
+
+    <TextView
+        android:id="@+id/btnF10"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Air Panas"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.077"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnF7"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <TextView
+        android:id="@+id/btnF11"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Jendela"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintStart_toEndOf="@+id/btnF10"
+        app:layout_constraintTop_toBottomOf="@+id/btnF8"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <TextView
+        android:id="@+id/btnF12"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Dapur"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toEndOf="@+id/btnF11"
+        app:layout_constraintTop_toBottomOf="@+id/btnF9"
+        app:layout_constraintVertical_bias="0.065" />
+
+    <TextView
+        android:id="@+id/btnF6"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Meja"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toEndOf="@+id/btnF5"
+        app:layout_constraintTop_toBottomOf="@+id/btnF3"
+        app:layout_constraintVertical_bias="0.046" />
+
+    <TextView
+        android:id="@+id/btnF9"
+        android:layout_width="115dp"
+        android:layout_height="33dp"
+        android:background="@drawable/rounded_corner2"
+        android:backgroundTint="#FF0000"
+        android:gravity="center"
+        android:text="Kasur Double"
+        android:textColor="#FFFFFF"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.081"
+        app:layout_constraintStart_toEndOf="@+id/btnF8"
+        app:layout_constraintTop_toBottomOf="@+id/btnF6"
+        app:layout_constraintVertical_bias="0.036" />
+
+    <EditText
+        android:id="@+id/etNamaTempat2"
+        android:layout_width="362dp"
+        android:layout_height="122dp"
+        android:background="@drawable/rounded_corner2"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:gravity="top|left"
+        android:hint="Deskripsi"
+        android:inputType="textPersonName"
+        android:paddingLeft="12dp"
+        android:paddingEnd="12dp"
+        android:textColorHint="@android:color/darker_gray"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/etNamaTempat"
+        app:layout_constraintVertical_bias="0.019" />
+
+    <ImageButton
+        android:id="@+id/btnback"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="#FFFFFF"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.008"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.007" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
