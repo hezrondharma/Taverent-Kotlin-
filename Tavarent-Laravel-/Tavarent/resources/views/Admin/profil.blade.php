@@ -1,0 +1,29 @@
+@extends('layout.layout')
+@section('title','Admin')
+@section('navbar')
+<ul class="navbar-nav mr-auto">
+    <li class="nav-item">
+        <a class="nav-link" href="/admin">Home</span></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/list">List</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/game">Game</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="/admin/announce">Announce</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="/admin/profil">Profil</a>
+    </li>
+</ul>
+@endsection
+@section('content')
+<form class="mt-5 d-flex" role="search">
+    <input class="form-control me-2" type="search" placeholder="Cari Kos Disini " aria-label="Search">
+    <img src="{{asset('img/search.png')}}" alt="" width="50" height="auto" type="submit">
+</form>
+
+@endsection
+
