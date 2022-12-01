@@ -15,50 +15,28 @@ class SewaMain : AppCompatActivity() {
         binding = ActivitySewaMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        binding.btnHomeSewa.setOnClickListener {
-            gray(binding)
-            binding.imHomeSewa.setImageResource(R.drawable.ic_baseline_home_24)
-            binding.txHomeSewa.setTextColor(Color.parseColor("#000000"))
-            changefragment(HomeSewa())
-        }
-        binding.btnChatSewa.setOnClickListener {
-            gray(binding)
-            binding.imChatSewa.setImageResource(R.drawable.ic_baseline_chat_24)
-            binding.txChatSewa.setTextColor(Color.parseColor("#000000"))
-            changefragment(ChatSewa())
-        }
-        binding.btnKelolaSewa.setOnClickListener {
-            gray(binding)
-            binding.imKelolaSewa.setImageResource(R.drawable.ic_baseline_settings_cell_24)
-            binding.txKelolaSewa.setTextColor(Color.parseColor("#000000"))
-            changefragment(KelolaSewa())
-        }
-        binding.btnStatistikSewa.setOnClickListener {
-            gray(binding)
-            binding.imStatistikSewa.setImageResource(R.drawable.ic_baseline_insert_chart_outlined_24)
-            binding.txStatistikSewa.setTextColor(Color.parseColor("#000000"))
-            changefragment(StatistikSewa())
-        }
-        binding.btnAkunSewa.setOnClickListener {
-            gray(binding)
-            binding.imAkunSewa.setImageResource(R.drawable.ic_baseline_person_24)
-            binding.txAkunSewa.setTextColor(Color.parseColor("#000000"))
-            changefragment(AkunSewa())
+        binding.bottomNavSewa.setOnItemSelectedListener {
+            when (it.itemId){
+                R.id.btnHomeSewa->{
+                    changefragment(HomeSewa())
+                }
+                R.id.btnChatSewa->{
+                    changefragment(ChatSewa())
+                }
+                R.id.btnKelolaSewa->{
+                    changefragment(KelolaSewa())
+                }
+                R.id.btnStatistikSewa->{
+                    changefragment(StatistikSewa())
+                }
+                R.id.btnAkunSewa->{
+                    changefragment(AkunSewa())
+                }
+            }
+            return@setOnItemSelectedListener true
         }
     }
 
-    fun gray(bind: ActivitySewaMainBinding){
-        bind.imHomeSewa.setImageResource(R.drawable.ic_baseline_homegray_24)
-        bind.imChatSewa.setImageResource(R.drawable.ic_baseline_chatgray_24)
-        bind.imKelolaSewa.setImageResource(R.drawable.ic_baseline_settingsgray_cell_24)
-        bind.imStatistikSewa.setImageResource(R.drawable.ic_baseline_insert_chartgray_outlined_24)
-        bind.imAkunSewa.setImageResource(R.drawable.ic_baseline_persongray_24)
-        bind.txHomeSewa.setTextColor(Color.parseColor("#C9C9C9"))
-        bind.txChatSewa.setTextColor(Color.parseColor("#C9C9C9"))
-        bind.txKelolaSewa.setTextColor(Color.parseColor("#C9C9C9"))
-        bind.txStatistikSewa.setTextColor(Color.parseColor("#C9C9C9"))
-        bind.txAkunSewa.setTextColor(Color.parseColor("#C9C9C9"))
-    }
     fun changefragment (fragments :Fragment){
         val fragreplace=fragments
         val transaction = supportFragmentManager.beginTransaction()
