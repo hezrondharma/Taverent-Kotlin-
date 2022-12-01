@@ -62,7 +62,11 @@ class TambahProperti : AppCompatActivity() {
             var ListFasilitas = ""
             for (i in 0 until listfasilitas.size){
                 if(list[i] == false){
-                    ListFasilitas= ListFasilitas +", "+ listfasilitas[i]
+                    if(ListFasilitas==""){
+                        ListFasilitas= ListFasilitas + listfasilitas[i]
+                    }else{
+                        ListFasilitas= ListFasilitas +", "+ listfasilitas[i]
+                    }
                 }
             }
             Toast.makeText(this, ListFasilitas, Toast.LENGTH_SHORT).show()
