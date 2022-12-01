@@ -1,5 +1,6 @@
 package com.example.taverent
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
@@ -57,7 +58,10 @@ class TambahProperti : AppCompatActivity() {
             changecolor(binding,list,11)
         }
 
-
+        binding.btnback.setOnClickListener {
+            val intent = Intent(view.context,SewaMain::class.java)
+            startActivity(intent)
+        }
         binding.btnTambahProperti.setOnClickListener {
             var ListFasilitas = ""
             for (i in 0 until listfasilitas.size){
