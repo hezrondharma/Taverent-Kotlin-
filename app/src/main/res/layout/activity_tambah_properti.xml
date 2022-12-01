@@ -6,20 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".TambahProperti">
 
-    <RadioButton
-        android:id="@+id/rbApartemen"
-        android:layout_width="141dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="56dp"
-        android:layout_weight="1"
-        android:text="Apartemen"
-        app:layout_constraintBottom_toTopOf="@+id/button11"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.985" />
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnF11"
+        app:layout_constraintVertical_bias="0.088"
+        tools:layout_editor_absoluteX="-64dp">
+
+        <RadioButton
+            android:id="@+id/rbApartemen"
+            android:layout_width="141dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="56dp"
+            android:layout_weight="1"
+            android:text="Apartemen" />
+
+        <RadioButton
+            android:id="@+id/rbKos"
+            android:layout_width="141dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="16dp"
+            android:layout_weight="1"
+            android:text="Kos" />
+    </RadioGroup>
 
     <Button
-        android:id="@+id/button11"
+        android:id="@+id/btnTambahProperti"
         android:layout_width="299dp"
         android:layout_height="49dp"
         android:background="@drawable/rounded_corner3"
@@ -27,20 +42,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.976" />
-
-    <RadioButton
-        android:id="@+id/rbKos"
-        android:layout_width="141dp"
-        android:layout_height="53dp"
-        android:layout_marginStart="16dp"
-        android:layout_weight="1"
-        android:text="Kos"
-        app:layout_constraintBottom_toTopOf="@+id/button11"
-        app:layout_constraintStart_toEndOf="@+id/rbApartemen"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.985" />
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+        app:layout_constraintVertical_bias="0.222" />
 
     <EditText
         android:id="@+id/etNamaTempat"
