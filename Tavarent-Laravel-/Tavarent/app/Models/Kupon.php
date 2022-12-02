@@ -16,10 +16,10 @@ class Kupon extends Model
 
     public function Pembayaran()
     {
-        $this->hasMany(Pembayaran::class,'id_kupon','id');
+        return $this->hasMany(Pembayaran::class,'id_kupon','id');
     }
     public function Penginap()
     {
-        $this->belongsToMany(Penginap::class,'kupon_penginap','id_kupon','id_penginap');
+        return $this->belongsToMany(Penginap::class,'kupon_penginap','id_kupon','id_penginap');
     }
 }

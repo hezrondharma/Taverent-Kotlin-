@@ -16,18 +16,18 @@ class Penginap extends Model
 
     public function Pembayaran()
     {
-        $this->hasMany(Pembayaran::class,'id_pembayaran','id');
+        return $this->hasMany(Pembayaran::class,'id_pembayaran','id');
     }
     public function Kupon()
     {
-        $this->hasMany(Kupon::class,'id_kupon','id');
+        return $this->hasMany(Kupon::class,'id_kupon','id');
     }
     public function Rating()
     {
-        $this->hasMany(Rating::class,'id_rating','id');
+        return $this->hasMany(Rating::class,'id_rating','id');
     }
     public function Penginapan()
     {
-        $this->belongsToMany(Penginapan::class,'penginap_history','id_penginap','id_penginapan');
+        return $this->belongsToMany(Penginapan::class,'favorit','id_penginap','id_penginapan')->withPivot("id");
     }
 }

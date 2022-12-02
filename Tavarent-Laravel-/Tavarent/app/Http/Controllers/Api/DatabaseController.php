@@ -36,6 +36,30 @@ class DatabaseController extends Controller
     {
         return response()->json(Penginapan::all(), 200);
     }
+    public function listpenginapanfavorit(Request $request)
+    {
+        $penginapan = Penginap::find($request->id_penginap)->Penginapan()->get();
+        return response()->json($penginapan, 200);
+    }
+    public function checkpenginapanfavorit(Request $request)
+    {
+        $penginapan = Penginap::find($request->id_penginap)->Penginapan()->where("penginapan.id","=",$request->id_penginapan)->get();
+        return response()->json($penginapan, 201);
+    }
+    public function togglepenginapanfavorit(Request $request)
+    {
+        $exist = "";
+        $penginapan = Penginap::find($request->id_penginap)->Penginapan()->where("penginapan.id","=",$request->id_penginapan)->first();
+        if ($penginapan==null){
+            $p = Penginapan::find($request->id_penginapan);
+            $favorit = Penginap::find($request->id_penginap)->Penginapan()->attach($p);
+            $exist = "bukanfavorit";
+        }else{
+            $p = Penginapan::find($request->id_penginapan);
+            $favorit = Penginap::find($request->id_penginap)->Penginapan()->detach($p);
+        }
+        return response()->json($exist, 201);
+    }
     
     public function listkupon(Request $request)
     {
@@ -53,6 +77,7 @@ class DatabaseController extends Controller
     {
         return response()->json(Pengumuman::all(), 200);
     }
+    
     function insertpemilik(Request $request){
         $pemilik = Pemilik::create(array(
             "email" => $request->email,

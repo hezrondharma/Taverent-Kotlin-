@@ -35,24 +35,36 @@ class PenginapActivity : AppCompatActivity() {
                 }
                 R.id.favorititem->{
                     val fragment = PenginapFavoritFragment()
+                    val bundle = Bundle()
+                    bundle.putParcelable("penginap",penginap)
+                    fragment.arguments = bundle
                     supportFragmentManager.beginTransaction().replace(
                         R.id.frag3,fragment
                     ).setReorderingAllowed(true).commit()
                 }
                 R.id.homeitem->{
                     val fragment = PenginapHomeFragment()
+                    val bundle = Bundle()
+                    bundle.putParcelable("penginap",penginap)
+                    fragment.arguments = bundle
                     supportFragmentManager.beginTransaction().replace(
                         R.id.frag3,fragment
                     ).setReorderingAllowed(true).commit()
                 }
                 R.id.chatitem->{
                     val fragment = PenginapChatFragment()
+                    val bundle = Bundle()
+                    bundle.putParcelable("penginap",penginap)
+                    fragment.arguments = bundle
                     supportFragmentManager.beginTransaction().replace(
                         R.id.frag3,fragment
                     ).setReorderingAllowed(true).commit()
                 }
                 R.id.accountitem->{
                     val fragment = PenginapAccountFragment()
+                    val bundle = Bundle()
+                    bundle.putParcelable("penginap",penginap)
+                    fragment.arguments = bundle
                     supportFragmentManager.beginTransaction().replace(
                         R.id.frag3,fragment
                     ).setReorderingAllowed(true).commit()

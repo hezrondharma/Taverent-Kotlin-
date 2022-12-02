@@ -16,10 +16,10 @@ class Rating extends Model
 
     public function Penginap()
     {
-        $this->belongsTo(Penginap::class,'id_penginap','id');
+        return $this->belongsTo(Penginap::class,'id_penginap','id');
     }
     public function Penginapan()
     {
-        $this->belongsTo(Penginapan::class,'id_penginapan','id');
+        return $this->belongsTo(Penginapan::class,'id_penginapan','id');
     }
 }

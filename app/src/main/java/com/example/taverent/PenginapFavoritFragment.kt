@@ -7,12 +7,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.taverent.databinding.FragmentPenginapFavoritBinding
 import com.example.taverent.databinding.FragmentPenginapHomeBinding
+import io.data2viz.shape.curve.Linear
 import org.json.JSONArray
 
 class PenginapFavoritFragment : Fragment() {
@@ -35,22 +37,27 @@ class PenginapFavoritFragment : Fragment() {
 
     private lateinit var rvPenginapanPenginapanFavorit: RVPenginapanPenginapanFavorit
     private lateinit var penginapans: ArrayList<Penginapan>
+    private lateinit var penginap: Penginap
     var WS_HOST = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
         WS_HOST = resources.getString(R.string.WS_HOST)
         penginapans = ArrayList()
+        penginap = arguments?.getParcelable<Penginap>("penginap") as Penginap
         rvPenginapanPenginapanFavorit = RVPenginapanPenginapanFavorit(penginapans,R.layout.rv_penginapan_favorit){view, idx->
             val intent = Intent(view.context,PenginapanDetailActivity::class.java)
             intent.putExtra("penginapan",penginapans[idx])
+            intent.putExtra("penginap",penginap)
             startActivity(intent)
         }
-        refreshPenginapan(view)
+        binding.rvFavorit.adapter = rvPenginapanPenginapanFavorit
+        binding.rvFavorit.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
+        refreshPenginapan(view,penginap.id)
     }
-    fun refreshPenginapan(view:View){
+    fun refreshPenginapan(view:View,id_penginap:Int){
         val strReq = object : StringRequest(
-            Method.GET,"$WS_HOST/penginapan/list/favorit",
+            Method.POST,"$WS_HOST/penginapan/list/favorit",
             Response.Listener {
                 val obj: JSONArray = JSONArray(it)
                 penginapans.clear()
@@ -74,7 +81,13 @@ class PenginapFavoritFragment : Fragment() {
             Response.ErrorListener {
                 Toast.makeText(view.context, "WS_ERROR1", Toast.LENGTH_SHORT).show()
             }
-        ){}
+        ){
+            override fun getParams(): MutableMap<String, String>? {
+                val params = HashMap<String, String>()
+                params["id_penginap"] = id_penginap.toString()
+                return params
+            }
+        }
         val queue: RequestQueue = Volley.newRequestQueue(view.context)
         queue.add(strReq)
     }

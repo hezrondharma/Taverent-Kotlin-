@@ -9,6 +9,10 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.taverent.CurrencyUtils.toRupiah
 import com.google.android.material.chip.Chip
 import com.google.android.material.chip.ChipGroup
@@ -19,6 +23,7 @@ import com.here.sdk.core.engine.SDKOptions
 import com.here.sdk.core.errors.InstantiationErrorException
 import com.here.sdk.mapviewlite.*
 import com.here.sdk.search.*
+import org.json.JSONArray
 
 class PenginapanDetailActivity : AppCompatActivity() {
     private lateinit var mainImage: ImageView
@@ -31,18 +36,23 @@ class PenginapanDetailActivity : AppCompatActivity() {
     private lateinit var tvDeskripsiPenginapanDetail: TextView
     private lateinit var tvHargaPenginapanDetail: TextView
     private lateinit var btnBack: ImageButton
+    private lateinit var btnFavorit: ImageButton
     private lateinit var mapView: MapViewLite
     private lateinit var penginapan: Penginapan
+    private lateinit var penginap: Penginap
     private lateinit var mapMarker: MapMarker
     private lateinit var searchEngine: SearchEngine
+    var WS_HOST = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initializeHERESDK()
 
         setContentView(R.layout.activity_penginapan_detail)
-
+        WS_HOST = resources.getString(R.string.WS_HOST)
         penginapan = intent.getParcelableExtra<Penginapan>("penginapan")  as Penginapan
+        penginap = intent.getParcelableExtra<Penginap>("penginap")  as Penginap
+        checkFavorit(penginap.id,penginapan.id)
 
         mainImage = findViewById(R.id.imageView19)
         tvNama = findViewById(R.id.tvNama)
@@ -54,6 +64,7 @@ class PenginapanDetailActivity : AppCompatActivity() {
         fasilitas = findViewById(R.id.chipgroup)
         tvDeskripsiPenginapanDetail = findViewById(R.id.tvDeskripsiPenginapanDetail)
         btnBack = findViewById(R.id.btnBack)
+        btnFavorit = findViewById(R.id.btnFavorit)
         mapView = findViewById(R.id.map_view)
         mapView.onCreate(savedInstanceState)
 
@@ -78,7 +89,61 @@ class PenginapanDetailActivity : AppCompatActivity() {
         btnBack.setOnClickListener{
             finish()
         }
+        btnFavorit.setOnClickListener{
 
+            toggleFavorit(penginap.id,penginapan.id)
+        }
+
+    }
+
+    fun checkFavorit(id_penginap:Int,id_penginapan:Int){
+        val strReq = object : StringRequest(
+            Method.POST,"$WS_HOST/penginapan/check/favorit",
+            Response.Listener {
+                if (it.toString()!="[]") {
+                    btnFavorit.imageTintList = resources.getColorStateList(R.color.red)
+                }else{
+                    btnFavorit.imageTintList = resources.getColorStateList(R.color.black)
+                }
+            },
+            Response.ErrorListener {
+                Toast.makeText(this, "WS_ERROR1", Toast.LENGTH_SHORT).show()
+            }
+        ){
+            override fun getParams(): MutableMap<String, String>? {
+                val params = HashMap<String, String>()
+                params["id_penginap"] = id_penginap.toString()
+                params["id_penginapan"] = id_penginapan.toString()
+                return params
+            }
+        }
+        val queue: RequestQueue = Volley.newRequestQueue(this)
+        queue.add(strReq)
+    }
+
+    fun toggleFavorit(id_penginap:Int,id_penginapan:Int){
+        val strReq = object : StringRequest(
+            Method.POST,"$WS_HOST/penginapan/toggle/favorit",
+            Response.Listener {
+                if (it.toString()!="\"\"") {
+                    btnFavorit.imageTintList = resources.getColorStateList(R.color.red)
+                }else{
+                    btnFavorit.imageTintList = resources.getColorStateList(R.color.black)
+                }
+            },
+            Response.ErrorListener {
+                Toast.makeText(this, "WS_ERROR1", Toast.LENGTH_SHORT).show()
+            }
+        ){
+            override fun getParams(): MutableMap<String, String>? {
+                val params = HashMap<String, String>()
+                params["id_penginap"] = id_penginap.toString()
+                params["id_penginapan"] = id_penginapan.toString()
+                return params
+            }
+        }
+        val queue: RequestQueue = Volley.newRequestQueue(this)
+        queue.add(strReq)
     }
     private fun loadMapScene(geoCoordinates:GeoCoordinates) {
         mapView.mapScene.loadScene(MapStyle.NORMAL_DAY

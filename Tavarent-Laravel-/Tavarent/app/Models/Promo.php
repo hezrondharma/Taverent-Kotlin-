@@ -16,10 +16,10 @@ class Promo extends Model
 
     public function Pembayaran()
     {
-        $this->hasMany(Pembayaran::class,'id_pembayaran','id');
+        return $this->hasMany(Pembayaran::class,'id_pembayaran','id');
     }
     public function Penginapan()
     {
-        $this->belongsTo(Penginapan::class,'id_penginapan','id');
+        return $this->belongsTo(Penginapan::class,'id_penginapan','id');
     }
 }

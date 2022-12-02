@@ -68,6 +68,7 @@ class PenginapCariFragment : Fragment() {
         rvPenginapanPenginapCari = RVPenginapanPenginapCari(penginapansSearch){view, idx ->
             val intent = Intent(view.context,PenginapanDetailActivity::class.java)
             intent.putExtra("penginapan",penginapansSearch[idx])
+            intent.putExtra("penginap",penginap)
             startActivity(intent)
         }
         binding.rvPenginapan.adapter = rvPenginapanPenginapCari

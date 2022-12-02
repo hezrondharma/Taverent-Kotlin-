@@ -27,19 +27,22 @@ class Penginapan extends Model
 
     public function Promo()
     {
-        $this->hasMany(Promo::class,'id_promo','id');
+        return $this->hasMany(Promo::class,'id_promo','id');
     }
+
     public function Pemilik()
     {
-        $this->belongsTo(Pemilik::class,'id_pemilik','id');
+        return $this->belongsTo(Pemilik::class,'id_pemilik','id');
     }
+
     public function Rating()
     {
-        $this->hasMany(Rating::class,'id_rating','id');
+        return $this->hasMany(Rating::class,'id_rating','id');
     }
+
     public function Penginap()
     {
-        $this->belongsToMany(Penginap::class,'penginap_history','id_penginapan','id_penginap');
+        return $this->belongsToMany(Penginap::class,'favorit','id_penginapan','id_penginap');
     }
     
 }

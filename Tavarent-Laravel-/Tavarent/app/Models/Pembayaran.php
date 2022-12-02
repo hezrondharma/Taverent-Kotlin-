@@ -16,18 +16,18 @@ class Pembayaran extends Model
 
     public function Kupon()
     {
-        $this->belongsTo(Kupon::class,'id_kupon','id');
+        return $this->belongsTo(Kupon::class,'id_kupon','id');
     }
     public function Penginap()
     {
-        $this->belongsTo(Penginap::class,'id_penginap','id');
+        return $this->belongsTo(Penginap::class,'id_penginap','id');
     }
     public function Penginapan()
     {
-        $this->belongsTo(Penginapan::class,'id_penginapan','id');
+        return $this->belongsTo(Penginapan::class,'id_penginapan','id');
     }
     public function Promo()
     {
-        $this->belongsTo(Promo::class,'id_promo','id');
+        return $this->belongsTo(Promo::class,'id_promo','id');
     }
 }
