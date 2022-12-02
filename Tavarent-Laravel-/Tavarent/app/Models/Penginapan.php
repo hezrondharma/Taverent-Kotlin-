@@ -13,7 +13,16 @@ class Penginapan extends Model
     protected $table = "penginapan";
     protected $primaryKey = "id";
     public $incrementing = true;
-    protected $fillable = ["nama","alamat","deskripsi","fasilitas","jk_boleh","id_pemilik"];
+    protected $fillable = [
+        "nama",
+        "alamat",
+        "deskripsi",
+        "fasilitas",
+        "jk_boleh",
+        "tipe",
+        "harga",
+        "koordinat",
+        "id_pemilik"];
     public $timestamps = false;
 
     public function Promo()

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Penginap;
+use App\Models\Penginapan;
 use App\Models\Pemilik;
 use App\Models\Pengumuman;
 use App\Models\Promo;
@@ -35,6 +36,7 @@ class DatabaseController extends Controller
     {
         return response()->json(Penginapan::all(), 200);
     }
+    
     public function listkupon(Request $request)
     {
         return response()->json(Kupon::all(), 200);
@@ -78,5 +80,21 @@ class DatabaseController extends Controller
             "tipe" => $request->tipe,
         ));
         return response()->json($pengumuman, 201);
+    }
+    function insertpenginapan(Request $request){
+        $penginapan = Penginapan::create(array(
+            "nama" =>$request->nama,
+            "alamat" =>$request->alamat,
+            "deskripsi" =>$request->deskripsi,
+            "fasilitas" =>$request->fasilitas,
+            "jk_boleh" =>$request->jk_boleh,
+            "tipe" =>$request->tipe,
+            "harga" =>$request->harga,
+            "koordinat" =>$request->koordinat,
+            "id_pemilik" =>$request->id_pemilik,
+        ));
+        
+        
+        return response()->json($penginapan, 201);
     }
 }

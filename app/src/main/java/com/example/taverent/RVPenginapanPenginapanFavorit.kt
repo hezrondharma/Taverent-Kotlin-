@@ -7,10 +7,11 @@ import android.widget.*
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 
-class RVPenginapanPenginapCari(
+class RVPenginapanPenginapanFavorit(
     private val songs: ArrayList<Penginapan>,
-    private val onMoreClickListener: (view: View, idx:Int)->Unit,
-): RecyclerView.Adapter<RVPenginapanPenginapCari.CustomViewHolder>(){
+    private val layout: Int,
+    private val onItemSelectedListener: (view: View, idx:Int)->Unit,
+): RecyclerView.Adapter<RVPenginapanPenginapanFavorit.CustomViewHolder>(){
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -18,17 +19,16 @@ class RVPenginapanPenginapCari(
     ): CustomViewHolder {
         var itemView = LayoutInflater.from(parent.context)
         return CustomViewHolder(itemView.inflate(
-            R.layout.rv_penginapan_penginap_cari, parent ,false
+            layout, parent ,false
         ))
     }
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val item = songs[position]
         holder.textnamakos.text = item.nama
         holder.textjk.text = item.jk_boleh
-
-        holder.textalamat.text = item.alamat.substring(0,item.alamat.indexOf(",",item.alamat.indexOf(",",0)+1))
-        holder.itemView.setOnClickListener {
-            onMoreClickListener?.invoke(it,position)
+        holder.textalamat.text = item.alamat
+        holder.itemView.setOnClickListener{
+            onItemSelectedListener?.invoke(it,position)
         }
     }
 
@@ -45,6 +45,7 @@ class RVPenginapanPenginapCari(
         val textalamat: TextView = itemView.findViewById(R.id.tvAlamat)
         val textrating: TextView = itemView.findViewById(R.id.textView20)
         val ratingbar: RatingBar = itemView.findViewById(R.id.ratingBar)
+
     }
 
 }

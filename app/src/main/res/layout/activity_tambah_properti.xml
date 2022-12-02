@@ -6,363 +6,415 @@
     android:layout_height="match_parent"
     tools:context=".TambahProperti">
 
-    <RadioGroup
-        android:id="@+id/radioGroup"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnF11"
-        app:layout_constraintVertical_bias="0.088"
-        tools:layout_editor_absoluteX="-64dp">
+        android:layout_height="match_parent">
 
-        <RadioButton
-            android:id="@+id/rbApartemen"
-            android:layout_width="141dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="56dp"
-            android:layout_weight="1"
-            android:text="Apartemen" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingLeft="20dp"
+            android:paddingRight="20dp">
 
-        <RadioButton
-            android:id="@+id/rbKos"
-            android:layout_width="141dp"
-            android:layout_height="30dp"
-            android:layout_marginStart="16dp"
-            android:layout_weight="1"
-            android:text="Kos" />
-    </RadioGroup>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal">
 
-    <Button
-        android:id="@+id/btnTambahProperti"
-        android:layout_width="299dp"
-        android:layout_height="49dp"
-        android:background="@drawable/rounded_corner3"
-        android:text="Tambah"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup"
-        app:layout_constraintVertical_bias="0.222" />
+                <ImageButton
+                    android:id="@+id/btnback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
+                    android:minHeight="48dp"
+                    android:src="@drawable/ic_baseline_arrow_back_24"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </LinearLayout>
 
-    <EditText
-        android:id="@+id/etNamaTempat"
-        android:layout_width="362dp"
-        android:layout_height="49dp"
-        android:background="@drawable/rounded_corner2"
-        android:drawableStart="@drawable/ic_baseline_homegray_24"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="Nama Tempat"
-        android:inputType="textPersonName"
-        android:paddingLeft="12dp"
-        android:paddingEnd="12dp"
-        android:textColorHint="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.08" />
+            <TextView
+                android:id="@+id/textView31"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Tambah Properti Baru"
+                android:textColor="#191919"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/button15"
-        android:layout_width="107dp"
-        android:layout_height="40dp"
-        android:text="Pilih"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.078"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView33"
-        app:layout_constraintVertical_bias="0.01" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center_vertical"
+                android:hint="Nama Properti"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout3">
 
-    <TextView
-        android:id="@+id/textView34"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Fasilitas"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button15"
-        app:layout_constraintVertical_bias="0.032" />
+                <EditText
+                    android:id="@+id/editNamaProperti"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="start"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:singleLine="true"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <LinearLayout
-        android:id="@+id/btncurrentLocation"
-        android:layout_width="362dp"
-        android:layout_height="49dp"
-        android:background="@drawable/rounded_corner2"
-        android:gravity="center"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNamaTempat2"
-        app:layout_constraintVertical_bias="0.02">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="top"
+                android:hint="Deskripsi Tambahan"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:counterEnabled="true"
+                app:counterMaxLength="255"
+                app:errorEnabled="true"
+                app:helperText="Beri informasi tambahan tentang properti anda"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout3">
 
-        <ImageView
-            android:id="@+id/imageView19"
-            android:layout_width="1dp"
-            android:layout_height="31dp"
-            android:layout_weight="1"
-            app:srcCompat="@drawable/current" />
+                <EditText
+                    android:id="@+id/editDeskripsi"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:ellipsize="start"
+                    android:focusableInTouchMode="true"
+                    android:gravity="top"
+                    android:inputType="textMultiLine"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:singleLine="true"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <TextView
-            android:id="@+id/textView32"
-            android:layout_width="220dp"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:gravity="center|left"
-            android:text="Lokasi saat ini"
-            android:textColor="#000000"
-            android:textSize="20sp" />
-    </LinearLayout>
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout4"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="20dp"
+                android:enabled="true"
+                android:gravity="center_vertical"
+                android:hint="Harga Per Bulan"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:counterEnabled="false"
+                app:errorEnabled="false"
+                app:helperText="Beri harga kamar per bulan"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout3"
+                app:prefixText="Rp, ">
 
-    <TextView
-        android:id="@+id/textView33"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Pilih Gambar"
-        android:textColor="#000000"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btncurrentLocation"
-        app:layout_constraintVertical_bias="0.026" />
+                <EditText
+                    android:id="@+id/editHarga"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="start"
+                    android:enabled="true"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:inputType="number"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:singleLine="true"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/btnF1"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Air Conditioner"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView34"
-        app:layout_constraintVertical_bias="0.0" />
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:background="@drawable/spinner_simple"
+                android:entries="@array/gender"
+                android:paddingLeft="12dp"
+                android:paddingTop="12dp"
+                android:paddingRight="12dp"
+                android:paddingBottom="12dp" />
 
-    <TextView
-        android:id="@+id/btnF3"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Termasuk Listrik"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toEndOf="@+id/btnF2"
-        app:layout_constraintTop_toBottomOf="@+id/textView34"
-        app:layout_constraintVertical_bias="0.0" />
+            <TextView
+                android:id="@+id/textView35"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="12dp"
+                android:layout_marginTop="3dp"
+                android:text="Jenis kelamin yang dibolehkan" />
 
-    <TextView
-        android:id="@+id/btnF2"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="K. Mandi Dalam"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintStart_toEndOf="@+id/btnF1"
-        app:layout_constraintTop_toBottomOf="@+id/textView34"
-        app:layout_constraintVertical_bias="0.0" />
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/textInputLayout3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:enabled="false"
+                android:gravity="center_vertical"
+                android:hint="Alamat"
+                android:textColorHint="#4A4A4A"
+                app:boxBackgroundColor="@color/white"
+                app:boxBackgroundMode="outline"
+                app:counterEnabled="false"
+                app:errorEnabled="false"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/linearLayout3">
 
-    <TextView
-        android:id="@+id/btnF4"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Wifi"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnF1"
-        app:layout_constraintVertical_bias="0.046" />
+                <EditText
+                    android:id="@+id/editAlamat"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="start"
+                    android:enabled="false"
+                    android:focusableInTouchMode="true"
+                    android:gravity="center_vertical"
+                    android:paddingTop="16dp"
+                    android:paddingBottom="16dp"
+                    android:singleLine="true"
+                    android:textColor="#3E3E3E"
+                    tools:ignore="SpeakableTextPresentCheck,SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
 
-    <TextView
-        android:id="@+id/btnF8"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Kasur Single"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintStart_toEndOf="@+id/btnF7"
-        app:layout_constraintTop_toBottomOf="@+id/btnF5"
-        app:layout_constraintVertical_bias="0.036" />
+            <Button
+                android:id="@+id/button11"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_baseline_my_location_24"
+                android:drawableTint="@color/white"
+                android:text="Cari Alamat" />
 
-    <TextView
-        android:id="@+id/btnF5"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Kursi"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintStart_toEndOf="@+id/btnF4"
-        app:layout_constraintTop_toBottomOf="@+id/btnF2"
-        app:layout_constraintVertical_bias="0.046" />
 
-    <TextView
-        android:id="@+id/btnF7"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Tv"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnF4"
-        app:layout_constraintVertical_bias="0.036" />
+            <TextView
+                android:id="@+id/textView32"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Fasilitas yang ada di properti anda"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/btnF10"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Air Panas"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.077"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnF7"
-        app:layout_constraintVertical_bias="0.065" />
+            <TextView
+                android:id="@+id/textView33"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilih minimal 3"
+                android:textColor="#575757" />
 
-    <TextView
-        android:id="@+id/btnF11"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Jendela"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.037"
-        app:layout_constraintStart_toEndOf="@+id/btnF10"
-        app:layout_constraintTop_toBottomOf="@+id/btnF8"
-        app:layout_constraintVertical_bias="0.065" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/btnF12"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Dapur"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toEndOf="@+id/btnF11"
-        app:layout_constraintTop_toBottomOf="@+id/btnF9"
-        app:layout_constraintVertical_bias="0.065" />
+                <TextView
+                    android:id="@+id/btnF1"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Air Conditioner"
+                    android:textColor="#000000" />
 
-    <TextView
-        android:id="@+id/btnF6"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Meja"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toEndOf="@+id/btnF5"
-        app:layout_constraintTop_toBottomOf="@+id/btnF3"
-        app:layout_constraintVertical_bias="0.046" />
+                <TextView
+                    android:id="@+id/btnF3"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Termasuk Listrik"
+                    android:textColor="#000000" />
 
-    <TextView
-        android:id="@+id/btnF9"
-        android:layout_width="115dp"
-        android:layout_height="33dp"
-        android:background="@drawable/rounded_corner2"
-        android:backgroundTint="#FF0000"
-        android:gravity="center"
-        android:text="Kasur Double"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.081"
-        app:layout_constraintStart_toEndOf="@+id/btnF8"
-        app:layout_constraintTop_toBottomOf="@+id/btnF6"
-        app:layout_constraintVertical_bias="0.036" />
+                <TextView
+                    android:id="@+id/btnF2"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="K. Mandi Dalam"
+                    android:textColor="#000000" />
+            </LinearLayout>
 
-    <EditText
-        android:id="@+id/etNamaTempat2"
-        android:layout_width="362dp"
-        android:layout_height="122dp"
-        android:background="@drawable/rounded_corner2"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:gravity="top|left"
-        android:hint="Deskripsi"
-        android:inputType="textPersonName"
-        android:paddingLeft="12dp"
-        android:paddingEnd="12dp"
-        android:textColorHint="@android:color/darker_gray"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.489"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/etNamaTempat"
-        app:layout_constraintVertical_bias="0.019" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/btnback"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:backgroundTint="#FFFFFF"
-        android:src="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.008"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.007" />
+                <TextView
+                    android:id="@+id/btnF5"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Kursi"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/btnF6"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Meja"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/btnF4"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Wifi"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnF9"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Kasur Double"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/btnF7"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Tv"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/btnF8"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Kasur Single"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:gravity="center_horizontal"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/btnF11"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Jendela"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/btnF10"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Air Panas"
+                    android:textColor="#000000" />
+
+                <TextView
+                    android:id="@+id/btnF12"
+                    android:layout_width="115dp"
+                    android:layout_height="33dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:background="@drawable/custom_edit_text2"
+                    android:gravity="center"
+                    android:text="Dapur"
+                    android:textColor="#000000" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/textView34"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Pilih tipe properti anda"
+                android:textColor="#000000"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/radioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/rbApartemen"
+                    android:layout_width="141dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="56dp"
+                    android:layout_weight="1"
+                    android:text="Apartemen" />
+
+                <RadioButton
+                    android:id="@+id/rbKos"
+                    android:layout_width="141dp"
+                    android:layout_height="30dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_weight="1"
+                    android:text="Kos" />
+            </RadioGroup>
+
+            <Button
+                android:id="@+id/btnTambahProperti"
+                android:layout_width="299dp"
+                android:layout_height="49dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/rounded_corner3"
+                android:text="Tambah" />
+
+        </LinearLayout>
+    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

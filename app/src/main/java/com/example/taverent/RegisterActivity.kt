@@ -1,5 +1,7 @@
 package com.example.taverent
 
+import android.app.Activity
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -29,6 +31,8 @@ class RegisterActivity : AppCompatActivity() {
         refreshPenginap()
 
         binding.imageButton2.setOnClickListener {
+            val resultIntent = Intent()
+            setResult(Activity.RESULT_OK,resultIntent)
             runOnUiThread { finish() }
         }
         binding.radioButton.isChecked

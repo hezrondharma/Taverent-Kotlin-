@@ -17,9 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('nama');
             $table->string('alamat');
+            $table->string('koordinat');
             $table->string('deskripsi');
             $table->string('fasilitas');
             $table->string('jk_boleh');
+            $table->string('tipe');
+            $table->integer('harga');
             $table->unsignedBigInteger('id_pemilik');
             $table->foreign('id_pemilik')->references('id')->on('pemilik')->onDelete('cascade');
             $table->softDeletes();

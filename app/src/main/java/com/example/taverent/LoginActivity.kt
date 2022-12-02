@@ -1,8 +1,11 @@
 package com.example.taverent
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import com.example.taverent.databinding.ActivityLoginBinding
 
 class LoginActivity : AppCompatActivity() {
@@ -23,10 +26,17 @@ class LoginActivity : AppCompatActivity() {
         binding.button2.setOnClickListener {
             val intent = Intent(this@LoginActivity, RegisterActivity::class.java)
             runOnUiThread {
-                startActivity(intent)
+                byResult.launch(intent)
             }
         }
 
+
+    }
+    val byResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+            result: ActivityResult->
+        if (result.resultCode==Activity.RESULT_OK){
+            setfrag()
+        }
     }
     fun setfrag(){
         val fragment = LoginChoose2()

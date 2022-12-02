@@ -73,6 +73,7 @@ class LoginChoose1 : Fragment() {
                                     if (pemiliks[i].password == password) {
                                         Toast.makeText(view.context, "Success", Toast.LENGTH_SHORT).show()
                                         val intent = Intent(view.context,SewaMain::class.java)
+                                        intent.putExtra("id_pemilik",pemiliks[i].id.toString())
                                         activity?.runOnUiThread { startActivity(intent) }
                                     } else {
                                         Toast.makeText(view.context,
@@ -95,6 +96,8 @@ class LoginChoose1 : Fragment() {
                                         Toast.makeText(view.context, "Success", Toast.LENGTH_SHORT)
                                             .show()
                                         val intent = Intent(view.context,PenginapActivity::class.java)
+                                        intent.putExtra("penginap",penginaps[i])
+                                        Toast.makeText(view.context, penginaps[i].id.toString(), Toast.LENGTH_SHORT).show()
                                         activity?.runOnUiThread { startActivity(intent) }
                                     } else {
                                         Toast.makeText(view.context,
@@ -107,7 +110,7 @@ class LoginChoose1 : Fragment() {
                             }
                             if (!exist) {
                                 Toast.makeText(view.context,
-                                    "Email not registered" + penginaps[0].toString(),
+                                    "Email not registered",
                                     Toast.LENGTH_SHORT).show()
                             }
                         }

@@ -1,125 +1,161 @@
 package com.example.taverent
 
+import android.app.Activity
 import android.content.Intent
 import android.content.res.ColorStateList
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.ConditionVariable
+import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.taverent.databinding.ActivityTambahPropertiBinding
+import org.w3c.dom.Text
 
 class TambahProperti : AppCompatActivity() {
-    lateinit var tx:TextView
+    var WS_HOST = ""
+
     private lateinit var binding: ActivityTambahPropertiBinding
-    lateinit var list:ArrayList<Boolean>
+    private lateinit var buttons: ArrayList<TextView>
+    private lateinit var check: ArrayList<Boolean>
+    var koordinat = ""
+    var id_pemilik = "1"
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityTambahPropertiBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-        list = arrayListOf(true,true,true,true,true,true,true,true,true,true,true,true)
-        val listfasilitas = arrayListOf("Air Conditioner","K. Mandi Dalam","Termasuk Listrik","Wifi","Kursi","Meja","Tv","Kasur Single","Kasur Double","Air Panas","Jendela","Dapur")
-        binding.btnF1.setOnClickListener {
-            changecolor(binding,list,0)
-        }
-        binding.btnF2.setOnClickListener {
-            changecolor(binding,list,1)
-        }
-        binding.btnF3.setOnClickListener {
-            changecolor(binding,list,2)
-        }
-        binding.btnF4.setOnClickListener {
-            changecolor(binding,list,3)
-        }
-        binding.btnF5.setOnClickListener {
-            changecolor(binding,list,4)
-        }
-        binding.btnF6.setOnClickListener {
-            changecolor(binding,list,5)
-        }
-        binding.btnF7.setOnClickListener {
-            changecolor(binding,list,6)
-        }
-        binding.btnF8.setOnClickListener {
-            changecolor(binding,list,7)
-        }
-        binding.btnF9.setOnClickListener {
-            changecolor(binding,list,8)
-        }
-        binding.btnF10.setOnClickListener {
-            changecolor(binding,list,9)
-        }
-        binding.btnF11.setOnClickListener {
-            changecolor(binding,list,10)
-        }
-        binding.btnF12.setOnClickListener {
-            changecolor(binding,list,11)
+        WS_HOST=resources.getString(R.string.WS_HOST)
+
+        if (intent.hasExtra("id_pemilik")) {
+            id_pemilik = intent.getStringExtra("id_pemilik").toString()
         }
 
-        binding.btnback.setOnClickListener {
-            val intent = Intent(view.context,SewaMain::class.java)
-            startActivity(intent)
-        }
-        binding.btnTambahProperti.setOnClickListener {
-            var ListFasilitas = ""
-            for (i in 0 until listfasilitas.size){
-                if(list[i] == false){
-                    if(ListFasilitas==""){
-                        ListFasilitas= ListFasilitas + listfasilitas[i]
-                    }else{
-                        ListFasilitas= ListFasilitas +", "+ listfasilitas[i]
-                    }
+        buttons = arrayListOf(
+            binding.btnF1,
+            binding.btnF2,
+            binding.btnF3,
+            binding.btnF4,
+            binding.btnF5,
+            binding.btnF6,
+            binding.btnF7,
+            binding.btnF8,
+            binding.btnF9,
+            binding.btnF10,
+            binding.btnF11,
+            binding.btnF12,
+        )
+        check = arrayListOf(
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+            false,
+        )
+
+
+        for(i in 0 until buttons.size){
+            buttons[i].setOnClickListener {
+                if (!check[i]){
+                    check[i] = true
+                    buttons[i].background = resources.getDrawable(R.drawable.rectangle_green)
+                }else {
+                    check[i] = false
+                    buttons[i].background = resources.getDrawable(R.drawable.custom_edit_text2)
                 }
             }
-            Toast.makeText(this, ListFasilitas, Toast.LENGTH_SHORT).show()
         }
 
-    }
-
-
-
-    fun changecolor (bind:ActivityTambahPropertiBinding,lists:ArrayList<Boolean>, j:Int){
-        val pass=false
-        val altColor = Color.parseColor("#2DCA0A")
-        val nextColor1 = if (pass == true) altColor else altColor
-        val nextColor2 = if (pass == true) altColor else Color.parseColor("#FF0000")
-        var btn = bind.btnF1
-        if(j==0){
-            btn = bind.btnF1
-        }else if(j==1){
-            btn = bind.btnF2
-        }else if(j==2){
-            btn = bind.btnF3
-        }else if(j==3){
-            btn = bind.btnF4
-        }else if(j==4){
-            btn = bind.btnF5
-        }else if(j==5){
-            btn = bind.btnF6
-        }else if(j==6){
-            btn = bind.btnF7
-        }else if(j==7){
-            btn = bind.btnF8
-        }else if(j==8){
-            btn = bind.btnF9
-        }else if(j==9){
-            btn = bind.btnF10
-        }else if(j==10){
-            btn = bind.btnF11
-        }else if(j==11){
-            btn = bind.btnF12
+        binding.button11.setOnClickListener {
+            val intent = Intent(this@TambahProperti,MapActivity::class.java)
+            byResult.launch(intent)
         }
-        for(i in 0 until lists.size){
-            if(i == j){
-                if(lists[i]==true) {
-                    btn.backgroundTintList = ColorStateList.valueOf(nextColor1)
-                    lists[i]=false
-                }else{
-                    btn.backgroundTintList = ColorStateList.valueOf(nextColor2)
-                    lists[i]=true
+        binding.btnTambahProperti.setOnClickListener {
+            val nama = binding.editNamaProperti.text.toString()
+            val deskripsi = binding.editDeskripsi.text.toString()
+            val alamat = binding.editAlamat.text.toString()
+            val harga = binding.editHarga.text.toString()
+            val jeniskelasmin = binding.spinner2.selectedItem.toString()
+            var tipe = ""
+            if (binding.rbKos.isChecked){
+                tipe = binding.rbKos.text.toString()
+            }else if(binding.rbApartemen.isChecked){
+                tipe = binding.rbApartemen.text.toString()
+            }
+
+            var fasilitas = ""
+            var counter = 0
+            for(i in 0 until buttons.size){
+                if (check[i]){
+                    fasilitas += buttons[i].text.toString()+","
+                    counter++
                 }
+            }
+
+            if (nama!=""&&deskripsi!=""&&alamat!=""&&harga!=""&&tipe!=""&&fasilitas!=""&&counter>2&&id_pemilik!=""){
+//                fasilitas = fasilitas.substring(0,fasilitas.length-1)
+
+                val strReg = object : StringRequest(
+                    Method.POST, "$WS_HOST/penginapan/insert",
+                    Response.Listener {
+                        Toast.makeText(this@TambahProperti, "Properti Berhasil Ditambah", Toast.LENGTH_SHORT)
+                            .show()
+                        val resultIntent = Intent()
+                        setResult(Activity.RESULT_OK,resultIntent)
+                        finish()
+                    },
+                    Response.ErrorListener {
+                        Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+                    }
+                ) {
+                    override fun getParams(): MutableMap<String, String>? {
+                        val params = HashMap<String, String>()
+                        params["nama"] = nama.toString()
+                        params["alamat"] = alamat.toString()
+                        params["deskripsi"] = deskripsi.toString()
+                        params["fasilitas"] = fasilitas.toString()
+                        params["jk_boleh"] = jeniskelasmin.toString()
+                        params["tipe"] = tipe.toString()
+                        params["koordinat"] = koordinat.toString()
+                        params["harga"] = harga.toString()
+                        params["id_pemilik"] = id_pemilik.toString()
+                        return params
+                    }
+                }
+                val queue: RequestQueue = Volley.newRequestQueue(this)
+                queue.add(strReg)
+            }else{
+                Toast.makeText(this@TambahProperti, "Tolong isi semua field", Toast.LENGTH_SHORT).show()
+            }
+
+            binding.btnback.setOnClickListener{
+                finish()
+            }
+        }
+    }
+    val byResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        result: ActivityResult ->
+        if (result.resultCode == Activity.RESULT_OK){
+            val data = result.data
+            if (data!=null){
+                val alamat = data.getStringExtra("alamat").toString()
+                Toast.makeText(this@TambahProperti, alamat.toString(), Toast.LENGTH_SHORT).show()
+                binding.editAlamat.setText(alamat)
+                koordinat = data.getStringExtra("koordinat").toString()
             }
         }
     }

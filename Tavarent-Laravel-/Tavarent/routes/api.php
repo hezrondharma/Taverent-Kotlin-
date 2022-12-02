@@ -27,6 +27,7 @@ Route::get("/pemilik/list",[DatabaseController::class, "listpemilik"]);
 Route::post("/pemilik/insert",[DatabaseController::class, "insertpemilik"]);
 
 Route::get("/penginapan/list",[DatabaseController::class, "listpenginapan"]);
+Route::post("/penginapan/insert",[DatabaseController::class, "insertpenginapan"]);
 
 Route::get("/pengumuman/list",[DatabaseController::class, "listpengumuman"]);
 Route::post("/pengumuman/insert",[DatabaseController::class, "insertpengumuman"]);

@@ -10,11 +10,16 @@ import com.example.taverent.databinding.ActivitySewaMainBinding
 
 class SewaMain : AppCompatActivity() {
     private lateinit var binding: ActivitySewaMainBinding
+    var id_pemilik = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySewaMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
+        id_pemilik = intent.getStringExtra("id_pemilik").toString()
+
+        changefragment(HomeSewa())
         binding.bottomNavSewa.setOnItemSelectedListener {
             when (it.itemId){
                 R.id.btnHomeSewa->{
@@ -39,8 +44,10 @@ class SewaMain : AppCompatActivity() {
 
     fun changefragment (fragments :Fragment){
         val fragreplace=fragments
+        val bundle = Bundle()
+        bundle.putString("id_pemilik",id_pemilik)
+        fragreplace.arguments = bundle
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.setCustomAnimations(R.anim.enter_from_right, R.anim.exit_to_left, R.anim.enter_from_left, R.anim.exit_to_right);
         transaction.replace(R.id.fragmentContainerView3, fragreplace)
         transaction.commit()
     }

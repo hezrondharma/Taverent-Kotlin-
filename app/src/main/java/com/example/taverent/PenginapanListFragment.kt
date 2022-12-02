@@ -113,8 +113,11 @@ class PenginapanListFragment : Fragment() {
                     val deskripsi = o.getString("deskripsi")
                     val fasilitas = o.getString("fasilitas")
                     var jk_boleh = o.getString("jk_boleh")
+                    var tipe = o.getString("tipe")
+                    var harga = o.getString("harga").toInt()
+                    var koordinat = o.getString("koordinat")
                     var id_pemilik = o.getInt("id_pemilik")
-                    val p = Penginapan(id,nama,alamat,deskripsi,fasilitas,jk_boleh,id_pemilik)
+                    val p = Penginapan(id,nama,alamat,deskripsi,fasilitas,jk_boleh,tipe,harga,koordinat,id_pemilik)
                     penginapans.add(p)
                     rvPenginapanAdminHome.notifyDataSetChanged()
                 }

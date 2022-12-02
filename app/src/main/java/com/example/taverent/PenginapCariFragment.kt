@@ -1,11 +1,15 @@
 package com.example.taverent
 
+import android.app.ActionBar
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.LinearLayout
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +23,7 @@ import org.json.JSONArray
 
 class PenginapCariFragment : Fragment() {
     private lateinit var binding: FragmentPenginapCariBinding
+    private lateinit var penginap: Penginap
     var WS_HOST = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -38,13 +43,16 @@ class PenginapCariFragment : Fragment() {
 
     var penginapans: ArrayList<Penginapan> = ArrayList()
     var penginapansSearch: ArrayList<Penginapan> = ArrayList()
-    private lateinit var rvPenginapanAdminHome: RVPenginapanAdminHome
+    private lateinit var rvPenginapanPenginapCari: RVPenginapanPenginapCari
     private lateinit var rvJenisPenginapan: RVJenisPenginapan
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         WS_HOST = resources.getString(R.string.WS_HOST)
 
+        penginap = arguments?.getParcelable<Penginap>("penginap") as Penginap
         refreshPenginapan(view)
+
+        binding.tvHalo.text = "Halo "+ penginap.username
 
         val namajenis = arrayListOf<String>("Kamar Kos","Apartment","Voucher","Game")
         val imagejenis = arrayListOf<Int>(R.drawable.kamarkos,R.drawable.apartment,R.drawable.voucher,R.drawable.game)
@@ -55,17 +63,43 @@ class PenginapCariFragment : Fragment() {
         binding.rvTipeKamar.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.HORIZONTAL,false)
 
 
-        rvPenginapanAdminHome = RVPenginapanAdminHome(penginapans,R.layout.rv_penginapan_admin){view, idx ->
 
+
+        rvPenginapanPenginapCari = RVPenginapanPenginapCari(penginapansSearch){view, idx ->
+            val intent = Intent(view.context,PenginapanDetailActivity::class.java)
+            intent.putExtra("penginapan",penginapansSearch[idx])
+            startActivity(intent)
         }
-        binding.rvPenginapan.adapter = rvPenginapanAdminHome
+        binding.rvPenginapan.adapter = rvPenginapanPenginapCari
         binding.rvPenginapan.layoutManager = GridLayoutManager(view.context,2)
 
         binding.editSearch.setOnClickListener{
             val intent = Intent(view.context,SearchActivity::class.java)
             startActivity(intent)
         }
-
+        filterPenginapan()
+        binding.spinner.onItemSelectedListener = object: AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(p0: AdapterView<*>?, p1: View?, p2: Int, p3: Long) {
+                filterPenginapan()
+            }
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+        }
+    }
+    fun filterPenginapan(){
+        penginapansSearch.clear()
+        for (i in 0 until penginapans.size){
+            if (penginapans[i].jk_boleh==binding.spinner.selectedItem.toString()){
+                penginapansSearch.add(penginapans[i])
+            }
+        }
+        if (penginapansSearch.size>0){
+            binding.linearbelumada.visibility = View.GONE
+        }else{
+            binding.linearbelumada.visibility = View.VISIBLE
+        }
+        rvPenginapanPenginapCari.notifyDataSetChanged()
     }
     fun refreshPenginapan(view:View){
         val strReq = object : StringRequest(
@@ -81,10 +115,14 @@ class PenginapCariFragment : Fragment() {
                     val deskripsi = o.getString("deskripsi")
                     val fasilitas = o.getString("fasilitas")
                     var jk_boleh = o.getString("jk_boleh")
+                    var tipe = o.getString("tipe")
+                    var harga = o.getString("harga").toInt()
+                    var koordinat = o.getString("koordinat")
                     var id_pemilik = o.getInt("id_pemilik")
-                    val p = Penginapan(id,nama,alamat,deskripsi,fasilitas,jk_boleh,id_pemilik)
+                    val p = Penginapan(id,nama,alamat,deskripsi,fasilitas,jk_boleh,tipe,harga,koordinat,id_pemilik)
                     penginapans.add(p)
-                    rvPenginapanAdminHome.notifyDataSetChanged()
+                    filterPenginapan()
+                    binding.rvPenginapan.layoutParams = LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,LinearLayout.LayoutParams.WRAP_CONTENT)
                 }
             },
             Response.ErrorListener {

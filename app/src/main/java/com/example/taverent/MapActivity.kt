@@ -106,7 +106,7 @@ class MapActivity : AppCompatActivity(){
                 Toast.makeText(this@MapActivity, "Masih Loading", Toast.LENGTH_SHORT).show()
             } else {
                 val resultIntent = Intent()
-                resultIntent.putExtra("alamat", autocompleteLocation.text)
+                resultIntent.putExtra("alamat", autocompleteLocation.text.toString())
                 resultIntent.putExtra("koordinat",
                     coordinates.latitude.toString() + "," + coordinates.longitude.toString())
                 setResult(Activity.RESULT_OK, resultIntent)
