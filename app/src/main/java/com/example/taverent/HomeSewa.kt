@@ -10,6 +10,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
@@ -53,9 +54,14 @@ class HomeSewa : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         id_pemilik = arguments?.getString("id_pemilik").toString()
-
-
+        val nama_pemilik = arguments?.getString("nama_pemilik").toString()
+        val username = arguments?.getString("username").toString()
+        val txOwnerUsername1 = view.findViewById<TextView>(R.id.txOwnerUsername1)
+        val txOwnerUsername2 = view.findViewById<TextView>(R.id.txOwnerUsername2)
         val btnpindah = view.findViewById<ImageView>(R.id.btnTambahKosApartmen)
+        var Temp =""
+        txOwnerUsername1.setText(nama_pemilik)
+        txOwnerUsername2.setText(username)
         btnpindah.setOnClickListener {
             val intent = Intent(view.context,TambahProperti::class.java)
             intent.putExtra("id_pemilik",id_pemilik)
