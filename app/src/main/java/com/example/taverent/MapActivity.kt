@@ -17,6 +17,7 @@ import com.here.sdk.core.Point2D
 import com.here.sdk.core.engine.SDKNativeEngine
 import com.here.sdk.core.engine.SDKOptions
 import com.here.sdk.core.errors.InstantiationErrorException
+import com.here.sdk.gestures.GestureType
 import com.here.sdk.gestures.TapListener
 import com.here.sdk.mapviewlite.*
 import com.here.sdk.search.*
@@ -59,6 +60,8 @@ class MapActivity : AppCompatActivity(){
         autocompleteLocation.setAdapter(stringAdapter)
         textZoom = findViewById(R.id.textView24)
         textZoom.text = zoomLevel.toString()
+        mapView.gestures.disableDefaultAction(GestureType.DOUBLE_TAP)
+
 
         searchEngine = try {
             SearchEngine()

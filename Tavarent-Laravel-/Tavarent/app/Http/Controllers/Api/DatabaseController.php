@@ -11,6 +11,7 @@ use App\Models\Pengumuman;
 use App\Models\Promo;
 use App\Models\Kupon;
 use App\Models\Rating;
+use App\Models\Chat;
 use App\Models\Pembayaran;
 
 class DatabaseController extends Controller
@@ -32,14 +33,81 @@ class DatabaseController extends Controller
         $pemilik = Pemilik::all();
         return response()->json($pemilik, 200);
     }
+    public function findpemilik(Request $request)
+    {
+        $pemilik = Pemilik::find($request->id_pemilik);
+        return response()->json($pemilik, 201);
+    }
+    public function findpemilikdaripenginapan(Request $request)
+    {
+        $pemilik = Penginapan::find($request->id_penginapan)->Pemilik()->get();
+        return response()->json($pemilik, 201);
+    }
+    public function findpenginap(Request $request)
+    {
+        $penginap = Penginap::find($request->id_penginap);
+        return response()->json($penginap, 201);
+    }
     public function listpenginapan(Request $request)
     {
         return response()->json(Penginapan::all(), 200);
     }
+
+    public function listchatpenginap(Request $request)
+    {
+        $chat = Chat::
+        selectRaw("chat.id as id,chat.pesan as pesan, chat.sender as sender,chat.status as status,
+        penginap.id as id_penginap,penginap.username as penginapusername,
+        pemilik.id as id_pemilik,pemilik.username as pemilikusername,
+        chat.created_at as created_at")
+        ->join("penginap","penginap.id","=","chat.id_penginap")
+        ->join("pemilik","pemilik.id","=","chat.id_pemilik")
+        ->where("chat.id_penginap","=",$request->id_penginap)
+        ->get();
+        return response()->json($chat, 201);
+    }
+    public function listpesanchat(Request $request)
+    {
+        $chat = Chat::
+        selectRaw("chat.id as id,chat.pesan as pesan, chat.sender as sender,chat.status as status,
+        penginap.id as id_penginap,penginap.username as penginapusername,
+        pemilik.id as id_pemilik,pemilik.username as pemilikusername,
+        chat.created_at as created_at")
+        ->join("penginap","penginap.id","=","chat.id_penginap")
+        ->join("pemilik","pemilik.id","=","chat.id_pemilik")
+        ->where("chat.id_penginap","=",$request->id_penginap)
+        ->where("chat.id_pemilik","=",$request->id_pemilik)
+        ->get();
+        return response()->json($chat, 201);
+    }
+    public function insertchat(Request $request)
+    {
+        $chat = Chat::create(array(
+            "pesan" => $request->pesan,
+            "id_penginap" => $request->id_penginap,
+            "id_pemilik" => $request->id_pemilik,
+            "sender" => $request->sender,
+            "status" => $request->status,
+        ));
+        return response()->json($chat, 201);
+    }
+    public function listchatpemilik(Request $request)
+    {
+        $chat = Chat::
+        selectRaw("chat.id as id,chat.pesan as pesan, chat.sender as sender,chat.status as status,
+        penginap.id as id_penginap,penginap.username as penginapusername,
+        pemilik.id as id_pemilik,pemilik.username as pemilikusername,
+        chat.created_at as created_at")
+        ->join("penginap","penginap.id","=","chat.id_penginap")
+        ->join("pemilik","pemilik.id","=","chat.id_pemilik")
+        ->where("chat.id_pemilik","=",$request->id_pemilik)
+        ->get();
+        return response()->json($chat, 201);
+    }
     public function listpenginapanfavorit(Request $request)
     {
         $penginapan = Penginap::find($request->id_penginap)->Penginapan()->get();
-        return response()->json($penginapan, 200);
+        return response()->json($penginapan, 201);
     }
     public function checkpenginapanfavorit(Request $request)
     {

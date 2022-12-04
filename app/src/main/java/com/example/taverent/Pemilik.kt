@@ -1,7 +1,10 @@
 package com.example.taverent
 
+import android.os.Parcelable
+import kotlinx.parcelize.Parcelize
 import java.util.*
 
+@Parcelize
 class Pemilik(
     var id: Int,
     var username: String,
@@ -10,5 +13,8 @@ class Pemilik(
     var email:String,
     var no_telp:String,
     var deleted_at:String,
-) {
+) : Parcelable {
+    override fun toString(): String {
+        return "$id $username $password $nama_lengkap $email $no_telp $deleted_at"
+    }
 }

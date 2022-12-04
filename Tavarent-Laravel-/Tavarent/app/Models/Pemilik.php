@@ -20,6 +20,10 @@ class Pemilik extends Model
 
     public function Penginapan()
     {
-        return $this->hasMany(Penginapan::class,'id_penginapan','id');
+        return $this->hasMany(Penginapan::class,'id_pemilik','id');
+    }
+    public function Chat()
+    {
+        return $this->hasMany(Chat::class,'id_pemilik','id');
     }
 }

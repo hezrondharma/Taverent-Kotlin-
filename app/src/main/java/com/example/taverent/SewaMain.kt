@@ -4,6 +4,7 @@ import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.ConditionVariable
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.fragment.app.Fragment
@@ -16,6 +17,7 @@ import org.json.JSONArray
 
 class SewaMain : AppCompatActivity() {
     private lateinit var binding: ActivitySewaMainBinding
+    private lateinit var pemilik: Pemilik
     var id_pemilik = ""
     var username=""
     var nama_pemilik = ""
@@ -28,41 +30,95 @@ class SewaMain : AppCompatActivity() {
         binding = ActivitySewaMainBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+
         id_pemilik = intent.getStringExtra("id_pemilik").toString()
         nama_pemilik = intent.getStringExtra("nama_pemilik").toString()
         username= intent.getStringExtra("username").toString()
-        changefragment(HomeSewa(),id_pemilik)
-        binding.bottomNavSewa.setOnItemSelectedListener {
-            when (it.itemId){
-                R.id.btnHomeSewa->{
 
-                    changefragment(HomeSewa(),id_pemilik)
+        pemilik = intent.getParcelableExtra<Pemilik>("pemilik") as Pemilik
+        Log.e("tag",pemilik.toString())
+
+
+
+        val fragreplace=HomeSewa()
+        val bundle = Bundle()
+        bundle.putParcelable("pemilik",pemilik)
+        bundle.putString("id_pemilik",id_pemilik)
+        bundle.putString("nama_pemilik",nama_pemilik)
+        bundle.putString("username",username)
+        fragreplace.arguments = bundle
+        val transaction = supportFragmentManager.beginTransaction().replace(
+            R.id.frag4,fragreplace
+        ).setReorderingAllowed(true).commit()
+
+        binding.bottomNavSewa.setOnItemSelectedListener {
+            when (it.itemId) {
+                R.id.btnHomeSewa -> {
+                    val fragreplace = HomeSewa()
+                    val bundle = Bundle()
+                    bundle.putParcelable("pemilik", pemilik)
+                    bundle.putString("id_pemilik", id_pemilik)
+                    bundle.putString("nama_pemilik", nama_pemilik)
+                    bundle.putString("username", username)
+                    fragreplace.arguments = bundle
+                    val transaction = supportFragmentManager.beginTransaction().replace(
+                        R.id.frag4, fragreplace
+                    ).setReorderingAllowed(true).commit()
                 }
-                R.id.btnChatSewa->{
-                    changefragment(ChatSewa(),id_pemilik)
+                R.id.btnChatSewa -> {
+                    val fragreplace = ChatSewa()
+                    val bundle = Bundle()
+                    bundle.putParcelable("pemilik", pemilik)
+                    bundle.putString("id_pemilik", id_pemilik)
+                    bundle.putString("nama_pemilik", nama_pemilik)
+                    bundle.putString("username", username)
+                    fragreplace.arguments = bundle
+                    val transaction = supportFragmentManager.beginTransaction().replace(
+                        R.id.frag4, fragreplace
+                    ).setReorderingAllowed(true).commit()
                 }
-                R.id.btnKelolaSewa->{
-                    changefragment(KelolaSewa(),id_pemilik)
+                R.id.btnKelolaSewa -> {
+                    val fragreplace = KelolaSewa()
+                    val bundle = Bundle()
+                    bundle.putParcelable("pemilik", pemilik)
+                    bundle.putString("id_pemilik", id_pemilik)
+                    bundle.putString("nama_pemilik", nama_pemilik)
+                    bundle.putString("username", username)
+                    fragreplace.arguments = bundle
+                    val transaction = supportFragmentManager.beginTransaction().replace(
+                        R.id.frag4, fragreplace
+                    ).setReorderingAllowed(true).commit()
                 }
-                R.id.btnStatistikSewa->{
-                    changefragment(StatistikSewa(),id_pemilik)
+                R.id.btnStatistikSewa -> {
+                    val fragreplace = StatistikSewa()
+                    val bundle = Bundle()
+                    bundle.putParcelable("pemilik", pemilik)
+                    bundle.putString("id_pemilik", id_pemilik)
+                    bundle.putString("nama_pemilik", nama_pemilik)
+                    bundle.putString("username", username)
+                    fragreplace.arguments = bundle
+                    val transaction = supportFragmentManager.beginTransaction().replace(
+                        R.id.frag4, fragreplace
+                    ).setReorderingAllowed(true).commit()
                 }
-                R.id.btnAkunSewa->{
-                    changefragment(AkunSewa(),id_pemilik)
+                R.id.btnAkunSewa -> {
+                    val fragreplace = AkunSewa()
+                    val bundle = Bundle()
+                    bundle.putParcelable("pemilik", pemilik)
+                    bundle.putString("id_pemilik", id_pemilik)
+                    bundle.putString("nama_pemilik", nama_pemilik)
+                    bundle.putString("username", username)
+                    fragreplace.arguments = bundle
+                    val transaction = supportFragmentManager.beginTransaction().replace(
+                        R.id.frag4, fragreplace
+                    ).setReorderingAllowed(true).commit()
                 }
             }
             return@setOnItemSelectedListener true
         }
+
+
     }
 
-    fun changefragment (fragments :Fragment , pemilik:String){
-        val bundle = Bundle()
-        bundle.putString("id_pemilik",pemilik)
-        bundle.putString("nama_pemilik",nama_pemilik)
-        bundle.putString("username",username)
-        fragments.arguments = bundle
-        val transaction = supportFragmentManager.beginTransaction()
-        transaction.replace(R.id.fragmentContainerView3, fragments)
-        transaction.commit()
-    }
+
 }
