@@ -142,7 +142,7 @@ class TambahProperti : AppCompatActivity() {
                 Toast.makeText(this@TambahProperti, "Tolong isi semua field", Toast.LENGTH_SHORT).show()
             }
 
-            binding.btnback.setOnClickListener{
+            binding.btnbackSewa.setOnClickListener{
                 finish()
             }
         }

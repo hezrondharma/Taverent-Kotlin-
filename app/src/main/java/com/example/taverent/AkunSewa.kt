@@ -1,10 +1,13 @@
 package com.example.taverent
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -36,7 +39,16 @@ class AkunSewa : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_akun_sewa, container, false)
     }
+    var id_pemilik = ""
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        var nama_pemilik = ""
 
+        id_pemilik = arguments?.getString("id_pemilik").toString()
+        nama_pemilik = arguments?.getString("nama_pemilik").toString()
+        val txOwnerUsername1 = view.findViewById<TextView>(R.id.txOwnerUsername)
+        txOwnerUsername1.setText(nama_pemilik)
+    }
     companion object {
         /**
          * Use this factory method to create a new instance of
