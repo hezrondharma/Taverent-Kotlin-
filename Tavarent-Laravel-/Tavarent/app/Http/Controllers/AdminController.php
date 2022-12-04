@@ -16,5 +16,13 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    
+    function testing(){
+        $pemilik=Pemilik::find(4);
+        $pemilik->update([
+            "username"=>"hezron",
+            "password"=>"123",
+            "nama_lengkap"=>"123",
+            "no_telp"=>"123",
+        ]);
+    }
 }

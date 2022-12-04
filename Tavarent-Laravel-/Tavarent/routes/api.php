@@ -22,9 +22,11 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 Route::get("/semuauser",[DatabaseController::class, "listuser"]);
 Route::get("/penginap/list",[DatabaseController::class, "listpenginap"]);
 Route::post("/penginap/insert",[DatabaseController::class, "insertpenginap"]);
+Route::post("/penginap/update",[DatabaseController::class, "updatepenginap"]);
 
 Route::get("/pemilik/list",[DatabaseController::class, "listpemilik"]);
 Route::post("/pemilik/insert",[DatabaseController::class, "insertpemilik"]);
+Route::post("/pemilik/update",[DatabaseController::class, "updatepemilik"]);
 
 Route::get("/penginapan/list",[DatabaseController::class, "listpenginapan"]);
 Route::post("/penginapan/list/favorit",[DatabaseController::class, "listpenginapanfavorit"]);

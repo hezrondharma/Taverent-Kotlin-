@@ -17,6 +17,7 @@ class PenginapActivity : AppCompatActivity() {
         val fragment = PenginapCariFragment()
         val bundle = Bundle()
         bundle.putParcelable("penginap",penginap)
+        val id_penginap = intent.getStringExtra("id_penginap").toString()
         fragment.arguments = bundle
         supportFragmentManager.beginTransaction().replace(
             R.id.frag3,fragment
@@ -64,6 +65,7 @@ class PenginapActivity : AppCompatActivity() {
                     val fragment = PenginapAccountFragment()
                     val bundle = Bundle()
                     bundle.putParcelable("penginap",penginap)
+                    bundle.putString("id_penginap",id_penginap)
                     fragment.arguments = bundle
                     supportFragmentManager.beginTransaction().replace(
                         R.id.frag3,fragment
