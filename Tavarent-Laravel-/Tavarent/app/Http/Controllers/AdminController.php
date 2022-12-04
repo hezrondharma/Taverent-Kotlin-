@@ -11,10 +11,16 @@ use App\Models\Promo;
 use App\Models\Kupon;
 use App\Models\Rating;
 use App\Models\Pembayaran;
+use App\Models\Chat;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 
+
 class AdminController extends Controller
 {
-    
+    public function testing()
+    {
+        dd(Pemilik::find(3)
+        );
+    }
 }

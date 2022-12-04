@@ -16,15 +16,15 @@ class Penginap extends Model
 
     public function Pembayaran()
     {
-        return $this->hasMany(Pembayaran::class,'id_pembayaran','id');
+        return $this->hasMany(Pembayaran::class,'id_penginap','id');
     }
     public function Kupon()
     {
-        return $this->hasMany(Kupon::class,'id_kupon','id');
+        return $this->hasMany(Kupon::class,'id_penginap','id');
     }
     public function Rating()
     {
-        return $this->hasMany(Rating::class,'id_rating','id');
+        return $this->hasMany(Rating::class,'id_penginap','id');
     }
     public function Penginapan()
     {

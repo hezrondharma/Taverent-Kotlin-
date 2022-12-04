@@ -73,7 +73,7 @@ class LoginChoose1 : Fragment() {
                                     if (pemiliks[i].password == password) {
                                         Toast.makeText(view.context, "Success", Toast.LENGTH_SHORT).show()
                                         val intent = Intent(view.context,SewaMain::class.java)
-                                        intent.putExtra("id_pemilik",pemiliks[i].id.toString())
+                                        intent.putExtra("pemilik",pemiliks[i])
                                         activity?.runOnUiThread { startActivity(intent) }
                                     } else {
                                         Toast.makeText(view.context,

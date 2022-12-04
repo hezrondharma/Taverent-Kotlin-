@@ -39,3 +39,7 @@ Route::get('admin/announce', [AdminController::class, 'AdminAnnounce']);
 Route::get('admin/profil', [AdminController::class, 'AdminProfil']);
 
 
+Route::get('testing', [AdminController::class, 'testing']);
+
+
+

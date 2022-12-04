@@ -21,9 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::get("/semuauser",[DatabaseController::class, "listuser"]);
 Route::get("/penginap/list",[DatabaseController::class, "listpenginap"]);
+Route::post("/penginap/find",[DatabaseController::class, "findpenginap"]);
 Route::post("/penginap/insert",[DatabaseController::class, "insertpenginap"]);
 
 Route::get("/pemilik/list",[DatabaseController::class, "listpemilik"]);
+Route::post("/pemilik/find",[DatabaseController::class, "findpemilik"]);
+Route::post("/pemilik/find/penginapan",[DatabaseController::class, "findpemilikdaripenginapan"]);
 Route::post("/pemilik/insert",[DatabaseController::class, "insertpemilik"]);
 
 Route::get("/penginapan/list",[DatabaseController::class, "listpenginapan"]);
@@ -36,5 +39,11 @@ Route::get("/pengumuman/list",[DatabaseController::class, "listpengumuman"]);
 Route::post("/pengumuman/insert",[DatabaseController::class, "insertpengumuman"]);
 
 Route::get("/kupon/list",[DatabaseController::class, "listkupon"]);
+
+Route::post("/chat/list/penginap",[DatabaseController::class, "listchatpenginap"]);
+Route::post("/chat/list/pemilik",[DatabaseController::class, "listchatpemilik"]);
+Route::post("/chat/pesan/list",[DatabaseController::class, "listpesanchat"]);
+Route::post("/chat/insert",[DatabaseController::class, "insertchat"]);
+
 Route::get("/promo/list",[DatabaseController::class, "listpromo"]);
 Route::get("/rating/list",[DatabaseController::class, "listrating"]);

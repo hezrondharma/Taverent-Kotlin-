@@ -19,28 +19,9 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeSewa.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeSewa : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -49,16 +30,17 @@ class HomeSewa : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home_sewa, container, false)
     }
-    var id_pemilik = ""
+    private lateinit var pemilik: Pemilik
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        id_pemilik = arguments?.getString("id_pemilik").toString()
+        Log.e("tag",arguments.toString())
+        pemilik = arguments?.getParcelable<Pemilik>("pemilik") as Pemilik
 
 
         val btnpindah = view.findViewById<ImageView>(R.id.btnTambahKosApartmen)
         btnpindah.setOnClickListener {
             val intent = Intent(view.context,TambahProperti::class.java)
-            intent.putExtra("id_pemilik",id_pemilik)
+            intent.putExtra("id_pemilik",pemilik.id)
             activity?.runOnUiThread { byResult.launch(intent) }
         }
     }
@@ -72,23 +54,5 @@ class HomeSewa : Fragment() {
     fun refreshPenginapan(){
 
     }
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeSewa.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeSewa().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }
+
 }

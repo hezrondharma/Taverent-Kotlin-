@@ -52,7 +52,7 @@ class PenginapFavoritFragment : Fragment() {
             startActivity(intent)
         }
         binding.rvFavorit.adapter = rvPenginapanPenginapanFavorit
-        binding.rvFavorit.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
+        binding.rvFavorit.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false )
         refreshPenginapan(view,penginap.id)
     }
     fun refreshPenginapan(view:View,id_penginap:Int){

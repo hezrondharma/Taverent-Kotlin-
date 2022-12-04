@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/circle.xml" value="0.2305" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/custom_edit_text1.xml" value="0.143" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/custom_edit_text2.xml" value="0.143" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/ic_baseline_key_24.xml" value="0.2305" />
@@ -17,34 +18,38 @@
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_add_announce.xml" value="0.2" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_add_penginapan.xml" value="0.4" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_admin.xml" value="0.14444444444444443" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_chat.xml" value="0.2984189723320158" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_login.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_map.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_penginap.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_penginapan_detail.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_search.xml" value="0.264" />
-        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_sewa_main.xml" value="0.2" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_sewa_main.xml" value="0.152" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_tambah_properti.xml" value="0.2" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_admin_account.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_admin_announce.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_admin_home.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_admin_list.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_akun_sewa.xml" value="0.1265625" />
-        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_chat_sewa.xml" value="0.264" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_chat_sewa.xml" value="0.2" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_home_sewa.xml" value="0.2" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_kelola_sewa.xml" value="0.1265625" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_login_choose1.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_login_choose2.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_penginap_cari.xml" value="0.264" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_penginap_chat.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_penginap_favorit.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_penginap_home.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_search1.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_statistik_sewa.xml" value="0.1265625" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_announce_admin.xml" value="0.27447916666666666" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_chat.xml" value="0.176" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_jenis_penginapan.xml" value="0.4" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_penginapan_admin.xml" value="0.4" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_penginapan_favorit.xml" value="0.4" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_penginapan_penginap_cari.xml" value="0.13796296296296295" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_penginapan_user_home.xml" value="0.27447916666666666" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_pesan.xml" value="0.2" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/menu/adminbottomnav.xml" value="0.1265625" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/menu/penginapbottomnav.xml" value="0.16" />
       </map>
