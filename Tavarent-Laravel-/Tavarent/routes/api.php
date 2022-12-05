@@ -30,6 +30,7 @@ Route::post("/pemilik/find/penginapan",[DatabaseController::class, "findpemilikd
 Route::post("/pemilik/insert",[DatabaseController::class, "insertpemilik"]);
 
 Route::get("/penginapan/list",[DatabaseController::class, "listpenginapan"]);
+Route::get("/penginapan/list/rating",[DatabaseController::class, "listpenginapanrating"]);
 Route::post("/penginapan/list/favorit",[DatabaseController::class, "listpenginapanfavorit"]);
 Route::post("/penginapan/check/favorit",[DatabaseController::class, "checkpenginapanfavorit"]);
 Route::post("/penginapan/toggle/favorit",[DatabaseController::class, "togglepenginapanfavorit"]);

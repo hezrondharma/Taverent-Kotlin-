@@ -29,6 +29,7 @@ class PenginapanDetailActivity : AppCompatActivity() {
     private lateinit var tvNama: TextView
     private lateinit var tvNamaPemilik: TextView
     private lateinit var btnChatPemilik: Button
+    private lateinit var btnPesan: Button
     private lateinit var tvJKboleh: TextView
     private lateinit var tvLokasi: TextView
     private lateinit var tvJKPenginapanDetail: TextView
@@ -71,6 +72,7 @@ class PenginapanDetailActivity : AppCompatActivity() {
         btnBack = findViewById(R.id.btnBack)
         btnFavorit = findViewById(R.id.btnFavorit)
         mapView = findViewById(R.id.map_view)
+        btnPesan = findViewById(R.id.button14)
         mapView.onCreate(savedInstanceState)
 
         checkPemilik(penginapan.id)
@@ -106,7 +108,12 @@ class PenginapanDetailActivity : AppCompatActivity() {
             intent.putExtra("pemilik",pemilik.id)
             startActivity(intent)
         }
-
+        btnPesan.setOnClickListener {
+            val intent = Intent(this, PembayaranActivity::class.java)
+            intent.putExtra("penginap",penginap)
+            intent.putExtra("penginapan",penginapan)
+            startActivity(intent)
+        }
     }
 
     fun checkPemilik(id_penginapan:Int){

@@ -76,6 +76,7 @@ class PenginapCariFragment : Fragment() {
 
         binding.editSearch.setOnClickListener{
             val intent = Intent(view.context,SearchActivity::class.java)
+            intent.putExtra("penginap",penginap)
             startActivity(intent)
         }
         filterPenginapan()

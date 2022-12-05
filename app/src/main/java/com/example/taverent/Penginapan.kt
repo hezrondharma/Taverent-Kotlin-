@@ -15,4 +15,5 @@ class Penginapan(
     var harga: Int,
     var koordinat: String,
     var id_pemilik: Int,
+    var rating: Int = 0,
 ) : Parcelable

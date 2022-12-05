@@ -52,7 +52,11 @@ class DatabaseController extends Controller
     {
         return response()->json(Penginapan::all(), 200);
     }
-
+    public function listpenginapanrating(Request $request)
+    {
+        $penginapan = Penginapan::all();
+        return response()->json($penginapan, 200);
+    }
     public function listchatpenginap(Request $request)
     {
         $chat = Chat::

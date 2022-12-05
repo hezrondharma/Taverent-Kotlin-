@@ -35,7 +35,7 @@ class HomeSewa : Fragment() {
     var id_pemilik = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        pemilik = arguments?.getParcelable<Pemilik>("pemilik") as Pemilik
+          pemilik = arguments?.getParcelable<Pemilik>("pemilik") as Pemilik
 
 
         id_pemilik = arguments?.getString("id_pemilik").toString()
