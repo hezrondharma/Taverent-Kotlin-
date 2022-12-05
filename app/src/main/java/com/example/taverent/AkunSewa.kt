@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 
 // TODO: Rename parameter arguments, choose names that match
@@ -43,11 +44,17 @@ class AkunSewa : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var nama_pemilik = ""
-
         id_pemilik = arguments?.getString("id_pemilik").toString()
         nama_pemilik = arguments?.getString("nama_pemilik").toString()
+        val btneditprofilSewa = view.findViewById<LinearLayout>(R.id.btneditprofilSewa)
         val txOwnerUsername1 = view.findViewById<TextView>(R.id.txOwnerUsername)
         txOwnerUsername1.setText(nama_pemilik)
+        btneditprofilSewa.setOnClickListener {
+            val intent = Intent(view.context,ProfileSewa::class.java)
+            intent.putExtra("id_pemilik",id_pemilik)
+            activity?.runOnUiThread { startActivity(intent) }
+        }
+
     }
     companion object {
         /**

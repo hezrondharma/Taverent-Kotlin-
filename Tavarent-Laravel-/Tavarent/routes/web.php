@@ -37,7 +37,7 @@ Route::get('admin/list', [AdminController::class, 'AdminList']);
 Route::get('admin/game', [AdminController::class, 'AdminGame']);
 Route::get('admin/announce', [AdminController::class, 'AdminAnnounce']);
 Route::get('admin/profil', [AdminController::class, 'AdminProfil']);
-
+Route::get('testing', [AdminController::class,'testing']);
 
 Route::get('testing', [AdminController::class, 'testing']);
 

@@ -18,9 +18,4 @@ use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
-    public function testing()
-    {
-        dd(Pemilik::find(3)
-        );
-    }
 }

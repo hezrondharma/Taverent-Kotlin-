@@ -27,6 +27,12 @@
             android:exported="false" />
         <activity
             android:name=".ChatActivity"
+            android:exported="false"/>
+        <activity
+            android:name=".PenginapProfile"
+            android:exported="false" />
+        <activity
+            android:name=".ProfileSewa"
             android:exported="false" />
         <activity
             android:name=".PenginapanDetailActivity"

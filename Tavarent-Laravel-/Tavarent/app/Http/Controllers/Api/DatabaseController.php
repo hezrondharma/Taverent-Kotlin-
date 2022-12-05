@@ -132,7 +132,7 @@ class DatabaseController extends Controller
         }
         return response()->json($exist, 201);
     }
-    
+
     public function listkupon(Request $request)
     {
         return response()->json(Kupon::all(), 200);
@@ -149,7 +149,7 @@ class DatabaseController extends Controller
     {
         return response()->json(Pengumuman::all(), 200);
     }
-    
+
     function insertpemilik(Request $request){
         $pemilik = Pemilik::create(array(
             "email" => $request->email,
@@ -190,8 +190,26 @@ class DatabaseController extends Controller
             "koordinat" =>$request->koordinat,
             "id_pemilik" =>$request->id_pemilik,
         ));
-        
-        
+
+
         return response()->json($penginapan, 201);
+    }
+    function updatepemilik(Request $request){
+        $pemilik=Pemilik::find($request->id);
+        $pemilik->update([
+            "password"=>$request->password,
+            "nama_lengkap"=>$request->nama_lengkap,
+            "no_telp"=>$request->no_telp,
+        ]);
+        return response()->json($pemilik, 201);
+    }
+    function updatepenginap(Request $request){
+        $penginap=Penginap::find($request->id);
+        $penginap->update([
+            "password"=>$request->password,
+            "nama_lengkap"=>$request->nama_lengkap,
+            "no_telp"=>$request->no_telp,
+        ]);
+        return response()->json($penginap, 201);
     }
 }

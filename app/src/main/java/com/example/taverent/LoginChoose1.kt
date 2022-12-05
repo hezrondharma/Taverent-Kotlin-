@@ -100,6 +100,7 @@ class LoginChoose1 : Fragment() {
                                             .show()
                                         val intent = Intent(view.context,PenginapActivity::class.java)
                                         intent.putExtra("penginap",penginaps[i])
+                                        intent.putExtra("id_penginap",penginaps[i].id.toString())
                                         Toast.makeText(view.context, penginaps[i].id.toString(), Toast.LENGTH_SHORT).show()
                                         activity?.runOnUiThread { startActivity(intent) }
                                     } else {

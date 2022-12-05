@@ -84,6 +84,9 @@ class TambahProperti : AppCompatActivity() {
             val intent = Intent(this@TambahProperti,MapActivity::class.java)
             byResult.launch(intent)
         }
+        binding.btnbackSewa.setOnClickListener{
+            finish()
+        }
         binding.btnTambahProperti.setOnClickListener {
             val nama = binding.editNamaProperti.text.toString()
             val deskripsi = binding.editDeskripsi.text.toString()
@@ -142,9 +145,6 @@ class TambahProperti : AppCompatActivity() {
                 Toast.makeText(this@TambahProperti, "Tolong isi semua field", Toast.LENGTH_SHORT).show()
             }
 
-            binding.btnbackSewa.setOnClickListener{
-                finish()
-            }
         }
     }
     val byResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
