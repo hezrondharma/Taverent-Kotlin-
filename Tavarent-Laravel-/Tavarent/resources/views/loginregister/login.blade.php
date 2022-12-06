@@ -3,6 +3,7 @@
 @section('content')
 <form action="{{ route('check') }}" method="POST" class="signin-form" >
     @csrf
+    <input type="hidden" id="hidden" name="hidden" value="login">
     <div class="form-group mb-3">
         <label class="label" for="name">Email</label>
         <input type="text" class="form-control" placeholder="Masukkan Email" value="{{ old('email') }}" name="email">
