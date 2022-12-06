@@ -2,7 +2,6 @@
     <nav class="navbar navbar-expand-lg" style="background-color:#D9D9D9;outline-style: solid;">
         <a class="navbar-brand" href="#">
             <img src="{{asset('img/logo.png')}}" alt="" width="75"  height="auto">
-            Penyewa
         </a>
         <div class="d-flex" id="navbarSupportedContent">
             @yield('navbar')
