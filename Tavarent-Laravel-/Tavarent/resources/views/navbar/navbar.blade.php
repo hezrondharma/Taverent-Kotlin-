@@ -11,7 +11,7 @@
             <label class="mr-3" for="">Saldo : </label>
         </div>
         <div class="d-flex justify-content-end">
-            <form action="/customer/logout">
+            <form action="pemilik/logout">
                 <button class="btn btn-danger my-2 my-sm-0" type="submit">Logout</button>
             </form>
         </div>

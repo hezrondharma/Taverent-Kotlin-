@@ -1,11 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use App\Models\Penginapan;
 class PemilikController extends Controller
 {
+    function logoutpemilik(){
+        Session::forget('cekuser');
+        return redirect('/login');
+    }
     function PemilikHome(){
         return view('pemilik/home');
     }

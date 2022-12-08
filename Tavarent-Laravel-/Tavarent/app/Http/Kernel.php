@@ -43,6 +43,12 @@ class Kernel extends HttpKernel
             'throttle:api',
             \Illuminate\Routing\Middleware\SubstituteBindings::class,
         ],
+        'cekLogin' => [
+            \App\Http\Middleware\cekLogin::class,
+        ],
+        'cekUser' => [
+            \App\Http\Middleware\cekUser::class,
+        ],
     ];
 
     /**
