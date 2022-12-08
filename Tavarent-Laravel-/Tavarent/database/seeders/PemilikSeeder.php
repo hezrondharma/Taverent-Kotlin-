@@ -36,6 +36,20 @@ class PemilikSeeder extends Seeder
                     "email" => "ivan@gmail.com",
                     "no_telp" => "0814444444",
                 ],
+                [
+                    "username" => "jojo",
+                    "password" => "jojo",
+                    "nama_lengkap" => "Jonathan Hans",
+                    "email" => "jojo@gmail.com",
+                    "no_telp" => "0811111111",
+                ],
+                [
+                    "username" => "hezron",
+                    "password" => "hezron",
+                    "nama_lengkap" => "Hezron Dharmawan",
+                    "email" => "hezron@gmail.com",
+                    "no_telp" => "0812222222",
+                ],
             ]
         );
     }

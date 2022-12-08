@@ -15,7 +15,14 @@ class Pemilik extends Model
     protected $table = "pemilik";
     protected $primaryKey = "id";
     public $incrementing = true;
-    protected $fillable = ["username","password","nama_lengkap","email","no_telp"];
+    protected $fillable = [
+        "username",
+        "password",
+        "nama_lengkap",
+        "email",
+        "no_telp",
+        "saldo"
+    ];
     public $timestamps = false;
 
     public function Penginapan()

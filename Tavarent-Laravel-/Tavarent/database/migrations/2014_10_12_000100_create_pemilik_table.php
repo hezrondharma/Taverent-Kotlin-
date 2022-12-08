@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('nama_lengkap');
             $table->string('email');
             $table->string('no_telp');
+            $table->integer("saldo")->default("0");
             $table->softDeletes();
         });
     }

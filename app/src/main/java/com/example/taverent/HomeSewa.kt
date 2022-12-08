@@ -35,12 +35,13 @@ class HomeSewa : Fragment() {
     var id_pemilik = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-          pemilik = arguments?.getParcelable<Pemilik>("pemilik") as Pemilik
 
 
         id_pemilik = arguments?.getString("id_pemilik").toString()
         val nama_pemilik = arguments?.getString("nama_pemilik").toString()
         val username = arguments?.getString("username").toString()
+        pemilik = arguments?.getParcelable<Pemilik>("pemilik") as Pemilik
+
         val txOwnerUsername1 = view.findViewById<TextView>(R.id.txOwnerUsername1)
         val txOwnerUsername2 = view.findViewById<TextView>(R.id.txOwnerUsername2)
         val btnpindah = view.findViewById<ImageView>(R.id.btnTambahKosApartmen)
@@ -49,7 +50,7 @@ class HomeSewa : Fragment() {
         txOwnerUsername2.setText(username)
         btnpindah.setOnClickListener {
             val intent = Intent(view.context,TambahProperti::class.java)
-            intent.putExtra("id_pemilik",pemilik.id)
+            intent.putExtra("id_pemilik",id_pemilik)
             activity?.runOnUiThread { byResult.launch(intent) }
         }
     }

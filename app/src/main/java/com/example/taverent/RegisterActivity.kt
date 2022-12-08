@@ -100,10 +100,18 @@ class RegisterActivity : AppCompatActivity() {
                 Toast.makeText(this@RegisterActivity, "Username/Email/Notelp not Unique", Toast.LENGTH_SHORT).show() }
         }
     }
-    fun insertPenginap(email:String,notelp:String,username:String,namalengkap:String,password:String){
+    fun insertPenginap(
+        email:String,
+        notelp:String,
+        username:String,
+        namalengkap:String,
+        password:String
+    ){
         var exist = false
         for (i in 0 until penginaps.size){
-            if (email==penginaps[i].email||notelp==penginaps[i].email||username==penginaps[i].username){
+            if (email==penginaps[i].email||
+                notelp==penginaps[i].email||
+                username==penginaps[i].username){
                 exist = true
             }
         }
@@ -112,11 +120,14 @@ class RegisterActivity : AppCompatActivity() {
                 Method.POST,"$WS_HOST/penginap/insert",
                 Response.Listener {
                     refreshPemilik()
-                    runOnUiThread {
-                        Toast.makeText(this@RegisterActivity, "User created", Toast.LENGTH_SHORT).show() }
+                    Toast.makeText(this@RegisterActivity,
+                        "User created",
+                        Toast.LENGTH_SHORT).show()
                 },
                 Response.ErrorListener {
-                    Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this,
+                        it.message.toString(),
+                        Toast.LENGTH_SHORT).show()
                 }
             ){
                 override fun getParams(): MutableMap<String, String>? {
@@ -133,8 +144,9 @@ class RegisterActivity : AppCompatActivity() {
             queue.add(strReg)
 
         }else{
-            runOnUiThread {
-                Toast.makeText(this@RegisterActivity, "Username/Email/Notelp not Unique", Toast.LENGTH_SHORT).show() }
+            Toast.makeText(this@RegisterActivity,
+                "Username/Email/Notelp not Unique",
+                Toast.LENGTH_SHORT).show()
         }
     }
     fun refreshPemilik(){
@@ -152,10 +164,11 @@ class RegisterActivity : AppCompatActivity() {
                     val email = o.getString("email")
                     val no_telp = o.getString("no_telp")
                     var deleted_at = ""
+                    val saldo = o.getInt("saldo")
                     if (o.has("deleted_at")) {
                         deleted_at = o.getString("deleted_at")
                     }
-                    val p = Pemilik(id,username,password,nama_lengkap,email,no_telp,deleted_at)
+                    val p = Pemilik(id,username,password,nama_lengkap,email,no_telp,deleted_at,saldo)
                     pemiliks.add(p)
                 }
             },
@@ -180,11 +193,12 @@ class RegisterActivity : AppCompatActivity() {
                     val nama_lengkap = o.getString("nama_lengkap")
                     val email = o.getString("email")
                     val no_telp = o.getString("no_telp")
+                    val saldo = o.getInt("saldo")
                     var deleted_at = ""
                     if (o.has("deleted_at")) {
                         deleted_at = o.getString("deleted_at")
                     }
-                    val p = Penginap(id,username,password,nama_lengkap,email,no_telp,deleted_at)
+                    val p = Penginap(id,username,password,nama_lengkap,email,no_telp,deleted_at,saldo)
                     penginaps.add(p)
                 }
             },

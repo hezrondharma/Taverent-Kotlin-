@@ -16,11 +16,12 @@ return new class extends Migration
         Schema::create('pembayaran', function (Blueprint $table) {
             $table->id();
             $table->integer('total');
-            $table->timestamp('tanggal')->useCurrent();
+            $table->timestamp('tanggal_mulai')->useCurrent();
+            $table->timestamp('tanggal_selesai')->useCurrent();
             $table->unsignedBigInteger('id_penginap');
             $table->unsignedBigInteger('id_penginapan');
-            $table->unsignedBigInteger('id_kupon');
-            $table->unsignedBigInteger('id_promo');
+            $table->unsignedBigInteger('id_kupon')->nullable();
+            $table->unsignedBigInteger('id_promo')->nullable();
             $table->foreign('id_penginap')->references('id')->on('penginap')->onDelete('cascade');
             $table->foreign('id_penginapan')->references('id')->on('penginapan')->onDelete('cascade');
             $table->foreign('id_kupon')->nullable()->references('id')->on('kupon')->onDelete('cascade');

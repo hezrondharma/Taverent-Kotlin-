@@ -24,6 +24,7 @@ Route::get("/penginap/list",[DatabaseController::class, "listpenginap"]);
 Route::post("/penginap/find",[DatabaseController::class, "findpenginap"]);
 Route::post("/penginap/insert",[DatabaseController::class, "insertpenginap"]);
 Route::post("/penginap/update",[DatabaseController::class, "updatepenginap"]);
+Route::post("/penginap/tambahsaldo",[DatabaseController::class, "tambahsaldopenginap"]);
 
 Route::get("/pemilik/list",[DatabaseController::class, "listpemilik"]);
 Route::post("/pemilik/find",[DatabaseController::class, "findpemilik"]);
@@ -50,3 +51,7 @@ Route::post("/chat/insert",[DatabaseController::class, "insertchat"]);
 
 Route::get("/promo/list",[DatabaseController::class, "listpromo"]);
 Route::get("/rating/list",[DatabaseController::class, "listrating"]);
+
+Route::post("/pembayaran/list",[DatabaseController::class, "listpembayaran"]);
+Route::post("/pembayaran/insert",[DatabaseController::class, "insertpembayaran"]);
+Route::post("/pembayaran/list/penginapan",[DatabaseController::class, "listpembayaranpenginapan"]);

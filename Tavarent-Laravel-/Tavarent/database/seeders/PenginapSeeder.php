@@ -20,23 +20,14 @@ class PenginapSeeder extends Seeder
         DB::table("penginap")->truncate();
         DB::statement("SET FOREIGN_KEY_CHECKS=1");
 
-        DB::table("pemilik")->insert(
+        DB::table("penginap")->insert(
             [
-                [
-                    "username" => "jojo",
-                    "password" => "jojo",
-                    "nama_lengkap" => "Jonathan Hans",
-                    "email" => "jojo@gmail.com",
-                    "no_telp" => "0811111111",
-                ],
-                [
-                    "username" => "hezron",
-                    "password" => "hezron",
-                    "nama_lengkap" => "Hezron Dharmawan",
-                    "email" => "hezron@gmail.com",
-                    "no_telp" => "0812222222",
-                ],
-            ]
+                "username" => "test",
+                "password" => "test",
+                "nama_lengkap" => "Testing Testing",
+                "email" => "test@gmail.com",
+                "no_telp" => "0812345678",
+            ],
         );
     }
 }

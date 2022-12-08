@@ -11,7 +11,15 @@ class Pembayaran extends Model
     protected $table = "pembayaran";
     protected $primaryKey = "id";
     public $incrementing = true;
-    protected $fillable = ["total","tanggal","id_penginap","id_penginapan","id_kupon","id_promo"];
+    protected $fillable = [
+        "total",
+        "tanggal_mulai",
+        "tanggal_selesai",
+        "id_penginap",
+        "id_penginapan",
+        "id_kupon",
+        "id_promo",
+    ];
     public $timestamps = false;
 
     public function Kupon()

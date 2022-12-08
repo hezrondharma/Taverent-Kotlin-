@@ -130,10 +130,11 @@ class PenginapanDetailActivity : AppCompatActivity() {
                     val email = o.getString("email")
                     val no_telp = o.getString("no_telp")
                     var deleted_at = ""
+                    var saldo = o.getInt("saldo")
                     if (o.has("deleted_at")) {
                         deleted_at = o.getString("deleted_at")
                     }
-                    pemilik = Pemilik(id,username,password,nama_lengkap,email,no_telp,deleted_at)
+                    pemilik = Pemilik(id,username,password,nama_lengkap,email,no_telp,deleted_at,saldo)
                     tvNamaPemilik.text = pemilik.nama_lengkap
                 }
             },

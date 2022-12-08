@@ -80,11 +80,12 @@ class ProfileSewa : AppCompatActivity() {
                     val nama_lengkap = o.getString("nama_lengkap")
                     val email = o.getString("email")
                     val no_telp = o.getString("no_telp")
+                    val saldo = o.getInt("saldo")
                     var deleted_at = ""
                     if (o.has("deleted_at")) {
                         deleted_at = o.getString("deleted_at")
                     }
-                    val p = Pemilik(id,username,password,nama_lengkap,email,no_telp,deleted_at)
+                    val p = Pemilik(id,username,password,nama_lengkap,email,no_telp,deleted_at,saldo)
                     pemiliks.add(p)
                 }
             },

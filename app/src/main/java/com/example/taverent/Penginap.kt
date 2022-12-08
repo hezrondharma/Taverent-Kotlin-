@@ -13,6 +13,7 @@ class Penginap(
     var email:String,
     var no_telp:String,
     var deleted_at:String,
+    var saldo:Int,
 ) : Parcelable {
     override fun toString(): String {
         return "$id $username $password $nama_lengkap $email $no_telp $deleted_at"

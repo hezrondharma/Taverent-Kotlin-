@@ -212,4 +212,38 @@ class DatabaseController extends Controller
         ]);
         return response()->json($penginap, 201);
     }
+    function tambahsaldopenginap(Request $request){
+        $penginap=Penginap::find($request->id);
+        $penginap->update([
+            "saldo"=>$request->saldo,
+        ]);
+        return response()->json($penginap, 201);
+    }
+
+    public function listpembayaran(Request $request)
+    {
+        $pembayaran = Pembayaran::find($request->id_penginap)->get();
+        return response()->json($pembayaran,201);
+    }
+    public function listpembayaranpenginapan(Request $request)
+    {
+        $pembayaran = Pembayaran::find($request->id_penginap)
+        ->join("penginapan","penginapan.id","=","pembayaran.id_penginapan")
+        ->get();
+        return response()->json($pembayaran,201);
+    }
+
+    public function insertpembayaran(Request $request)
+    {
+        $pembayaran = Pembayaran::create(array(
+            "total" => $request->total,
+            "tanggal_mulai" => $request->tanggal_mulai,
+            "tanggal_selesai" => $request->tanggal_selesai,
+            "id_penginap" => $request->id_penginap,
+            "id_penginapan" => $request->id_penginapan,
+            "id_kupon" => $request->id_kupon,
+            "id_promo" => $request->id_promo,
+        ));
+        return response()->json($pembayaran,201);
+    }
 }

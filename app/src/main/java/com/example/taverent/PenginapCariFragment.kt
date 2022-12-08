@@ -11,15 +11,18 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.example.taverent.CurrencyUtils.toRupiah
 import com.example.taverent.databinding.FragmentPenginapCariBinding
 import com.example.taverent.databinding.FragmentPenginapHomeBinding
 import org.json.JSONArray
+import org.json.JSONObject
 
 class PenginapCariFragment : Fragment() {
     private lateinit var binding: FragmentPenginapCariBinding
@@ -53,6 +56,14 @@ class PenginapCariFragment : Fragment() {
         refreshPenginapan(view)
 
         binding.tvHalo.text = "Halo "+ penginap.username
+        binding.tvCurrency.text = penginap.saldo.toRupiah()
+
+
+        binding.btnAddCurrency.setOnClickListener {
+            val intent = Intent(view.context,AddSaldoActivity::class.java)
+            intent.putExtra("penginap",penginap)
+            byresult.launch(intent)
+        }
 
         val namajenis = arrayListOf<String>("Kamar Kos","Apartment","Voucher","Game")
         val imagejenis = arrayListOf<Int>(R.drawable.kamarkos,R.drawable.apartment,R.drawable.voucher,R.drawable.game)
@@ -88,6 +99,11 @@ class PenginapCariFragment : Fragment() {
                 TODO("Not yet implemented")
             }
         }
+
+    }
+
+    val byresult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+        refreshPenginap(binding.root)
     }
     fun filterPenginapan(){
         penginapansSearch.clear()
@@ -131,6 +147,39 @@ class PenginapCariFragment : Fragment() {
                 Toast.makeText(view.context, "WS_ERROR1", Toast.LENGTH_SHORT).show()
             }
         ){}
+        val queue: RequestQueue = Volley.newRequestQueue(view.context)
+        queue.add(strReq)
+    }
+    fun refreshPenginap(view:View){
+        val strReq = object : StringRequest(
+            Method.POST,"$WS_HOST/penginap/find",
+            Response.Listener {
+                val o = JSONObject(it)
+                val id = o.getInt("id")
+                val username = o.getString("username")
+                val password = o.getString("password")
+                val nama_lengkap = o.getString("nama_lengkap")
+                val email = o.getString("email")
+                val no_telp = o.getString("no_telp")
+                val saldo = o.getInt("saldo")
+                var deleted_at = ""
+                if (o.has("deleted_at")) {
+                    deleted_at = o.getString("deleted_at")
+                }
+                penginap = Penginap(id,username,password,nama_lengkap,email,no_telp,deleted_at,saldo)
+                binding.tvCurrency.text = penginap.saldo.toRupiah()
+
+            },
+            Response.ErrorListener {
+                Toast.makeText(view.context, "WS_ERROR2", Toast.LENGTH_SHORT).show()
+            }
+        ){
+            override fun getParams(): MutableMap<String, String>? {
+                val params = HashMap<String, String>()
+                params["id_penginap"] = penginap.id.toString()
+                return params
+            }
+        }
         val queue: RequestQueue = Volley.newRequestQueue(view.context)
         queue.add(strReq)
     }

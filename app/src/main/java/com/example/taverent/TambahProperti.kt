@@ -111,7 +111,6 @@ class TambahProperti : AppCompatActivity() {
 
             if (nama!=""&&deskripsi!=""&&alamat!=""&&harga!=""&&tipe!=""&&fasilitas!=""&&counter>2&&id_pemilik!=""){
 //                fasilitas = fasilitas.substring(0,fasilitas.length-1)
-
                 val strReg = object : StringRequest(
                     Method.POST, "$WS_HOST/penginapan/insert",
                     Response.Listener {
@@ -122,7 +121,7 @@ class TambahProperti : AppCompatActivity() {
                         finish()
                     },
                     Response.ErrorListener {
-                        Toast.makeText(this, it.message.toString(), Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
                     }
                 ) {
                     override fun getParams(): MutableMap<String, String>? {

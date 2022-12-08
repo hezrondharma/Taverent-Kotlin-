@@ -20,6 +20,9 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".AddSaldoActivity"
+            android:exported="false" />
+        <activity
             android:name=".PembayaranActivity"
             android:exported="false" />
         <activity
@@ -27,7 +30,7 @@
             android:exported="false" />
         <activity
             android:name=".ChatActivity"
-            android:exported="false"/>
+            android:exported="false" />
         <activity
             android:name=".PenginapProfile"
             android:exported="false" />

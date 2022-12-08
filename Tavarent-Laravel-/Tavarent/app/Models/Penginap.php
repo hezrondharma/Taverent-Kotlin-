@@ -4,14 +4,16 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Penginap extends Model
 {
     use HasFactory;
+    use SoftDeletes;
     protected $table = "penginap";
     protected $primaryKey = "id";
     public $incrementing = true;
-    protected $fillable = ["username","password","nama_lengkap","email","no_telp"];
+    protected $fillable = ["username","password","nama_lengkap","email","no_telp","saldo"];
     public $timestamps = false;
 
     public function Pembayaran()
