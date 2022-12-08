@@ -35,6 +35,7 @@ Route::get('penyewa/profil', [PenyewaController::class, 'PenyewaProfil']);
 Route::get('pemilik', [PemilikController::class, 'PemilikHome']);
 Route::get('pemilik/chat', [PemilikController::class, 'PemilikChat']);
 Route::get('pemilik/kelola', [PemilikController::class, 'PemilikKelola']);
+Route::post('pemilik/kelola', [PemilikController::class, 'doPemilikKelola']);
 Route::get('pemilik/statistik', [PemilikController::class, 'PemilikStatistik']);
 Route::get('pemilik/profil', [PemilikController::class, 'PemilikProfil']);
 
