@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::post('submit', [LoginRegisterController::class, 'check'])->name('check');
 
 Route::get('/', function () {
     return redirect('login');
