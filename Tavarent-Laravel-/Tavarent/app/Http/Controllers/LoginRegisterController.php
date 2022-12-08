@@ -35,7 +35,7 @@ class LoginRegisterController extends Controller
             $penginap = Penginap::where("email","=",$request->email)->first();
             if ($penginap->password == $request->password){
                 Session::put("pemilik",$penginap);
-                return redirect("/penginap");
+                return redirect("/penyewa");
             }else{
                 return redirect()->back();
             }
