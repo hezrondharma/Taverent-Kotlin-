@@ -4,130 +4,84 @@ namespace App\Http\Controllers;
 use App\Models\Penginap;
 use App\Models\Pemilik;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Session;
 
 class LoginRegisterController extends Controller
 {
     function login(Request $request){
         return view('loginregister/login');
     }
-    function Register(Request $request){
+    function register(Request $request){
         return view('loginregister/register');
     }
-
-    private function UserPenginap(){
-        $users = Penginap::all();
-        $return_data = [];
-        foreach( $users as $row)
-        {
-
-            $return_data['users'][] =$row->getOriginal();
+    public function doLogin(Request $request)
+    {
+        $request->validate([
+            "email" => ["required","email"],
+            "password"  => ["required"] ,
+            "rbJenis" =>["required"]           
+        ],[
+            "rbJenis" => "Pilih salah satu"
+        ]);
+        if ($request->rbJenis=="pemilik"){
+            $pemilik = Pemilik::where("email","=",$request->email)->first();
+            if ($pemilik->password == $request->password){
+                Session::put("pemilik",$pemilik);
+                return redirect("/pemilik");
+            }else{
+                return redirect()->back();
+            }
+        }else if ($request->rbJenis=="penginap"){
+            $penginap = Penginap::where("email","=",$request->email)->first();
+            if ($penginap->password == $request->password){
+                Session::put("pemilik",$penginap);
+                return redirect("/penginap");
+            }else{
+                return redirect()->back();
+            }
         }
-        return $return_data;
     }
-    private function UserPemilik(){
-        $users = Pemilik::all();
-        $return_data = [];
-        foreach( $users as $row)
-        {
 
-            $return_data['users'][] =$row->getOriginal();
-        }
-        return $return_data;
-    }
+    public function doRegister(Request $request)
+    {
+        if ($request->rbJenis!=""){
+            if ($request->rbJenis=="pemilik"){
+                $request->validate([
+                    "email" => ["required","email","unique:App\Models\Pemilik,email"],
+                    "username" => ["required","unique:App\Models\Pemilik,username","unique:App\Models\Penginap,username"],
+                    "notelp" => ['numeric','min_digits:10','max_digits:12','unique:App\Models\Pemilik,no_telp'],
+                    "nama" => ["required"],
+                    "password"  => ["required"]            
+                ]);
 
-    function check(Request $request){
-        $dataUserPenginap = $this->UserPenginap($request);
-        $dataUserPemilik = $this->UserPemilik($request);
-        $email = $request->email;
-        $password = $request->password;
-        $hidden = $request->hidden;
-        $cekEmail = false;
-        $cekPassword = false;
-        if($hidden=="login"){
-            if($dataUserPenginap != null){
-                foreach($dataUserPenginap['users'] as $row)
-                {
-                    if($email == $row['email']){
-                        $cekEmail = true;
-                        if($password == $row['password'] ){
-                            $cekPassword =true;
-                            return view('Penyewa/home');
-                        }
-                    }
-                }
-            }
-            if($dataUserPemilik != null){
-                foreach($dataUserPemilik['users'] as $row)
-                {
-                    if($email == $row['email']){
-                        $cekEmail = true;
-                        if($password == $row['password'] ){
-                            $cekPassword =true;
-                            return view('Pemilik/home');
-                        }
-                    }
-                }
-            }
-            if( $cekEmail == false){
-                return redirect()->back()->withInput($request->only('email','password'))->withErrors([
-                    'email' => 'Your Email is Invalid',
-                ]);
-            }else if($cekPassword == false){
-                return redirect()->back()->withInput($request->only('email','password'))->withErrors([
-                    'password' => 'Your Password is Invalid',
-                ]);
-            }
-        }
-        if($hidden=="register"){
-            $cekPemilik = false;
-            $cekPenginap = false;
-            if($dataUserPenginap != null){
-                foreach($dataUserPenginap['users'] as $row)
-                {
-                    if(str_contains($email,$row['email'])){
-                        $cekEmail = true;
-                    }
-                }
-            }
-            if($dataUserPemilik != null){
-                foreach($dataUserPemilik['users'] as $row)
-                {
-                    if(str_contains($email,$row['email'])){
-                        $cekEmail = true;
-                    }
-                }
-            }
-            if($cekEmail){
-                return redirect()->back()->withInput($request->only('email','username','password','notelp','nama'))->withErrors([
-                    'email' => 'Email Taken',
-                ]);
-            }
-            $rbjenis = $request->rbJenis;
-            if( $rbjenis == "pemilik"){
-                Pemilik::create(array(
+                $res = Pemilik::create(array(
                     "email" => $request->email,
                     "no_telp" => $request->notelp,
                     "username" => $request->username,
                     "nama_lengkap" => $request->nama,
                     "password" => $request->password,
                 ));
-            }
-            else if( $rbjenis == "penginap"){
-                Penginap::create(array(
+                return redirect("/login");
+            }else if ($request->rbJenis=="penginap"){
+                $request->validate([
+                    "email" => ["required","email","unique:App\Models\Penginap,email"],
+                    "username" => ["required","unique:App\Models\Penginap,username","unique:App\Models\Pemilik,username"],
+                    "notelp" => ['numeric','min_digits:10','max_digits:12','unique:App\Models\Penginap,no_telp'],
+                    "nama" => ["required"],
+                    "password"  => ["required"]            
+                ]);
+                $res = Penginap::create(array(
                     "email" => $request->email,
                     "no_telp" => $request->notelp,
                     "username" => $request->username,
                     "nama_lengkap" => $request->nama,
                     "password" => $request->password,
                 ));
+                return redirect("/login");
             }
-            else{
-                return redirect()->back()->withInput($request->only('email','username','password','notelp','nama'))->withErrors([
-                    'rbJenis' => 'Pilih salah satu',
-                ]);
-            }
-            return view('loginregister/register');
+        }else{
+            return redirect()->back()->withErrors(["rbJenis"=>"Pilih salah satu"]);
         }
-    }
+    }      
 
 }

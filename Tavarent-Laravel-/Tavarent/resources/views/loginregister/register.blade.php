@@ -2,7 +2,7 @@
 @section('title','Register')
 
 @section('content')
-<form action="{{ route('check') }}" method="POST" class="signin-form">
+<form action="" method="POST" class="signin-form">
     @csrf
     <input type="hidden" id="hidden" name="hidden" value="register">
     <div class="form-group mb-3">
@@ -15,31 +15,31 @@
     <div class="form-group mb-3">
         <label class="label" for="name">Username</label>
         <input type="text" class="form-control" placeholder="Masukkan Username" name="username" value="{{ old('username') }}">
-        {{-- @error("Username")
+        @error("username")
             <label class="label text-danger" for="Username">{{$message}}</label>
-        @enderror --}}
+        @enderror
     </div>
     <div class="form-group mb-3">
         <label class="label" for="name">Nama</label>
         <input type="text" class="form-control" placeholder="Masukkan Nama" name="nama" value="{{ old('nama') }}">
-        {{-- @error("nama")
+        @error("nama")
             <label class="label text-danger" for="nama">{{$message}}</label>
-        @enderror --}}
+        @enderror
     </div>
     <div class="form-group mb-3">
         <label class="label" for="name">Nomor Telepon</label>
         <input type="text" class="form-control" placeholder="Nomor Telepon" name="notelp" value="{{ old('notelp') }}">
-        {{-- @error("notelp")
+        @error("notelp")
             <label class="label text-danger" for="notelp">{{$message}}</label>
-        @enderror --}}
+        @enderror
     </div>
 
     <div class="form-group mb-4">
         <label class="label" for="password">Password</label>
         <input id="password" type="password" class="form-control" placeholder="Masukkan Password" name="password"  value="{{ old('password') }}">
-        {{-- @error("password")
+        @error("password")
             <label class="label text-danger" for="password">{{$message}}</label>
-        @enderror --}}
+        @enderror
     </div>
     <div class="form-group mb-4">
         <label class="label" for="name">Pemilik</label> <input type="radio" name="rbJenis" value="pemilik"><i class="validation"></i>
