@@ -42,7 +42,6 @@ class LoginRegisterController extends Controller
                 Session::put("penginap",$penginap);
                 Session::put("cekuser","penginap");
                 return redirect("/penginap");
-
             }else{
                 return redirect()->back();
             }
