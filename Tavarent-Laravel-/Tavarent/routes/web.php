@@ -29,13 +29,13 @@ Route::middleware(['cekLogin'])->group(function () {
     Route::post('login', [LoginRegisterController::class, 'doLogin']);
     Route::post('register', [LoginRegisterController::class, 'doRegister']);
 });
-
+Route::middleware(['cekUser'])->group(function () {
     Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
     Route::get('penyewa/favorit', [PenyewaController::class, 'PenyewaFavorit']);
     Route::get('penyewa/kossaya', [PenyewaController::class, 'PenyewaKosSaya']);
     Route::get('penyewa/chat', [PenyewaController::class, 'PenyewaChat']);
     Route::get('penyewa/profil', [PenyewaController::class, 'PenyewaProfil']);
-
+});
 
 Route::middleware(['cekUser'])->group(function () {
     Route::get('pemilik', [PemilikController::class, 'PemilikHome']);
@@ -47,14 +47,14 @@ Route::middleware(['cekUser'])->group(function () {
     Route::get('pemilik/logout', [PemilikController::class, 'logoutpemilik']);
 });
 
-
+Route::middleware(['cekUser'])->group(function () {
     Route::get('admin', [AdminController::class, 'AdminHome']);
     Route::get('admin/list', [AdminController::class, 'AdminList']);
     Route::get('admin/game', [AdminController::class, 'AdminGame']);
     Route::get('admin/announce', [AdminController::class, 'AdminAnnounce']);
     Route::get('admin/profil', [AdminController::class, 'AdminProfil']);
     Route::get('testing', [AdminController::class,'testing']);
-
+});
 Route::get('testing', [AdminController::class, 'testing']);
 
 
