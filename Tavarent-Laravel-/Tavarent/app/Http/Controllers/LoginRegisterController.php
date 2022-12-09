@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 class LoginRegisterController extends Controller
 {
     function login(Request $request){
+        Session::forget("login");
         return view('loginregister/login');
     }
     function register(Request $request){
@@ -19,14 +20,17 @@ class LoginRegisterController extends Controller
         $request->validate([
             "email" => ["required","email"],
             "password"  => ["required"] ,
-            "rbJenis" =>["required"]           
+            "rbJenis" =>["required"]
         ],[
             "rbJenis" => "Pilih salah satu"
         ]);
+        Session::forget('cekuser');
         if ($request->rbJenis=="pemilik"){
             $pemilik = Pemilik::where("email","=",$request->email)->first();
             if ($pemilik->password == $request->password){
+                Session::forget('pemilik');
                 Session::put("pemilik",$pemilik);
+                Session::put("cekuser","pemilik");
                 return redirect("/pemilik");
             }else{
                 return redirect()->back();
@@ -34,8 +38,10 @@ class LoginRegisterController extends Controller
         }else if ($request->rbJenis=="penginap"){
             $penginap = Penginap::where("email","=",$request->email)->first();
             if ($penginap->password == $request->password){
-                Session::put("pemilik",$penginap);
-                return redirect("/penyewa");
+                Session::forget('penginap');
+                Session::put("penginap",$penginap);
+                Session::put("cekuser","penginap");
+                return redirect("/penginap");
             }else{
                 return redirect()->back();
             }
@@ -51,7 +57,7 @@ class LoginRegisterController extends Controller
                     "username" => ["required","unique:App\Models\Pemilik,username","unique:App\Models\Penginap,username"],
                     "notelp" => ['numeric','min_digits:10','max_digits:12','unique:App\Models\Pemilik,no_telp'],
                     "nama" => ["required"],
-                    "password"  => ["required"]            
+                    "password"  => ["required"]
                 ]);
 
                 $res = Pemilik::create(array(
@@ -68,7 +74,7 @@ class LoginRegisterController extends Controller
                     "username" => ["required","unique:App\Models\Penginap,username","unique:App\Models\Pemilik,username"],
                     "notelp" => ['numeric','min_digits:10','max_digits:12','unique:App\Models\Penginap,no_telp'],
                     "nama" => ["required"],
-                    "password"  => ["required"]            
+                    "password"  => ["required"]
                 ]);
                 $res = Penginap::create(array(
                     "email" => $request->email,
@@ -82,6 +88,6 @@ class LoginRegisterController extends Controller
         }else{
             return redirect()->back()->withErrors(["rbJenis"=>"Pilih salah satu"]);
         }
-    }      
+    }
 
 }
