@@ -10,10 +10,15 @@
     @include("navbar.navbarpenginap")
 @endsection
 @section('content')
-<div class="container" style="margin-top:100px; height:1000px;">
+<div class="container" style="margin-top:150px; height:1000px;">
     
-
-
+    <div style="margin-left:2%">
+        <h4>Search Penginapan Terdekat</h4>
+        <a href="/penyewa/search" style="text-decoration:none;">
+            <input type="text" name="" id="" class="form-control" style="width:60%;" placeholder="Search penginapan terdekat">
+        </a>
+    </div>
+    
     <div class="container" style="justify-content:space-between;">
         @forelse($penginapan as $p)
         <div class="product-card">

@@ -26,7 +26,11 @@
 								</li>
 							</ul>
 						</div>
-						
+
+						<form action="{{url('logout')}}" method="post" style="float:right;">
+						@csrf
+							<input type="submit" value="Logout" class="btn btn-danger">
+						</form>
 					</nav>		
 				</div>
 			</div>

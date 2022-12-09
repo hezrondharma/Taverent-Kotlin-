@@ -15,4 +15,12 @@ class PenyewaController extends Controller
         $param["penginapan"] = $penginapan;
         return view('penyewa.cari',$param);
     }
+    public function PenyewaSearch(Request $request)
+    {
+        $param = [];
+        $penginapan = Penginapan::all();
+
+        $param["penginapan"] = $penginapan;
+        return view('penyewa.search',$param);
+    }
 }

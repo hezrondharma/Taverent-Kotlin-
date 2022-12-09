@@ -21,12 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return redirect('login');
 });
+Route::post('logout', [LoginRegisterController::class, 'logout']);
+
 Route::get('login', [LoginRegisterController::class, 'login']);
 Route::get('register', [LoginRegisterController::class, 'register']);
 Route::post('login', [LoginRegisterController::class, 'doLogin']);
 Route::post('register', [LoginRegisterController::class, 'doRegister']);
 
 Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
+Route::get('penyewa/search', [PenyewaController::class, 'PenyewaSearch']);
 Route::get('penyewa/favorit', [PenyewaController::class, 'PenyewaFavorit']);
 Route::get('penyewa/kossaya', [PenyewaController::class, 'PenyewaKosSaya']);
 Route::get('penyewa/chat', [PenyewaController::class, 'PenyewaChat']);
