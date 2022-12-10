@@ -18,13 +18,6 @@
             <label class="label text-danger" for="password">{{$message}}</label>
         @enderror
     </div>
-    <div class="form-group mb-4">
-        <label class="label" for="name">Pemilik</label> <input type="radio" name="rbJenis" value="pemilik"><i class="validation"></i>
-        <label class="label" for="name">Penginap</label>  <input type="radio" name="rbJenis" value="penginap"><i class="validation"></i><br>
-        @error("rbJenis")
-            <label class="label text-danger" for="rbJenis">{{$message}}</label>
-        @enderror
-    </div>
     <div class="form-group mb-3">
     <div class="form-check">
         <input type="checkbox" class="form-check-input" name="remember">

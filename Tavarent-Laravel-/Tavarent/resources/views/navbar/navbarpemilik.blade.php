@@ -5,24 +5,24 @@
 				<div class="col-12">
 					<nav class="navbar navbar-expand-md navbar-light">
 
-						<a href="/penyewa"><img src="img/tavarentlogo-removebg-big.png" width="70px" alt=""></a>
+						<a href="/pemilik"><img src="img/tavarentlogo-removebg-big.png" width="70px" alt=""></a>
 
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav ml-auto py-4 py-md-0">
                                 <li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="/penyewa">Cari</a>
+									<a class="nav-link" href="/pemilik">Home</a>
 								</li>
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="/penyewa/chat">Chat</a>
+									<a class="nav-link" href="/pemilik/chat">Chat</a>
 								</li>
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="/penyewa/favorit">Favorit</a>
+									<a class="nav-link" href="/pemilik/kelola">Kelola</a>
 								</li>
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="/penyewa/kossaya">Kos Saya</a>
+									<a class="nav-link" href="/pemilik/statistik">Statistik</a>
 								</li>
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
-									<a class="nav-link" href="/penyewa/profil">Profil</a>
+									<a class="nav-link" href="/pemilik/profil">Profil</a>
 								</li>
 							</ul>
 						</div>

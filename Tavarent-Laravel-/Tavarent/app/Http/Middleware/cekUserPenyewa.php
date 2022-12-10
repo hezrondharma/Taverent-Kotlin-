@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class cekUser
+class cekUserPenyewa
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,9 @@ class cekUser
     public function handle(Request $request, Closure $next)
     {
         if(Session::has('cekuser')){
-
+            if(Session::get('cekuser')=="pemilik"){
+                return redirect('/pemilik');
+            }
         }else{
             return redirect('login');
         }
