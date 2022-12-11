@@ -1,5 +1,5 @@
 <?php
-
+use App\Http\Controllers\GaleriController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\PemilikController;
@@ -48,7 +48,11 @@ Route::middleware(['cekUserPemilik'])->group(function () {
     Route::get('pemilik/profil', [PemilikController::class, 'PemilikProfil']);
     Route::get('pemilik/logout', [PemilikController::class, 'logoutpemilik']);
 });
-
+Route::prefix("galeri")->group(function(){
+    Route::get('upload', [GaleriController::class, "upload"]);
+    Route::post('doUpload', [GaleriController::class, "doUpload"]);
+    Route::get('download/{namafile}', [GaleriController::class, 'download']);
+});
 Route::get('admin', [AdminController::class, 'AdminHome']);
 Route::get('admin/list', [AdminController::class, 'AdminList']);
 Route::get('admin/game', [AdminController::class, 'AdminGame']);
@@ -56,7 +60,6 @@ Route::get('admin/announce', [AdminController::class, 'AdminAnnounce']);
 Route::get('admin/profil', [AdminController::class, 'AdminProfil']);
 Route::get('testing', [AdminController::class,'testing']);
 
-Route::get('testing', [AdminController::class, 'testing']);
 
 
 

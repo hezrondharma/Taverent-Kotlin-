@@ -8,6 +8,12 @@
 @endsection
 @section('content')
 <div class="container" style="margin-top:150px; height:1000px;">
+    <form action="{{ url('galeri/doUpload') }}" method="POST" enctype="multipart/form-data">
+        @csrf
+        tes Upload File:
+        <input type="file" name="photo" id="" class="form-control">
+        <input type="submit" value="Upload" class="btn btn-success">
+    </form>
     <form action="" method="POST" class="signin-form" >
         @csrf
         <input type="hidden" id="hidden" name="hidden" value="login">
