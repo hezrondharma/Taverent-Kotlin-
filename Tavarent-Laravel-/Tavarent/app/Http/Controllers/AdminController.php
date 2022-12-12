@@ -29,4 +29,146 @@ class AdminController extends Controller
         ));
         dd($pembayaran);
     }
+    function AdminListPenginap(){
+        $param = [];
+        $penginap = Penginap::withTrashed()->get();
+
+        $param["penginap"] = $penginap;
+
+        return view('Admin.listpenginap',$param);
+    }
+
+    public function AdminHapusListPenginap(Request $request){
+        $penginap = Penginap::withTrashed()->find($request->id);
+        if ($penginap->trashed()){
+            $penginap->restore();
+            return redirect("admin/listpenginap")->with("pesanSukses", "user telah di unban!");
+        } else{
+            $penginap->delete();
+            return redirect("admin/listpenginap")->with("pesanSukses", "user telah di ban!");
+        }
+    }
+
+    public function AdminUbahListPenginap(Request $request){
+        $param =[];
+        $penginap = Penginap::where('id',$request->id)->first();
+
+        $param["penginap"] = $penginap;
+        // dd($param);
+        return view('Admin.ubahlistpenginap', $param);
+    }
+
+    public function AdmindoUbahListPenginap(Request $request){
+
+        $res = Penginap::where('id',$request->id)->update(
+            [
+                "username"=>$request->username,
+                "password"=>$request->password,
+                "nama_lengkap"=>$request->nama,
+                "email"=>$request->email,
+                "no_telp"=>$request->notelp,
+                "saldo"=>$request->saldo,
+            ]
+        );
+        if($res){
+            return redirect("admin/listpenginap")->with("pesanSukses","Data berhasil diubah");
+        }else{
+            return redirect("admin/listpenginap")->with("pesanGagal","Data gagal berhasil diubah");
+        }
+    }
+
+    function AdminListPemilik(){
+        $param = [];
+        $pemilik = Pemilik::withTrashed()->get();
+
+        $param["pemilik"] = $pemilik;
+        return view('Admin.listpemilik',$param);
+    }
+
+    public function AdminHapusListPemilik(Request $request){
+        $pemilik = Pemilik::withTrashed()->find($request->id);
+        if ($pemilik->trashed()){
+            $pemilik->restore();
+            return redirect("admin/listpemilik")->with("pesanSukses", "user telah di unban!");
+        } else{
+            $pemilik->delete();
+            return redirect("admin/listpemilik")->with("pesanSukses", "user telah di ban!");
+        }
+    }
+
+    public function AdminUbahListPemilik(Request $request){
+
+        $param =[];
+        $pemilik = Pemilik::where('id',$request->id)->first();
+
+        $param["pemilik"] = $pemilik;
+        // dd($param);
+        return view('Admin.ubahlistpemilik', $param);
+    }
+
+    public function AdmindoUbahListPemilik(Request $request){
+
+        $res = Pemilik::where('id',$request->id)->update(
+            [
+                "username"=>$request->username,
+                "password"=>$request->password,
+                "nama_lengkap"=>$request->nama,
+                "email"=>$request->email,
+                "no_telp"=>$request->notelp,
+                "saldo"=>$request->saldo,
+            ]
+        );
+        if($res){
+            return redirect("admin/listpemilik")->with("pesanSukses","Data berhasil diubah");
+        }else{
+            return redirect("admin/listpemilik")->with("pesanGagal","Data gagal berhasil diubah");
+        }
+    }
+
+    function AdminLaporan(){
+        $param =[];
+        $laporan = Pembayaran::all();
+
+        $param["pembayaran"] = $laporan;
+        return view('Admin.laporan',$param);
+    }
+    function AdminListNotifikasi(){
+        $param =[];
+        $notifikasi = Pengumuman::all();
+
+        $param["notifikasi"] = $notifikasi;
+        return view('Admin.listnotifikasi', $param);
+    }
+    function AdminTambahNotifikasi(Request $request){
+        $request->validate([
+            "title" => ["required"],
+            "isi" => ["required"],
+            "rbJenis" => ['required','in:pemilik,penginap'],
+        ]);
+        if($request->rbJenis == "penginap"){
+            $tipe = 0;
+        }
+        else if($request->rbJenis == "pemilik"){
+            $tipe = 1;
+        }
+        $res = Pengumuman::create(array(
+            "judul" => $request->title,
+            "isi" => $request->isi,
+            "tipe" => $tipe
+        ));
+        return redirect()->back();
+    }
+
+    public function AdminHapusNotifikasi(Request $request){
+        $res = Pengumuman::where('id',$request->id)->delete();
+
+        if($res){
+            return redirect("admin/listnotifikasi")->with("pesanSukses","Data berhasil dihapus");
+        }else{
+            return redirect("admin/listnotifikasi")->with("pesanGagal","Data gagal berhasil dihapus");
+
+        }
+    }
+
+
 }
