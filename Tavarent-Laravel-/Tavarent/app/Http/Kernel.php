@@ -46,8 +46,11 @@ class Kernel extends HttpKernel
         'cekLogin' => [
             \App\Http\Middleware\cekLogin::class,
         ],
-        'cekUser' => [
-            \App\Http\Middleware\cekUser::class,
+        'cekUserPemilik' => [
+            \App\Http\Middleware\cekUserPemilik::class,
+        ],
+        'cekUserPenyewa' => [
+            \App\Http\Middleware\cekUserPenyewa::class,
         ],
     ];
 
