@@ -26,14 +26,15 @@
 
             </li>
             <li class="has-subnav">
-                <a href="/admin/laporan">
-                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                <a href="/admin/listpenginapan">
+                    <i class="fa fa-inbox fa-2x"></i>
                     <span class="nav-text">
-                        Laporan
+                        List Penginapan
                     </span>
                 </a>
 
             </li>
+
             <li>
                 <a href="/admin/listnotifikasi">
                     <i class="fa fa-bell fa-2x"></i>
@@ -41,6 +42,16 @@
                         List Notifikasi
                     </span>
                 </a>
+            </li>
+
+            <li class="has-subnav">
+                <a href="/admin/laporan">
+                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                    <span class="nav-text">
+                        Laporan
+                    </span>
+                </a>
+
             </li>
         </ul>
 

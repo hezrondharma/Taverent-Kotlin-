@@ -58,7 +58,7 @@ Route::post('pemilik/kelola', [PemilikController::class, 'doPemilikKelola']);
 Route::get('pemilik/statistik', [PemilikController::class, 'PemilikStatistik']);
 Route::get('pemilik/profil', [PemilikController::class, 'PemilikProfil']);
 
-Route::get('admin', [AdminController::class, 'AdminHome']);
+Route::get('admin', [AdminController::class, 'AdminListPenginap']);
 Route::get('admin/listpenginap', [AdminController::class, 'AdminListPenginap']);
 Route::get('admin/listpenginap/hapus/{id}', [AdminController::class, 'AdminHapusListPenginap']);
 Route::get('admin/listpenginap/ubah/{id}',[AdminController::class,'AdminUbahListPenginap']);
@@ -67,6 +67,10 @@ Route::get('admin/listpemilik', [AdminController::class, 'AdminListPemilik']);
 Route::get('admin/listpemilik/hapus/{id}', [AdminController::class, 'AdminHapusListPemilik']);
 Route::get('admin/listpemilik/ubah/{id}',[AdminController::class,'AdminUbahListPemilik']);
 Route::post('admin/listpemilik/ubah/{id}',[AdminController::class,'AdmindoUbahListPemilik']);
+Route::get('admin/listpenginapan', [AdminController::class, 'AdminListPenginapan']);
+Route::get('admin/listpenginapan/hapus/{id}', [AdminController::class, 'AdminHapusListPenginapan']);
+Route::get('admin/listpenginapan/ubah/{id}',[AdminController::class,'AdminUbahListPenginapan']);
+Route::post('admin/listpenginapan/ubah/{id}',[AdminController::class,'AdmindoUbahListPenginapan']);
 Route::get('admin/laporan', [AdminController::class, 'AdminLaporan']);
 Route::get('admin/listnotifikasi', [AdminController::class, 'AdminListNotifikasi']);
 Route::post('admin/listnotifikasi', [AdminController::class, 'AdminTambahNotifikasi']);
@@ -89,11 +93,7 @@ Route::prefix("galeri")->group(function(){
     Route::post('doUpload', [GaleriController::class, "doUpload"]);
     Route::get('download/{namafile}', [GaleriController::class, 'download']);
 });
-Route::get('admin', [AdminController::class, 'AdminHome']);
-Route::get('admin/list', [AdminController::class, 'AdminList']);
-Route::get('admin/game', [AdminController::class, 'AdminGame']);
-Route::get('admin/announce', [AdminController::class, 'AdminAnnounce']);
-Route::get('admin/profil', [AdminController::class, 'AdminProfil']);
+
 Route::get('testing', [AdminController::class,'testing']);
 
 

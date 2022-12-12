@@ -3,6 +3,11 @@
 @section("extracss")
     <link rel="stylesheet" href="/css/admin.css">
 @endsection
+@section('navbar')
+<a href="/admin/listpenginap" style="text-decoration: none">
+    <i class="fa fa-arrow-circle-o-left" style="color: black;"></i>
+</a>
+@endsection
 @section('content')
 <div class="container">
     <h1>Ubah Penginap</h1>

@@ -125,6 +125,54 @@ class AdminController extends Controller
         }
     }
 
+    function AdminListPenginapan(){
+        $param = [];
+        $penginapan = Penginapan::withTrashed()->get();
+
+        $param["penginapan"] = $penginapan;
+        return view('Admin.listpenginapan',$param);
+    }
+
+    public function AdminHapusListPenginapan(Request $request){
+        $penginapan = Penginapan::withTrashed()->find($request->id);
+        if ($penginapan->trashed()){
+            $penginapan->restore();
+            return redirect("admin/listpenginapan")->with("pesanSukses", "penginapan telah di unban!");
+        } else{
+            $penginapan->delete();
+            return redirect("admin/listpenginapan")->with("pesanSukses", "penginapan telah di ban!");
+        }
+    }
+
+    public function AdminUbahListPenginapan(Request $request){
+
+        $param =[];
+        $penginapan = Penginapan::where('id',$request->id)->first();
+
+        $param["penginapan"] = $penginapan;
+        // dd($param);
+        return view('Admin.ubahlistpenginapan', $param);
+    }
+
+    public function AdmindoUbahListPenginapan(Request $request){
+
+        $res = Penginapan::where('id',$request->id)->update(
+            [
+                "username"=>$request->username,
+                "password"=>$request->password,
+                "nama_lengkap"=>$request->nama,
+                "email"=>$request->email,
+                "no_telp"=>$request->notelp,
+                "saldo"=>$request->saldo,
+            ]
+        );
+        if($res){
+            return redirect("admin/listpenginapan")->with("pesanSukses","Data berhasil diubah");
+        }else{
+            return redirect("admin/listpenginapan")->with("pesanGagal","Data gagal berhasil diubah");
+        }
+    }
+
     function AdminLaporan(){
         $param =[];
         $laporan = Pembayaran::all();

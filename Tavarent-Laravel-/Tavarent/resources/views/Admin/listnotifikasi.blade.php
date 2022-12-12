@@ -1,5 +1,5 @@
 @extends('layout.layout')
-@section('title','List Notifikasi')
+@section('title','List Pengumuman')
 @section("extracss")
     <link rel="stylesheet" href="/css/admin.css">
 @endsection
@@ -26,14 +26,15 @@
 
             </li>
             <li class="has-subnav">
-                <a href="/admin/laporan">
-                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                <a href="/admin/listpenginapan">
+                    <i class="fa fa-inbox fa-2x"></i>
                     <span class="nav-text">
-                        Laporan
+                        List Penginapan
                     </span>
                 </a>
 
             </li>
+
             <li>
                 <a href="/admin/listnotifikasi">
                     <i class="fa fa-bell fa-2x"></i>
@@ -41,6 +42,16 @@
                         List Notifikasi
                     </span>
                 </a>
+            </li>
+
+            <li class="has-subnav">
+                <a href="/admin/laporan">
+                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                    <span class="nav-text">
+                        Laporan
+                    </span>
+                </a>
+
             </li>
         </ul>
 
@@ -59,6 +70,7 @@
 @endsection
 @section('content')
 <div class="area">
+    <br>
     @if (Session::has("pesanSukses"))
         <div class="alert alert-success">{{ Session::get("pesanSukses") }}</div>
     @endif
@@ -66,7 +78,7 @@
     @if (Session::has("pesanGagal"))
         <div class="alert alert-danger">{{ Session::get("pesanGagal") }}</div>
     @endif
-    <h1>Tambah Notifikasi</h1>
+    <h1>Tambah Pengumuman</h1>
     <form action="{{ url("admin/listnotifikasi") }}" method="POST">
         @csrf
         <div class="mb-3">
@@ -97,27 +109,34 @@
             <input type="submit" value="tambah" class="btn btn-success">
         </div>
     </form>
-    @if ($notifikasi !== null)
-        <table class="table">
-            <tr>
-                <th>ID</th>
-                <th>Judul</th>
-                <th>Isi</th>
-                <th>Tipe</th>
-                <th>Action</th>
-            </tr>
-            @foreach ($notifikasi as $notif)
+<br>
+<h1>List Pengumuman</h1>
+    @if (!$notifikasi->isEmpty())
+        <table class="table table-striped table-hover table-bordered border-dark">
+            <thead class="table-dark">
                 <tr>
-                    <td>{{ $notif->id }}</td>
-                    <td>{{ $notif->judul }}</td>
-                    <td>{{ $notif->isi }}</td>
-                    <td>{{ $notif->tipe }}</td>
-                    <td>
-                        <a href="{{ url("admin/listnotifikasi/hapus/$notif->id") }}" class="btn btn-danger">Hapus</a>
-
-                    </td>
+                    <th>ID</th>
+                    <th>Judul</th>
+                    <th>Isi</th>
+                    <th>Kepada</th>
+                    <th>Action</th>
                 </tr>
-            @endforeach
+            </thead>
+            <tbody>
+                @foreach ($notifikasi as $notif)
+                    <tr>
+                        <td>{{ $notif->id }}</td>
+                        <td>{{ $notif->judul }}</td>
+                        <td>{{ $notif->isi }}</td>
+                        <td> <?php echo ($notif->tipe == 0)? "Penginap" : "Pemilik" ?>
+                        </td>
+                        <td>
+                            <a href="{{ url("admin/listnotifikasi/hapus/$notif->id") }}" class="btn btn-danger">Hapus</a>
+
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
         </table>
     @else
     <h1>tidak ada daftar notifikasi</h1>

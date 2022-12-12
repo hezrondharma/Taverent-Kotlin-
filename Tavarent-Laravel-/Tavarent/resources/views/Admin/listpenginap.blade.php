@@ -26,14 +26,15 @@
 
             </li>
             <li class="has-subnav">
-                <a href="/admin/laporan">
-                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                <a href="/admin/listpenginapan">
+                    <i class="fa fa-inbox fa-2x"></i>
                     <span class="nav-text">
-                        Laporan
+                        List Penginapan
                     </span>
                 </a>
 
             </li>
+
             <li>
                 <a href="/admin/listnotifikasi">
                     <i class="fa fa-bell fa-2x"></i>
@@ -41,6 +42,16 @@
                         List Notifikasi
                     </span>
                 </a>
+            </li>
+
+            <li class="has-subnav">
+                <a href="/admin/laporan">
+                    <i class="fa fa-bar-chart-o fa-2x"></i>
+                    <span class="nav-text">
+                        Laporan
+                    </span>
+                </a>
+
             </li>
         </ul>
 
@@ -58,7 +69,10 @@
 
 @endsection
 @section('content')
+
 <div class="area">
+    <br>
+    <h1>List Penginap</h1>
 @if (Session::has("pesanSukses"))
 <div class="alert alert-success">{{ Session::get("pesanSukses") }}</div>
 @endif
@@ -66,19 +80,24 @@
 @if (Session::has("pesanGagal"))
 <div class="alert alert-danger">{{ Session::get("pesanGagal") }}</div>
 @endif
-@if ($penginap !== null)
-    <table class="table">
-        <tr>
-            <th>ID</th>
-            <th>Username</th>
-            <th>Password</th>
-            <th>Nama Lengkap</th>
-            <th>Email</th>
-            <th>No Telephone</th>
-            <th>Saldo</th>
-            <th>Action</th>
-        </tr>
-        @foreach ($penginap as $penginaps)
+
+@if (!$penginap->isEmpty())
+    <table class="table table table-striped table-hover table-bordered border-dark">
+        <thead class="table-dark">
+            <tr>
+                <th>ID</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>Nama Lengkap</th>
+                <th>Email</th>
+                <th>No Telephone</th>
+                <th>Saldo</th>
+                <th>Action</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            @foreach ($penginap as $penginaps)
             <tr>
                 <td>{{ $penginaps->id }}</td>
                 <td>{{ $penginaps->username }}</td>
@@ -97,6 +116,9 @@
                 </td>
             </tr>
         @endforeach
+        </tbody>
+
+
     </table>
 @else
 <h1>tidak ada daftar penginap</h1>
