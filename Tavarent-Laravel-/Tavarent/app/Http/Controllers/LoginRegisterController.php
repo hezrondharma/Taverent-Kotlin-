@@ -41,7 +41,7 @@ class LoginRegisterController extends Controller
                 Session::forget('penginap');
                 Session::put("penginap",$penginap);
                 Session::put("cekuser","penginap");
-                return redirect("/penginap");
+                return redirect("/penyewa");
             }else{
                 return redirect()->back();
             }
