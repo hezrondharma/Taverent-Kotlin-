@@ -44,19 +44,23 @@ Route::get('register', [LoginRegisterController::class, 'register']);
 Route::post('login', [LoginRegisterController::class, 'doLogin']);
 Route::post('register', [LoginRegisterController::class, 'doRegister']);
 
+Route::middleware(['cekUserPenyewa'])->group(function () {
 Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
 Route::get('penyewa/search', [PenyewaController::class, 'PenyewaSearch']);
 Route::get('penyewa/favorit', [PenyewaController::class, 'PenyewaFavorit']);
 Route::get('penyewa/kossaya', [PenyewaController::class, 'PenyewaKosSaya']);
 Route::get('penyewa/chat', [PenyewaController::class, 'PenyewaChat']);
 Route::get('penyewa/profil', [PenyewaController::class, 'PenyewaProfil']);
-
-Route::get('pemilik', [PemilikController::class, 'PemilikHome']);
-Route::get('pemilik/chat', [PemilikController::class, 'PemilikChat']);
-Route::get('pemilik/kelola', [PemilikController::class, 'PemilikKelola']);
-Route::post('pemilik/kelola', [PemilikController::class, 'doPemilikKelola']);
-Route::get('pemilik/statistik', [PemilikController::class, 'PemilikStatistik']);
-Route::get('pemilik/profil', [PemilikController::class, 'PemilikProfil']);
+});
+Route::middleware(['cekUserPemilik'])->group(function () {
+    Route::get('pemilik', [PemilikController::class, 'PemilikHome']);
+    Route::get('pemilik/chat', [PemilikController::class, 'PemilikChat']);
+    Route::get('pemilik/kelola', [PemilikController::class, 'PemilikKelola']);
+    Route::post('pemilik/kelola', [PemilikController::class, 'doPemilikKelola']);
+    Route::get('pemilik/statistik', [PemilikController::class, 'PemilikStatistik']);
+    Route::get('pemilik/profil', [PemilikController::class, 'PemilikProfil']);
+    Route::get('pemilik/logout', [PemilikController::class, 'logoutpemilik']);
+});
 
 Route::get('admin', [AdminController::class, 'AdminListPenginap']);
 Route::get('admin/listpenginap', [AdminController::class, 'AdminListPenginap']);
@@ -79,15 +83,6 @@ Route::get('admin/listnotifikasi/ubah/{id}',[AdminController::class,'AdminUbahNo
 Route::post('admin/listnotifikasi/ubah/{id}',[AdminController::class,'AdmindoUbahNotifikasi']);
 Route::get('testing', [AdminController::class,'testing']);
 
-Route::middleware(['cekUser'])->group(function () {
-    Route::get('pemilik', [PemilikController::class, 'PemilikHome']);
-    Route::get('pemilik/chat', [PemilikController::class, 'PemilikChat']);
-    Route::get('pemilik/kelola', [PemilikController::class, 'PemilikKelola']);
-    Route::post('pemilik/kelola', [PemilikController::class, 'doPemilikKelola']);
-    Route::get('pemilik/statistik', [PemilikController::class, 'PemilikStatistik']);
-    Route::get('pemilik/profil', [PemilikController::class, 'PemilikProfil']);
-    Route::get('pemilik/logout', [PemilikController::class, 'logoutpemilik']);
-});
 Route::prefix("galeri")->group(function(){
     Route::get('upload', [GaleriController::class, "upload"]);
     Route::post('doUpload', [GaleriController::class, "doUpload"]);
