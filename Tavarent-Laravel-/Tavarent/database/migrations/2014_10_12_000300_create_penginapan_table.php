@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('jk_boleh');
             $table->string('tipe');
             $table->integer('harga');
-            $table->integer('jumlah_foto');
+            $table->integer('jumlah_foto')->nullable();
             $table->unsignedBigInteger('id_pemilik');
             $table->foreign('id_pemilik')->references('id')->on('pemilik')->onDelete('cascade');
             $table->softDeletes();
