@@ -32,7 +32,8 @@ Route::middleware(['cekLogin'])->group(function () {
 });
 Route::middleware(['cekUserPenyewa'])->group(function () {
     Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
-    Route::get('penyewa/search', [PenyewaController::class, 'PenyewaSearch']);
+    Route::get('penyewa/search/{lat?}/{lng?}/{alamat?}', [PenyewaController::class, 'PenyewaSearch']);
+    Route::get('penyewa/penginapan/{id}', [PenyewaController::class, 'PenginapanDetail']);
     Route::get('penyewa/favorit', [PenyewaController::class, 'PenyewaFavorit']);
     Route::get('penyewa/kossaya', [PenyewaController::class, 'PenyewaKosSaya']);
     Route::get('penyewa/chat', [PenyewaController::class, 'PenyewaChat']);

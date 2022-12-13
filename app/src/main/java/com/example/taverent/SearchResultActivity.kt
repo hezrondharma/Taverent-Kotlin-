@@ -151,7 +151,11 @@ class SearchResultActivity : AppCompatActivity() {
 
         return geoCoordinates1.distanceTo(geoCoordinates2)
     }
-    fun filterPenginapan(hargaminimum:Int = -1, hargamaksimum:Int = -1, ratingminimum: Int = -1){
+    fun filterPenginapan(
+        hargaminimum:Int = -1,
+        hargamaksimum:Int = -1,
+        ratingminimum: Int = -1
+    ){
         penginapansFilter.clear()
         for (i in 0 until penginapansJarak.size){
             var valid = true

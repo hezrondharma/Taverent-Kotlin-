@@ -109,19 +109,28 @@ class TambahProperti : AppCompatActivity() {
                 }
             }
 
-            if (nama!=""&&deskripsi!=""&&alamat!=""&&harga!=""&&tipe!=""&&fasilitas!=""&&counter>2&&id_pemilik!=""){
+            if (nama!=""&&
+                deskripsi!=""&&
+                alamat!=""&&
+                harga!=""&&
+                tipe!=""&&
+                fasilitas!=""&&
+                counter>2&&
+                id_pemilik!=""){
 //                fasilitas = fasilitas.substring(0,fasilitas.length-1)
                 val strReg = object : StringRequest(
                     Method.POST, "$WS_HOST/penginapan/insert",
                     Response.Listener {
-                        Toast.makeText(this@TambahProperti, "Properti Berhasil Ditambah", Toast.LENGTH_SHORT)
+                        Toast.makeText(this@TambahProperti,
+                            "Properti Berhasil Ditambah", Toast.LENGTH_SHORT)
                             .show()
                         val resultIntent = Intent()
                         setResult(Activity.RESULT_OK,resultIntent)
                         finish()
                     },
                     Response.ErrorListener {
-                        Toast.makeText(this, "error", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(this, "error",
+                            Toast.LENGTH_SHORT).show()
                     }
                 ) {
                     override fun getParams(): MutableMap<String, String>? {
@@ -141,7 +150,8 @@ class TambahProperti : AppCompatActivity() {
                 val queue: RequestQueue = Volley.newRequestQueue(this)
                 queue.add(strReg)
             }else{
-                Toast.makeText(this@TambahProperti, "Tolong isi semua field", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this@TambahProperti,
+                    "Tolong isi semua field", Toast.LENGTH_SHORT).show()
             }
 
         }

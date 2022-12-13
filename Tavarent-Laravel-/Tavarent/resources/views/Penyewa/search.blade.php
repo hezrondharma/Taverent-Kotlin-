@@ -23,15 +23,16 @@
 @endsection
 @section('content')
     <div class="container" style="margin-top:100px;">
-        <input type="hidden" name="" val="" id="address">
-        <input type="hidden" name="" val="" id="koordinat">
+        <input type="hidden" name="" val="{{$alamat}}" id="alamat">
+        <input type="hidden" name="" val="{{$lat}}" id="lat">
+        <input type="hidden" name="" val="{{$lng}}" id="lng">
         <div class="left" style="width:50%;float:left;">
             <div style="width:100%;margin-bottom:30px;height:auto;overflow:hidden;">
                 <input type="text" name="" id="searchtextinput" class="form-control" style="width:80%; float:left;" placeholder="Search penginapan terdekat">
                 <input type="button" value="Search" id="search" class="btn btn-warning" style="width:18%;margin-left:2%;float:left;">
             </div>
             @forelse($penginapan as $p)
-            <a href="" style="color:black;">
+            <a href="/penyewa/penginapan/{{$p->id}}" style="color:black;">
             <div class="kotak" style="border:1px solid gray; border-radius:10px;margin-top:10px;margin-bottom:10px;height:auto;overflow:hidden;padding:20px;position:relative;">
                 <img src="" alt="gambar penginapan" style="float:left;object-fit:cover;background-color:gray;" width="160px" height="160px">
                 <div class="right" style="width:calc(95% - 160px);float:left;margin-left:5%;">
@@ -39,12 +40,13 @@
                     <p style="font-size:10pt;">{{$p->alamat}}</p>
                     <p  style="font-size:10pt;">
                         @php
-                            if (strlen($p->deskripsi)>100){
-                                echo substr($p->deskripsi,0,100) . " ... ";
+                            if(ceil($p->distance)>=1000){
+                                echo round(ceil($p->distance)/1000,2). " kilometer";
                             }else{
-                                echo $p->deskripsi;
+                                echo ceil($p->distance)." meter";
                             }
                         @endphp
+                        
                     </p>
                     <div style="position:absolute;right:20px;top:20px;font-weight:bold;">{{$p->tipe}}</div>
                     <div style="position:absolute;right:20px;bottom:20px;border:2px solid lightblue;border-radius:5px;padding:2px;font-size:10pt;">{{$p->jk_boleh}}</div>
@@ -60,18 +62,36 @@
             <div style="position:fixed;top:20%;left:55%;width: 40%; height: 70%;border-radius:10px;border:1px solid gray; overflow:hidden" id="mapContainer"></div>
         </div>
     </div>
+    
     <script>
 
-        $(document).ready(function(){
-            if (navigator.geolocation) {
-                navigator.geolocation.getCurrentPosition(getLocation);
-            } else { 
-                alert("iowejfiojw");
+        function start(){ 
+            if ($("#lat").attr("val")==""||$("#lng").attr("val")==""){
+                if (navigator.geolocation) {
+                    navigator.geolocation.getCurrentPosition(changeHeader);
+                } else { 
+                    alert("iowejfiojw");
+                }
+            }else{
+                var position = {
+                    lat:$("#lat").attr("val"), 
+                    lng:$("#lng").attr("val")
+                }
+                getLocation(position);
+                if ($("#alamat")!=""){
+                    $("#searchtextinput").val($("#alamat").attr("val"));
+                    getAddress(position)
+                }
+                
+                
             }
             
             var platform;
             var map;
             var marker;
+            function changeHeader(position){
+                window.location.href = "/penyewa/search/"+position.coords.latitude+"/"+position.coords.longitude;
+            }
             function getLocation(position){
                 platform = new H.service.Platform({
                     'apikey': 'rQWmEReEoxYDzqrD4qDxp08gW5ZGMBv_0zXDW547jRg'
@@ -82,7 +102,7 @@
                     defaultLayers.vector.normal.map,
                     {
                         zoom: 14,
-                        center: { lat: position.coords.latitude, lng: position.coords.longitude }
+                        center: { lat: position.lat, lng: position.lng }
                     }
                 );
                 var mapevents = new H.mapevents.MapEvents(map)
@@ -95,14 +115,16 @@
                 var behavior = new H.mapevents.Behavior(mapevents);
 
                 
-                marker = new H.map.Marker({ lat: position.coords.latitude, lng: position.coords.longitude });
+                marker = new H.map.Marker({ lat: position.lat, lng: position.lng });
                 // Add the marker to the map and center the map at the location of the marker:
                 map.addObject(marker);
-                map.setCenter({ lat: position.coords.latitude, lng: position.coords.longitude });
+                map.setCenter({ lat: position.lat, lng: position.lng });
             }
             $('#search').click(function(){
-                navigator.geolocation.getCurrentPosition(getAddress);
+                window.location.href = "/penyewa/search/"+$("#lat").attr("val")+"/"+$("#lng").attr("val")+"/"+$("#searchtextinput").val();
             });
+
+
             function getAddress(position){
                 var autocomplete = [];
                 var location = [];
@@ -115,7 +137,7 @@
                 service.autosuggest({
                 // Search query
                     q: String($('#searchtextinput').val()),
-                    at: position.coords.latitude+','+position.coords.longitude,
+                    at: position.lat+','+position.lng,
                 }, (result) => {
 
                     var idx = 1;
@@ -131,12 +153,7 @@
                     minLenght: 0,
                     autoFocus: true,
                     select: function(event,ui){
-                        $('#address').val(autocomplete[ui.item.idx].label);
-                        $('#koordinat').val(location[ui.item.idx].koordinat.lat+','+location[ui.item.idx].koordinat.lng);
-                        map.setCenter(location[ui.item.idx].koordinat);
-                        map.removeObject(marker);
-                        marker = new H.map.Marker(location[ui.item.idx].koordinat);
-                        map.addObject(marker);
+                        window.location.href = "/penyewa/search/"+location[ui.item.idx].koordinat.lat+"/"+location[ui.item.idx].koordinat.lng+"/"+autocomplete[ui.item.idx].label;
                     }
                 }).focus(function () {
                     $(this).autocomplete("search");
@@ -145,9 +162,12 @@
             }
             
             
-        });
+        };
+
              
                         
     </script>
-    
+    @php
+        echo $java;
+    @endphp
 @endsection
