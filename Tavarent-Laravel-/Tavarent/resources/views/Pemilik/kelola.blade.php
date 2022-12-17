@@ -7,16 +7,18 @@
     @include("navbar.navbarpemilik")
 @endsection
 @section('content')
+@php
+            $files = Storage::disk('public-folder')->allFiles();
+        dump($files);
+@endphp
 <div class="container" style="margin-top:150px; height:1000px;">
-    <form action="{{ url('galeri/doUpload') }}" method="POST" enctype="multipart/form-data">
-        @csrf
-        tes Upload File:
-        <input type="file" name="photo" id="" class="form-control">
-        <input type="submit" value="Upload" class="btn btn-success">
-    </form>
-    <form action="" method="POST" class="signin-form" >
+    <form action="" method="POST" class="signin-form" enctype='multipart/form-data'>
         @csrf
         <input type="hidden" id="hidden" name="hidden" value="login">
+        <div class="form-group mb-3">
+            <label class="label" for="name">tes Upload File:</label>
+            <input type="file" name="photo[]" id="photo" class="form-control" accept="image/jpeg" multiple required>
+        </div>
         <div class="form-group mb-3">
             <label class="label" for="name">Nama Properti</label>
             <input type="text" class="form-control" placeholder="Nama Properti" value="{{ old('nproperti') }}" name="nproperti">
