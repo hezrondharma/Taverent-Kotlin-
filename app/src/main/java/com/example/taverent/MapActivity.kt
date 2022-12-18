@@ -72,24 +72,24 @@ class MapActivity : AppCompatActivity(){
         handleAndroidPermissions()
         platformPositioningProvider = PlatformPositioningProvider(this)
 
+platformPositioningProvider.startLocating {
+    addPin(mapView, GeoCoordinates(it.latitude, it.longitude))
+    coordinates = GeoCoordinates(it.latitude, it.longitude)
+    mapView.camera.target = GeoCoordinates(it.latitude, it.longitude)
+    getAddressForCoordinates(GeoCoordinates(it.latitude, it.longitude))
+    platformPositioningProvider.stopLocating()
+    linearmap.setOnClickListener {
+        autocompleteLocation.setText("Loading . . .")
         platformPositioningProvider.startLocating {
-            addPin(mapView, GeoCoordinates(it.latitude, it.longitude))
-            coordinates = GeoCoordinates(it.latitude, it.longitude)
-            mapView.camera.target = GeoCoordinates(it.latitude, it.longitude)
-            getAddressForCoordinates(GeoCoordinates(it.latitude, it.longitude))
+            mapView.mapScene.removeMapMarker(mapMarker)
+            val geoCoordinates = GeoCoordinates(it.latitude, it.longitude)
+            coordinates = geoCoordinates
+            addPin(mapView, geoCoordinates)
+            getAddressForCoordinates(geoCoordinates)
             platformPositioningProvider.stopLocating()
-            linearmap.setOnClickListener {
-                autocompleteLocation.setText("Loading . . .")
-                platformPositioningProvider.startLocating {
-                    mapView.mapScene.removeMapMarker(mapMarker)
-                    val geoCoordinates = GeoCoordinates(it.latitude, it.longitude)
-                    coordinates = geoCoordinates
-                    addPin(mapView, geoCoordinates)
-                    getAddressForCoordinates(geoCoordinates)
-                    platformPositioningProvider.stopLocating()
-                }
-            }
         }
+    }
+}
 
 
 
@@ -206,23 +206,23 @@ class MapActivity : AppCompatActivity(){
 
 
     private fun getAddressForCoordinates(geoCoordinates: GeoCoordinates) {
-        val reverseGeocodingOptions = SearchOptions()
-        reverseGeocodingOptions.languageCode = LanguageCode.ID_ID
-        reverseGeocodingOptions.maxItems = 1
-        searchEngine.search(geoCoordinates, reverseGeocodingOptions, object:SearchCallback{
-            override fun onSearchCompleted(p0: SearchError?, p1: MutableList<Place>?) {
-                if (p0 != null) {
-                    Toast.makeText(this@MapActivity, "Reverse geocoding:Error: $p0", Toast.LENGTH_SHORT).show()
-                    return
-                }
+val reverseGeocodingOptions = SearchOptions()
+reverseGeocodingOptions.languageCode = LanguageCode.ID_ID
+reverseGeocodingOptions.maxItems = 1
+searchEngine.search(geoCoordinates, reverseGeocodingOptions, object:SearchCallback{
+    override fun onSearchCompleted(p0: SearchError?, p1: MutableList<Place>?) {
+        if (p0 != null) {
+            Toast.makeText(this@MapActivity, "Reverse geocoding:Error: $p0", Toast.LENGTH_SHORT).show()
+            return
+        }
 
-                // If error is null, list is guaranteed to be not empty.
-                if (p1 != null) {
-                    autocompleteLocation.setText(p1.get(0).address.addressText.toString())
-                }
-            }
+        // If error is null, list is guaranteed to be not empty.
+        if (p1 != null) {
+            autocompleteLocation.setText(p1.get(0).address.addressText.toString())
+        }
+    }
 
-        })
+})
     }
 
 

@@ -75,19 +75,20 @@ class UsersListFragment : Fragment() {
             val popup = PopupMenu(view.context,view)
             popup.inflate(R.menu.popupmenu1)
 
-            popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
-                when (it.itemId){
-                    R.id.menudetail->{
+            popup.setOnMenuItemClickListener {
+                when (it.itemId) {
+                    R.id.menudetail -> {
 //                        val intent = Intent(view.context,)
                     }
-                    R.id.menuban->{
+                    R.id.menuban -> {
                         //ban user
                         activity?.runOnUiThread {
-                            rvPenginapAdminHome.notifyDataSetChanged()}
+                            rvPenginapAdminHome.notifyDataSetChanged()
+                        }
                     }
                 }
                 true
-            })
+            }
             popup.show()
         }
         rvPemilikAdminHome = RVPemilikAdminHome(pemiliksSearch,R.layout.rv_user_admin_home){ view, idx ->
