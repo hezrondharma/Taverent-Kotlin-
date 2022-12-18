@@ -12,14 +12,20 @@ class GaleriController extends Controller
     }
 
     public function doUpload(Request $request){
+
         $value =1 ;
+        $files = $_FILES;
         $destinationPath = 'HomeImages';
-        $myimage  = $request->photo->getClientOriginalName();
+        $totalimage= count($_FILES['photo']['name']);
         $files = Storage::disk('public-folder')->allFiles();
         foreach($files as $cek){
             $value+=1;
         }
-        $request->photo->move(public_path($destinationPath), $value.".jpg");
+
+        for ($i = 0; $i < $totalimage; $i++) {
+            move_uploaded_file($_FILES['photo']['tmp_name'][$i],public_path($destinationPath).'/'. $value.".jpg");
+            $value++;
+        }
         return redirect('galeri/upload');
     }
 }

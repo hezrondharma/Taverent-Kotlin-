@@ -22,6 +22,7 @@ class Penginapan extends Model
         "tipe",
         "harga",
         "koordinat",
+        "jumlah_foto",
         "id_pemilik"];
     public $timestamps = false;
 
@@ -44,5 +45,5 @@ class Penginapan extends Model
     {
         return $this->belongsToMany(Penginap::class,'favorit','id_penginapan','id_penginap');
     }
-    
+
 }

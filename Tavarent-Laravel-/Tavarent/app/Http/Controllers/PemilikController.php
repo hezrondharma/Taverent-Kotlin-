@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 use App\Models\Penginapan;
 class PemilikController extends Controller
 {
@@ -17,9 +18,20 @@ class PemilikController extends Controller
     function PemilikKelola(){
         return view('pemilik/kelola');
     }
-
+    private function getUserPenginapan(Request $request){
+        $users = Penginapan::all();
+        $return_data = [];
+        foreach( $users as $row)
+        {
+            $return_data['users'][] =$row->getOriginal();
+        }
+        return $return_data;
+    }
     function doPemilikKelola(Request $request){
         $list = "";
+        $default=0;
+        $id_pemilik=Session::get('pemilik')->getOriginal();
+        $totalimage= count($_FILES['photo']['name']);
         if($request->ac != null){
             $list=$list."Air Conditioner,";
         }if($request->termasuklistrik != null){
@@ -54,8 +66,20 @@ class PemilikController extends Controller
             "tipe" =>$request->rbJenis,
             "harga" =>$request->harga,
             "koordinat" =>"",
-            "id_pemilik" =>"1",
+            "jumlah_foto" =>$totalimage,
+            "id_pemilik" =>$id_pemilik['id'],
         ));
-        return view('pemilik/kelola');
+        $dataPemilik = $this->getUserPenginapan($request);
+        foreach( $dataPemilik['users'] as $row){
+            $default=$row['id'];
+        }
+        $value =1 ;
+        $destinationPath = 'HomeImages';
+        for ($i = 0; $i < $totalimage; $i++) {
+            $picname = $default."_".$value;
+            move_uploaded_file($_FILES['photo']['tmp_name'][$i],public_path($destinationPath).'/'.$picname.".jpg");
+            $value++;
+        }
+        return redirect('pemilik/kelola');
     }
 }
