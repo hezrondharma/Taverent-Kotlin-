@@ -67,6 +67,7 @@ Route::middleware(['cekUserPemilik'])->group(function () {
     Route::get('pemilik/statistik', [PemilikController::class, 'PemilikStatistik']);
     Route::get('pemilik/profil', [PemilikController::class, 'PemilikProfil']);
     Route::post('pemilik/profil', [PemilikController::class, 'updatePemilik']);
+    Route::post('pemilik/promo/{id}', [PemilikController::class, 'deletePromo']);
     Route::get('pemilik/penginapan/{id}', [PemilikController::class, 'PenginapanDetail']);
     Route::get('pemilik/logout', [PemilikController::class, 'logoutpemilik']);
 });

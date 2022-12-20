@@ -28,7 +28,7 @@ class Penginapan extends Model
 
     public function Promo()
     {
-        return $this->hasMany(Promo::class,'id_promo','id');
+        return $this->hasMany(Promo::class,'id_penginapan','id');
     }
 
     public function Pemilik()

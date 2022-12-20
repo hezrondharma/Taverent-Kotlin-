@@ -189,6 +189,30 @@ class PemilikController extends Controller
         foreach($penginapan as $p){
             $promo = $promo->merge(Promo::where("id_penginapan","=",$p->id)->get());
         }
+        $param["promo"] = $promo;
+        $param["penginapan"] = Pemilik::find(Session::get("pemilik")->id)
+        ->Penginapan->all();
+        $param["java"] = "<script>start();</script>";
         return view("pemilik.promo",$param);
+    }
+    public function doPemilikPromo(Request $request)
+    {
+        $request->validate([
+            "id_penginapan" => ["unique:promo,id_penginapan"],
+        ]);
+        $promo = Promo::create(array(
+            "nama" => $request->nama,
+            "jenis" => $request->jenis,
+            "jumlah" => $request->jumlah,
+            "tanggal_mulai" => $request->tanggal_mulai,
+            "tanggal_selesai" => $request->tanggal_selesai,
+            "id_penginapan" => $request->id_penginapan
+        ));
+        return redirect()->back();
+    }
+    public function deletePromo(Request $request)
+    {
+        $promo = Promo::find($request->id)->delete();
+        return redirect()->back();
     }
 }

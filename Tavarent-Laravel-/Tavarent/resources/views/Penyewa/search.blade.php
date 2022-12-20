@@ -50,7 +50,21 @@
                     </p>
                     <div style="position:absolute;right:20px;top:20px;font-weight:bold;">{{$p->tipe}}</div>
                     <div style="position:absolute;right:20px;bottom:20px;border:2px solid lightblue;border-radius:5px;padding:2px;font-size:10pt;">{{$p->jk_boleh}}</div>
-                    <div class="product-price">Rp. {{$p->harga}}</div>
+                    <div class="product-price"><p style="text-decoration:line-through;margin-bottom:0px;color:gray;font-size:11pt;">Rp. {{number_format($p->harga)}}</p>
+                    @php
+                        
+                        $promo = $p->Promo()->get();
+                        
+                        foreach($promo as $pro){
+                        if ($pro->jenis=="diskon"){
+                            $hargaakhir = $p->harga*(100-$pro->jumlah)/100;
+                        }else{
+                            $hargaakhir = $p->harga-$pro->jumlah;
+                        }
+                    }
+                        echo 'Rp. '.number_format($hargaakhir);
+                    @endphp
+                    </div>
                 </div>
             </div>
             </a>
