@@ -41,6 +41,7 @@ Route::middleware(['cekUserPenyewa'])->group(function () {
     Route::get('penyewa/profil', [PenyewaController::class, 'PenyewaProfil']);
     Route::post('penyewa/profil', [PenyewaController::class, 'updatePenyewa']);
     Route::post('penyewa/togglefavorit',[PenyewaController::class, 'ToggleFavorit'])->name("toggle");
+    Route::get('penyewa/pembayaran',[PenyewaController::class, 'Pembayaran']);
 });
 
 
