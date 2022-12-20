@@ -14,13 +14,18 @@ use App\Models\Pembayaran;
 use App\Models\Chat;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
 {
     public function testing()
     {
-        
+
+    }
+
+    function logoutadmin(){
+        Session::forget('cekuser');
+        return redirect('/login');
     }
     function AdminListPenginap(){
         $param = [];

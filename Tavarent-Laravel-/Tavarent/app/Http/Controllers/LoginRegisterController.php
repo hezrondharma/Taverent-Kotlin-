@@ -40,6 +40,13 @@ class LoginRegisterController extends Controller
 
     public function doLogin(Request $request)
     {
+        Session::forget('cekuser');
+        if(strtolower($request->email) == "admin"){
+            if(strtolower($request->password) == "admin"){
+                Session::put("cekuser","admin");
+                return redirect("/admin");
+            }
+        }
         $dataPemilik = $this->getUserPemilik($request);
         $dataPenginap = $this->getUserPenginap($request);
 
@@ -47,26 +54,29 @@ class LoginRegisterController extends Controller
             "email" => ["required","email"],
             "password"  => ["required"] ,
         ]);
-        Session::forget('cekuser');
-        foreach( $dataPemilik['users'] as $row){
-            if ( $row['email'] == $request->email ) {
-                if ($row['password'] == $request->password){
-                    $pemilik = Pemilik::where("email","=",$request->email)->first();
-                    Session::forget('pemilik');
-                    Session::put("pemilik",$pemilik);
-                    Session::put("cekuser","pemilik");
-                    return redirect("/pemilik");
+        if($dataPemilik !=null){
+            foreach( $dataPemilik['users'] as $row){
+                if ( $row['email'] == $request->email ) {
+                    if ($row['password'] == $request->password){
+                        $pemilik = Pemilik::where("email","=",$request->email)->first();
+                        Session::forget('pemilik');
+                        Session::put("pemilik",$pemilik);
+                        Session::put("cekuser","pemilik");
+                        return redirect("/pemilik");
+                    }
                 }
             }
         }
-        foreach( $dataPenginap['users'] as $row){
-            if ( $row['email'] == $request->email ) {
-                if ($row['password'] == $request->password){
-                    $penginap = Penginap::where("email","=",$request->email)->first();
-                    Session::forget('penyewa');
-                    Session::put("penyewa",$penginap);
-                    Session::put("cekuser","penginap");
-                    return redirect("/penyewa");
+        if($dataPenginap !=null){
+            foreach( $dataPenginap['users'] as $row){
+                if ( $row['email'] == $request->email ) {
+                    if ($row['password'] == $request->password){
+                        $penginap = Penginap::where("email","=",$request->email)->first();
+                        Session::forget('penyewa');
+                        Session::put("penyewa",$penginap);
+                        Session::put("cekuser","penginap");
+                        return redirect("/penyewa");
+                    }
                 }
             }
         }

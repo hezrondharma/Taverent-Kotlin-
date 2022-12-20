@@ -22,6 +22,9 @@ class cekUserPenyewa
             if(Session::get('cekuser')=="pemilik"){
                 return redirect('/pemilik');
             }
+            if(Session::get('cekuser')=="admin"){
+                return redirect('/admin');
+            }
         }else{
             return redirect('login');
         }

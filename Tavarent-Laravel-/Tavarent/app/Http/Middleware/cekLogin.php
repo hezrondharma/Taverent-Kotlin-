@@ -24,6 +24,9 @@ class cekLogin
             }if(Session::get('cekuser')=="penginap"){
                 return redirect('/penyewa');
             }
+            if(Session::get('cekuser')=="admin"){
+                return redirect('/admin');
+            }
         }
         return $next($request);
     }

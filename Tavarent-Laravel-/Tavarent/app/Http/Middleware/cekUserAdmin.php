@@ -7,7 +7,7 @@ use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 
-class cekUserPemilik
+class cekUserAdmin
 {
     /**
      * Handle an incoming request.
@@ -22,10 +22,11 @@ class cekUserPemilik
             if(Session::get('cekuser')=="penginap"){
                 return redirect('/penyewa');
             }
-            if(Session::get('cekuser')=="admin"){
-                return redirect('/admin');
+            if(Session::get('cekuser')=="pemilik"){
+                return redirect('/pemilik');
             }
-        }else{
+        }
+        else{
             return redirect('login');
         }
         return $next($request);
