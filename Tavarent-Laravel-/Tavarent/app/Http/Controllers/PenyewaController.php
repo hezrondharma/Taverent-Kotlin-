@@ -79,7 +79,7 @@ class PenyewaController extends Controller
 
         return view("penyewa.favorit",$param);
     }
-    
+
     public function PenyewaChatPemilik(Request $request)
     {
         $param = [];
@@ -140,7 +140,7 @@ class PenyewaController extends Controller
     public function doPenginapanDetail(Request $request)
     {
         $param = [];
-        $param["harga"]
+        $param["harga"];
     }
     public function Pembayaran(Request $request)
     {
@@ -152,7 +152,7 @@ class PenyewaController extends Controller
         $param["email"] = "";
         $param["phone"] = "";
         $param["java"] = "<script>start();</script>";
-        
+
         return view("penyewa.payment",$param);
     }
 }
