@@ -43,10 +43,6 @@ Route::middleware(['cekUserPenyewa'])->group(function () {
     Route::post('penyewa/togglefavorit',[PenyewaController::class, 'ToggleFavorit'])->name("toggle");
 });
 
-Route::get('login', [LoginRegisterController::class, 'login']);
-Route::get('register', [LoginRegisterController::class, 'register']);
-Route::post('login', [LoginRegisterController::class, 'doLogin']);
-Route::post('register', [LoginRegisterController::class, 'doRegister']);
 
 Route::middleware(['cekUserPenyewa'])->group(function () {
 Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
@@ -69,7 +65,7 @@ Route::middleware(['cekUserPemilik'])->group(function () {
     Route::post('pemilik/profil', [PemilikController::class, 'updatePemilik']);
     Route::post('pemilik/promo/{id}', [PemilikController::class, 'deletePromo']);
     Route::get('pemilik/penginapan/{id}', [PemilikController::class, 'PenginapanDetail']);
-    Route::get('pemilik/logout', [PemilikController::class, 'logoutpemilik']);
+    Route::get('logout', [PemilikController::class, 'logoutpemilik']);
 });
 
 Route::get('admin', [AdminController::class, 'AdminListPenginap']);
