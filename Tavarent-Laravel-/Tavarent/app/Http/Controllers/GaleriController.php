@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 class GaleriController extends Controller
 {
     public function upload(Request $request){
-        return redirect('Pemilik/kelola');
+        return redirect('pemilik/kelola');
     }
 
     public function doUpload(Request $request){
