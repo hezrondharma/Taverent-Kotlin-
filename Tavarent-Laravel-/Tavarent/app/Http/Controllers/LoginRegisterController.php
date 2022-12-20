@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 class LoginRegisterController extends Controller
 {
     function logout(){
+        setcookie('cekRawUser','',time()-3600);
         Session::forget('cekuser');
         return redirect('/login');
     }
@@ -40,10 +41,17 @@ class LoginRegisterController extends Controller
 
     public function doLogin(Request $request)
     {
+        $check = false;
+        if($request->rbremember =='true'){
+            $check= true;
+        }
         Session::forget('cekuser');
         if(strtolower($request->email) == "admin"){
             if(strtolower($request->password) == "admin"){
-                Session::put("cekuser","admin");
+                if( $check == true){
+                    Session::put("cekuser","admin");
+                }
+                setcookie('cekRawUser',hash('sha256', 'admin') );
                 return redirect("/admin");
             }
         }
@@ -61,7 +69,10 @@ class LoginRegisterController extends Controller
                         $pemilik = Pemilik::where("email","=",$request->email)->first();
                         Session::forget('pemilik');
                         Session::put("pemilik",$pemilik);
-                        Session::put("cekuser","pemilik");
+                        if( $check == true){
+                            Session::put("cekuser","pemilik");
+                        }
+                        setcookie('cekRawUser',hash('sha256','pemilik'));
                         return redirect("/pemilik");
                     }
                 }
@@ -74,7 +85,10 @@ class LoginRegisterController extends Controller
                         $penginap = Penginap::where("email","=",$request->email)->first();
                         Session::forget('penyewa');
                         Session::put("penyewa",$penginap);
-                        Session::put("cekuser","penginap");
+                        if( $check == true){
+                            Session::put("cekuser","penginap");
+                        }
+                        setcookie('cekRawUser',hash('sha256', 'penginap'));
                         return redirect("/penyewa");
                     }
                 }

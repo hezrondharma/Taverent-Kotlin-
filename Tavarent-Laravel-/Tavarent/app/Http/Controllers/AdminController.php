@@ -24,6 +24,7 @@ class AdminController extends Controller
     }
 
     function logoutadmin(){
+        setcookie('cekRawUser','',time()-3600);
         Session::forget('cekuser');
         return redirect('/login');
     }

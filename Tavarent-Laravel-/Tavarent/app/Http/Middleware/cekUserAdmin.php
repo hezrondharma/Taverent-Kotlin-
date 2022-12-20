@@ -25,6 +25,13 @@ class cekUserAdmin
             if(Session::get('cekuser')=="pemilik"){
                 return redirect('/pemilik');
             }
+        }else if(isset($_COOKIE['cekRawUser'])){
+            if(hash('sha256', 'pemilik')==$_COOKIE['cekRawUser']){
+                return redirect('/pemilik');
+            }
+            if(hash('sha256', 'penginap')==$_COOKIE['cekRawUser']){
+                return redirect('/penyewa');
+            }
         }
         else{
             return redirect('login');
