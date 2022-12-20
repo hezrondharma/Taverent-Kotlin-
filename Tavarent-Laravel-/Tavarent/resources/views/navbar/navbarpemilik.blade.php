@@ -19,6 +19,9 @@
 									<a class="nav-link" href="/pemilik/kelola">Kelola</a>
 								</li>
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
+									<a class="nav-link" href="/pemilik/promo">Promo</a>
+								</li>
+								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">
 									<a class="nav-link" href="/pemilik/statistik">Statistik</a>
 								</li>
 								<li class="nav-item pl-4 pl-md-0 ml-0 ml-md-4">

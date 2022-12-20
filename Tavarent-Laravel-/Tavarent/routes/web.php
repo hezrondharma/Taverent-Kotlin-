@@ -39,6 +39,7 @@ Route::middleware(['cekUserPenyewa'])->group(function () {
     Route::get('penyewa/chat/{id?}', [PenyewaController::class, 'PenyewaChatPemilik']);
     Route::post('penyewa/chat/{id}', [PenyewaController::class, 'sendchat']);
     Route::get('penyewa/profil', [PenyewaController::class, 'PenyewaProfil']);
+    Route::post('penyewa/profil', [PenyewaController::class, 'updatePenyewa']);
     Route::post('penyewa/togglefavorit',[PenyewaController::class, 'ToggleFavorit'])->name("toggle");
 });
 
@@ -57,11 +58,16 @@ Route::get('penyewa/profil', [PenyewaController::class, 'PenyewaProfil']);
 });
 Route::middleware(['cekUserPemilik'])->group(function () {
     Route::get('pemilik', [PemilikController::class, 'PemilikHome']);
-    Route::get('pemilik/chat', [PemilikController::class, 'PemilikChat']);
+    Route::get('pemilik/chat/{id?}', [PemilikController::class, 'PemilikChatPenyewa']);
+    Route::post('pemilik/chat/{id?}', [PemilikController::class, 'sendchat']);
     Route::get('pemilik/kelola', [PemilikController::class, 'PemilikKelola']);
+    Route::get('pemilik/promo', [PemilikController::class, 'PemilikPromo']);
+    Route::post('pemilik/promo', [PemilikController::class, 'doPemilikPromo']);
     Route::post('pemilik/kelola', [PemilikController::class, 'doPemilikKelola']);
     Route::get('pemilik/statistik', [PemilikController::class, 'PemilikStatistik']);
     Route::get('pemilik/profil', [PemilikController::class, 'PemilikProfil']);
+    Route::post('pemilik/profil', [PemilikController::class, 'updatePemilik']);
+    Route::get('pemilik/penginapan/{id}', [PemilikController::class, 'PenginapanDetail']);
     Route::get('pemilik/logout', [PemilikController::class, 'logoutpemilik']);
 });
 

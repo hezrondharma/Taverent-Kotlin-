@@ -120,6 +120,9 @@
                 <label class="label text-danger" for="rbJenis">{{$message}}</label>
             @enderror
         </div>
+            @if(Session::has("success"))
+            <label class="label text-success">{{Session::get("success")}}</label>
+            @endif
             <button type="submit" class="button form-control rounded px-3" >Daftar</button>
         </div>
     </form>

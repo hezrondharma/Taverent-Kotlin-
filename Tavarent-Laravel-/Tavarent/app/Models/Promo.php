@@ -11,7 +11,7 @@ class Promo extends Model
     protected $table = "promo";
     protected $primaryKey = "id";
     public $incrementing = true;
-    protected $fillable = ["nama","jenis","jenis","jumlah","tanggal_mulai","tanggal_selesai","id_penginapan"];
+    protected $fillable = ["nama","jenis","jumlah","tanggal_mulai","tanggal_selesai","id_penginapan"];
     public $timestamps = false;
 
     public function Pembayaran()

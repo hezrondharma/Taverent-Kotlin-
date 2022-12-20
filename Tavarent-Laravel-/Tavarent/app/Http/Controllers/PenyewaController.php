@@ -10,6 +10,7 @@ use App\Models\Pemilik;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Validation\Rule;
 
 class PenyewaController extends Controller
 {
@@ -78,19 +79,14 @@ class PenyewaController extends Controller
 
         return view("penyewa.favorit",$param);
     }
-    public function PenyewaChat()
-    {
-        $param = [];
-        $param["chat"] = Chat::where("chat.id_penginap","=",Session::get("penyewa")->id)
-        ->get();
-        return view('penyewa.chat',$param);
-    }
+    
     public function PenyewaChatPemilik(Request $request)
     {
         $param = [];
         $param["pemilik"] = Pemilik::find($request->id);
         $param["chat"] = Chat::where("chat.id_penginap","=",Session::get("penyewa")->id)
         ->where("chat.id_pemilik","=",$request->id)->get();
+        $param["semuachat"] = Chat::where("chat.id_penginap","=",Session::get("penyewa")->id)->get();
         return view('penyewa.chat',$param);
     }
     public function sendchat(Request $request)
@@ -104,6 +100,42 @@ class PenyewaController extends Controller
         ));
 
         return redirect()->back();
+    }
+    public function PenyewaProfil(Request $request)
+    {
+        $param = [];
+
+        return view('penyewa.profil',$param);
+    }
+    public function updatePenyewa(Request $request)
+    {
+        Validator([
+            "email" => [
+                "required",
+                "email",
+                Rule::unique('App\Models\Penginap','email')->ignore(Session::get("penyewa")->id,'id'),
+                Rule::unique('App\Models\Pemilik,email')
+            ],
+            "username" => [
+                "required",
+                Rule::unique('App\Models\Penginap','username')->ignore(Session::get("penyewa")->id,'id'),
+                Rule::unique('App\Models\Pemilik,username')
+            ],
+            "no_telp" => [
+                'numeric','min_digits:10','max_digits:12',
+                Rule::unique('App\Models\Penginap','no_telp')->ignore(Session::get("penyewa")->id,'id'),
+                Rule::unique('App\Models\Pemilik,no_telp')
+            ],
+            "password"  => ["required"]
+        ]);
+        $penginap = Penginap::find(Session::get("penyewa")->id)
+        ->update([
+            "password"=>$request->password,
+            "username"=>$request->username,
+            "email"=>$request->email,
+            "no_telp"=>$request->no_telp,
+        ]);
+        return redirect()->back()->with("success","Berhasil ganti profil");
     }
 }
 

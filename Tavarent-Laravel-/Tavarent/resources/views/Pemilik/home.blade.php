@@ -8,10 +8,36 @@
 @endsection
 @section('content')
 <div class="container" style="margin-top:150px; height:1000px;">
-    <form class="mt-5 d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Cari Kos Disini " aria-label="Search">
-        <img src="{{asset('img/search.png')}}" alt="" width="50" height="auto" type="submit">
-    </form>
+<div class="container" style="justify-content:space-between;">
+        @forelse($penginapan as $p)
+        <div class="product-card">
+            <div class="badge">{{$p->tipe}}</div>
+            <div class="product-tumb">
+                <img src="/storage/imagesPenginapan/{{$p->id}}_1.jpg" alt="" style="height:100%;width:100%;object-fit:cover;">
+            </div>
+            <div class="product-details">
+                <span class="product-catagory">{{$p->jk_boleh}}</span>
+                <h4><a href="/pemilik/penginapan/{{$p->id}}">{{$p->nama}}</a></h4>
+                <p>
+                    @php
+                        if (strlen($p->deskripsi)>100){
+                            echo substr($p->deskripsi,0,80) . " ... ";
+                        }else{
+                            echo $p->deskripsi;
+                        }
+                    @endphp
+                </p>
+                <div class="product-bottom-details">
+                    <div class="product-price">Rp. {{$p->harga}}</div>
+                    <div class="product-links">
+                    </div>
+                </div>
+            </div>
+        </div>
+        @empty
+            <h2>Tidak ada penginapan</h2>
+        @endforelse
+    </div>
 </div>
 @endsection
 

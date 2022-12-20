@@ -13,11 +13,11 @@
 <div class="container" style="height:100vh;padding-top:100px;padding-bottom:20px;">
     <div class="left" style="height:100%;width:30%;float:left;border:1px solid black;">
         @php
-            for($i=(count($chat)-1) ; $i >= 0 ; $i--){
+            for($i=(count($semuachat)-1) ; $i >= 0 ; $i--){
                 $exist = false;
-                for($j=count($chat)-1 ; $j > $i ; $j--){
-                    if ($chat[$i]->id_penginap == $chat[$j]->id_penginap &&
-                    $chat[$i]->id_pemilik == $chat[$j]->id_pemilik){
+                for($j=count($semuachat)-1 ; $j > $i ; $j--){
+                    if ($semuachat[$i]->id_penginap == $semuachat[$j]->id_penginap &&
+                    $semuachat[$i]->id_pemilik == $semuachat[$j]->id_pemilik){
                     
                         $exist = true;
                         break;
@@ -25,8 +25,7 @@
                 }
                 
                 if (!$exist){
-                    $pesan = "ewiweiof jwoie fjiow eofj ewojf owijefi jwoejfoiw jfojw jefiowj ioefjow ejifo jwioe jfw ejfoij weio fjw efoiwjeio weoifji owejf ";
-                    echo '<a href="'.$chat[$i]->id_pemilik.'" style="color:black;text-decoration:none;">
+                    echo '<a href="/penyewa/chat/'.$semuachat[$i]->id_pemilik.'" style="color:black;text-decoration:none;">
                         <div style="display:flex;flex-direction:row;">
                             <div  style="border:3px solid black;border-radius:50%;width:auto;height:60px;margin-top:10px;margin-right:10px;margin-left:10px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -34,12 +33,12 @@
                                 </svg>
                             </div>
                             <div>
-                                <p style="font-weight:bold;margin-bottom:0px;margin-top:10px;">'.$chat[$i]->Pemilik->nama_lengkap.'</p>
+                                <p style="font-weight:bold;margin-bottom:0px;margin-top:10px;">'.$semuachat[$i]->Pemilik->nama_lengkap.'</p>
                                 <p class="hint" style="margin-top:0px;font-size:10pt;line-height:15px;">';
-                    if(strlen($chat[$i]->pesan)>70){
-                        echo substr($chat[$i]->pesan,0,70).'...';
+                    if(strlen($semuachat[$i]->pesan)>70){
+                        echo substr($semuachat[$i]->pesan,0,70).'...';
                     }else{
-                        echo $chat[$i]->pesan;
+                        echo $semuachat[$i]->pesan;
                     }
                     echo '</p>
                             </div>
@@ -51,6 +50,8 @@
     </div>
     <div class="right" style="height:100%;width:70%;float:left;border:1px solid black;display:flex;flex-direction:column;">
         @if($pemilik==null)
+            <h1>Pilih Chat</h1>
+        @else
         <div class="top" style="box-shadow: 0 6px 10px -4px black;background-color:lightgreen;padding:10px;display:flex;flex-direction:row;">
             <div style="border:3px solid black;border-radius:50%;margin-left:20px;">
             <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" fill="currentColor" class="bi bi-person" viewBox="0 0 16 16">
@@ -61,7 +62,7 @@
                 {{$pemilik->nama_lengkap}}
             </div>
         </div>
-        <div class="mid" style="flex-grow:1;padding-left:20px;padding-right:20px;padding-top:20px;display:flex;flex-direction:column;">
+        <div class="mid" style="overflow-y:scroll;flex-grow:1;padding-left:20px;padding-right:20px;padding-top:20px;display:flex;flex-direction:column;">
             @forelse($chat as $c)
                 @if($c->sender=="penginap")
                     <div style="padding:10px 20px 10px 20px;margin-bottom:10px;background-color:lightgray;border-radius:10px;height:auto;width:fit-content;margin-left:auto">
@@ -90,6 +91,7 @@
             </form>
             
         </div>
+        @endif
     </div>
 </div>
 
