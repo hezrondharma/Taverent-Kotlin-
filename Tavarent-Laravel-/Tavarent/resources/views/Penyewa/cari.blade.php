@@ -39,21 +39,28 @@
                     @endphp
                 </p>
                 <div class="product-bottom-details">
-                    <div class="product-price">
-                        <p style="text-decoration:line-through;margin-bottom:0px;">{{number_format($p->harga)}}</p>
-                    @php
+                    <div class="product-price" style="height:40px;">
+                        @php
+                            $promo = $p->Promo()->get();
+                            if (count($promo)==0){
+                                echo 'Rp. '.number_format($p->harga);
+                            }else{
+                                echo '<p style="text-decoration:line-through;margin-bottom:0px">Rp. '.number_format($p->harga).'</p>';
+                            
+                                
+                                $hargaakhir = 0;
+                                foreach($promo as $pro){
+                                if ($pro->jenis=="diskon"){
+                                    $hargaakhir = $p->harga*(100-$pro->jumlah)/100;
+                                }else{
+                                    $hargaakhir = $p->harga-$pro->jumlah;
+                                }
+                            echo 'Rp. '.number_format($hargaakhir);
+
+                            }
                         
-                        $promo = $p->Promo()->get();
-                        
-                        foreach($promo as $pro){
-                        if ($pro->jenis=="diskon"){
-                            $hargaakhir = $p->harga*(100-$pro->jumlah)/100;
-                        }else{
-                            $hargaakhir = $p->harga-$pro->jumlah;
                         }
-                    }
-                        echo 'Rp. '.number_format($hargaakhir);
-                    @endphp
+                        @endphp
                     </div>
                     <div class="product-links">
                     </div>
