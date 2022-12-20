@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Penginap;
 use Illuminate\Http\Request;
 use App\Models\Penginapan;
+use App\Models\Chat;
+use App\Models\Pemilik;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class PenyewaController extends Controller
 {
@@ -14,6 +19,7 @@ class PenyewaController extends Controller
         $penginapan = Penginapan::all();
 
         $param["penginapan"] = $penginapan;
+        $param["photos"] = Storage::disk('public')->files('imagesPenginapan');
         return view('penyewa.cari',$param);
     }
     public function PenyewaSearch(Request $request)
@@ -43,6 +49,61 @@ class PenyewaController extends Controller
         $penginapan = Penginapan::find($request->id);
 
         $param["penginapan"] = $penginapan;
+        $param["photos"] = Storage::disk('public')->files('imagesPenginapan');
+        $param["java"] = "<script>start();</script>";
+        $param["fav"] = (int)count(Penginap::find(Session::get("penyewa")->id)
+        ->Penginapan()
+        ->where("penginapan.id","=",$request->id)
+        ->get());
         return view("penyewa.penginapan",$param);
     }
+    public function ToggleFavorit(Request $request)
+    {
+        $exist = "";
+        $penginapan = Penginap::find($request->id_penginap)->Penginapan()->where("penginapan.id","=",$request->id_penginapan)->first();
+        if ($penginapan==null){
+            $p = Penginapan::find($request->id_penginapan);
+            $favorit = Penginap::find($request->id_penginap)->Penginapan()->attach($p);
+            $exist = "bukanfavorit";
+        }else{
+            $p = Penginapan::find($request->id_penginapan);
+            $favorit = Penginap::find($request->id_penginap)->Penginapan()->detach($p);
+        }
+        return redirect()->back();
+    }
+    public function PenyewaFavorit()
+    {
+        $param = [];
+        $param["penginapan"] = Penginap::find(Session::get("penyewa")->id)->Penginapan()->get();
+
+        return view("penyewa.favorit",$param);
+    }
+    public function PenyewaChat()
+    {
+        $param = [];
+        $param["chat"] = Chat::where("chat.id_penginap","=",Session::get("penyewa")->id)
+        ->get();
+        return view('penyewa.chat',$param);
+    }
+    public function PenyewaChatPemilik(Request $request)
+    {
+        $param = [];
+        $param["pemilik"] = Pemilik::find($request->id);
+        $param["chat"] = Chat::where("chat.id_penginap","=",Session::get("penyewa")->id)
+        ->where("chat.id_pemilik","=",$request->id)->get();
+        return view('penyewa.chat',$param);
+    }
+    public function sendchat(Request $request)
+    {
+        $chat = Chat::create(array(
+            "pesan" => $request->chat,
+            "id_penginap" => Session::get("penyewa")->id,
+            "id_pemilik" => $request->id,
+            "sender" => "penginap",
+            "status" => "",
+        ));
+
+        return redirect()->back();
+    }
 }
+

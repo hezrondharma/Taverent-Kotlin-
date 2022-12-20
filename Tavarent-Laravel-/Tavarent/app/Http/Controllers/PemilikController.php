@@ -28,10 +28,32 @@ class PemilikController extends Controller
         return $return_data;
     }
     function doPemilikKelola(Request $request){
+        
+        $request->validate([
+            "nproperti" => ["required"],
+            "alamat" =>["required"],
+            "deskripsi" =>["required"],
+            "selector" =>["required"],
+            "rbJenis" =>["required"],
+            "harga" =>["required","numeric","min:1"],
+            "koordinat" =>["required"],
+            "photo"=>["required"],
+            "photo.*"=>["mimes:jpg"]
+        ],[
+            "nproperti" => "Nama harus di isi",
+            "alamat" => "Alamat harus di isi",
+            "deskripsi" => "Harus ada deskripsi tambahan",
+            "selector" => "Harus memilih jenis kelamin ",
+            "rbJenis" => "Harus memilih tipe",
+            "harga" => "Harus ada harga",
+            "koordinat" => "Harus memilih alamat dari autosuggest",
+        ]);
+        $totalimage = 0;
+        foreach($request->file('photo') as $photo){
+            $totalimage++;
+        }
         $list = "";
-        $default=0;
-        $id_pemilik=Session::get('pemilik')->getOriginal();
-        $totalimage= count($_FILES['photo']['name']);
+        $id_pemilik=Session::get('pemilik')->id;
         if($request->ac != null){
             $list=$list."Air Conditioner,";
         }if($request->termasuklistrik != null){
@@ -65,21 +87,22 @@ class PemilikController extends Controller
             "jk_boleh" =>$request->selector,
             "tipe" =>$request->rbJenis,
             "harga" =>$request->harga,
-            "koordinat" =>"",
+            "koordinat" =>$request->koordinat,
             "jumlah_foto" =>$totalimage,
-            "id_pemilik" =>$id_pemilik['id'],
+            "id_pemilik" =>$id_pemilik,
         ));
+
+        $default=0;
         $dataPemilik = $this->getUserPenginapan($request);
         foreach( $dataPemilik['users'] as $row){
             $default=$row['id'];
         }
         $value =1 ;
-        $destinationPath = 'HomeImages';
-        for ($i = 0; $i < $totalimage; $i++) {
-            $picname = $default."_".$value;
-            move_uploaded_file($_FILES['photo']['tmp_name'][$i],public_path($destinationPath).'/'.$picname.".jpg");
+        foreach($request->file('photo') as $photo){
+            $path = $photo->storeAs("imagesPenginapan",$default.'_'.$value.'.jpg',"public");
             $value++;
         }
+        return redirect('galeri/upload');
         return redirect('pemilik/kelola');
     }
 }

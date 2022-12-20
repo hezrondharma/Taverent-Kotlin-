@@ -24,11 +24,11 @@
         <div class="product-card">
             <div class="badge">{{$p->tipe}}</div>
             <div class="product-tumb">
-                <img src="https://i.imgur.com/xdbHo4E.png" alt="">
+                <img src="/storage/imagesPenginapan/{{$p->id}}_1.jpg" alt="" style="height:100%;width:100%;object-fit:cover;">
             </div>
             <div class="product-details">
                 <span class="product-catagory">{{$p->jk_boleh}}</span>
-                <h4><a href="">{{$p->nama}}</a></h4>
+                <h4><a href="/penyewa/penginapan/{{$p->id}}">{{$p->nama}}</a></h4>
                 <p>
                     @php
                         if (strlen($p->deskripsi)>100){

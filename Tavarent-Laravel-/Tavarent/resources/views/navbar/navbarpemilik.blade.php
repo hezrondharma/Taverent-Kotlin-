@@ -5,7 +5,7 @@
 				<div class="col-12">
 					<nav class="navbar navbar-expand-md navbar-light">
 
-						<a href="/pemilik"><img src="img/tavarentlogo-removebg-big.png" width="70px" alt=""></a>
+						<a href="/pemilik"><img src="{{ asset('img/tavarentlogo-removebg-big.png') }}" width="70px" alt=""></a>
 
 						<div class="collapse navbar-collapse" id="navbarSupportedContent">
 							<ul class="navbar-nav ml-auto py-4 py-md-0">

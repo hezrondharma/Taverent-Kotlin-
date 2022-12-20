@@ -34,7 +34,7 @@
             @forelse($penginapan as $p)
             <a href="/penyewa/penginapan/{{$p->id}}" style="color:black;">
             <div class="kotak" style="border:1px solid gray; border-radius:10px;margin-top:10px;margin-bottom:10px;height:auto;overflow:hidden;padding:20px;position:relative;">
-                <img src="" alt="gambar penginapan" style="float:left;object-fit:cover;background-color:gray;" width="160px" height="160px">
+                <img src="/storage/imagesPenginapan/{{$p->id}}_1.jpg" alt="gambar penginapan" style="float:left;object-fit:cover;background-color:gray;" width="160px" height="160px">
                 <div class="right" style="width:calc(95% - 160px);float:left;margin-left:5%;">
                     <h4 style="font-size:15pt;margin-bottom:0px;">{{$p->nama}}</h4>
                     <p style="font-size:10pt;">{{$p->alamat}}</p>

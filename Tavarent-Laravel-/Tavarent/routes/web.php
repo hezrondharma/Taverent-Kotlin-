@@ -36,8 +36,10 @@ Route::middleware(['cekUserPenyewa'])->group(function () {
     Route::get('penyewa/penginapan/{id}', [PenyewaController::class, 'PenginapanDetail']);
     Route::get('penyewa/favorit', [PenyewaController::class, 'PenyewaFavorit']);
     Route::get('penyewa/kossaya', [PenyewaController::class, 'PenyewaKosSaya']);
-    Route::get('penyewa/chat', [PenyewaController::class, 'PenyewaChat']);
+    Route::get('penyewa/chat/{id?}', [PenyewaController::class, 'PenyewaChatPemilik']);
+    Route::post('penyewa/chat/{id}', [PenyewaController::class, 'sendchat']);
     Route::get('penyewa/profil', [PenyewaController::class, 'PenyewaProfil']);
+    Route::post('penyewa/togglefavorit',[PenyewaController::class, 'ToggleFavorit'])->name("toggle");
 });
 
 Route::get('login', [LoginRegisterController::class, 'login']);
