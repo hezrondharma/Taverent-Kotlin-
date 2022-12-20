@@ -79,7 +79,7 @@ class PenyewaController extends Controller
 
         return view("penyewa.favorit",$param);
     }
-    
+
     public function PenyewaChatPemilik(Request $request)
     {
         $param = [];
@@ -136,6 +136,24 @@ class PenyewaController extends Controller
             "no_telp"=>$request->no_telp,
         ]);
         return redirect()->back()->with("success","Berhasil ganti profil");
+    }
+    public function doPenginapanDetail(Request $request)
+    {
+        $param = [];
+        $param["harga"];
+    }
+    public function Pembayaran(Request $request)
+    {
+        $param = [];
+        $param["order_id"] = "";
+        $param["gross_amount"] = "";
+        $param["first_name"] = "";
+        $param["last_name"] = "";
+        $param["email"] = "";
+        $param["phone"] = "";
+        $param["java"] = "<script>start();</script>";
+
+        return view("penyewa.payment",$param);
     }
 }
 

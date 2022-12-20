@@ -18,8 +18,8 @@ class Promo extends Model
     {
         return $this->hasMany(Pembayaran::class,'id_pembayaran','id');
     }
-    public function Penginapan()
+    public function Penginapan()    
     {
-        return $this->belongsTo(Penginapan::class,'id_penginapan','id');
+        return $this->belongsTo(Promo::class,'id_penginapan','id');
     }
 }

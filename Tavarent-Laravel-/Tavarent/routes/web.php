@@ -31,9 +31,11 @@ Route::middleware(['cekLogin'])->group(function () {
     Route::post('register', [LoginRegisterController::class, 'doRegister']);
 });
 Route::middleware(['cekUserPenyewa'])->group(function () {
+
     Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
     Route::get('penyewa/search/{lat?}/{lng?}/{alamat?}', [PenyewaController::class, 'PenyewaSearch']);
     Route::get('penyewa/penginapan/{id}', [PenyewaController::class, 'PenginapanDetail']);
+    Route::post('penyewa/penginapan/{id}', [PenyewaController::class, 'doPenginapanDetail']);
     Route::get('penyewa/favorit', [PenyewaController::class, 'PenyewaFavorit']);
     Route::get('penyewa/kossaya', [PenyewaController::class, 'PenyewaKosSaya']);
     Route::get('penyewa/chat/{id?}', [PenyewaController::class, 'PenyewaChatPemilik']);
@@ -41,12 +43,9 @@ Route::middleware(['cekUserPenyewa'])->group(function () {
     Route::get('penyewa/profil', [PenyewaController::class, 'PenyewaProfil']);
     Route::post('penyewa/profil', [PenyewaController::class, 'updatePenyewa']);
     Route::post('penyewa/togglefavorit',[PenyewaController::class, 'ToggleFavorit'])->name("toggle");
+    Route::get('penyewa/pembayaran',[PenyewaController::class, 'Pembayaran']);
 });
 
-Route::get('login', [LoginRegisterController::class, 'login']);
-Route::get('register', [LoginRegisterController::class, 'register']);
-Route::post('login', [LoginRegisterController::class, 'doLogin']);
-Route::post('register', [LoginRegisterController::class, 'doRegister']);
 
 Route::middleware(['cekUserPenyewa'])->group(function () {
 Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
@@ -67,8 +66,9 @@ Route::middleware(['cekUserPemilik'])->group(function () {
     Route::get('pemilik/statistik', [PemilikController::class, 'PemilikStatistik']);
     Route::get('pemilik/profil', [PemilikController::class, 'PemilikProfil']);
     Route::post('pemilik/profil', [PemilikController::class, 'updatePemilik']);
+    Route::post('pemilik/promo/{id}', [PemilikController::class, 'deletePromo']);
     Route::get('pemilik/penginapan/{id}', [PemilikController::class, 'PenginapanDetail']);
-    Route::get('pemilik/logout', [PemilikController::class, 'logoutpemilik']);
+    Route::get('logout', [PemilikController::class, 'logoutpemilik']);
 });
 
 Route::get('admin', [AdminController::class, 'AdminListPenginap']);

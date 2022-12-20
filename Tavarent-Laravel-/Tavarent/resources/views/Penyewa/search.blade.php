@@ -38,7 +38,7 @@
                 <div class="right" style="width:calc(95% - 160px);float:left;margin-left:5%;">
                     <h4 style="font-size:15pt;margin-bottom:0px;">{{$p->nama}}</h4>
                     <p style="font-size:10pt;">{{$p->alamat}}</p>
-                    <p  style="font-size:10pt;">
+                    <p style="font-size:10pt;">
                         @php
                             if(ceil($p->distance)>=1000){
                                 echo round(ceil($p->distance)/1000,2). " kilometer";
@@ -50,7 +50,29 @@
                     </p>
                     <div style="position:absolute;right:20px;top:20px;font-weight:bold;">{{$p->tipe}}</div>
                     <div style="position:absolute;right:20px;bottom:20px;border:2px solid lightblue;border-radius:5px;padding:2px;font-size:10pt;">{{$p->jk_boleh}}</div>
-                    <div class="product-price">Rp. {{$p->harga}}</div>
+                    <div class="product-price">
+                    @php
+                        $promo = $p->Promo()->get();
+                        if (count($promo)==0){
+                            echo 'Rp. '.number_format($p->harga);
+                        }else{
+                            echo '<p style="text-decoration:line-through;margin-bottom:0px;color:gray;font-size:11pt;">Rp. '.number_format($p->harga).'</p>';
+                        
+                            
+                            $hargaakhir = 0;
+                            foreach($promo as $pro){
+                            if ($pro->jenis=="diskon"){
+                                $hargaakhir = $p->harga*(100-$pro->jumlah)/100;
+                            }else{
+                                $hargaakhir = $p->harga-$pro->jumlah;
+                            }
+                        echo 'Rp. '.number_format($hargaakhir);
+
+                        }
+                    
+                    }
+                    @endphp
+                    </div>
                 </div>
             </div>
             </a>
