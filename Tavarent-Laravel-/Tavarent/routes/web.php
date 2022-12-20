@@ -31,6 +31,7 @@ Route::middleware(['cekLogin'])->group(function () {
     Route::post('register', [LoginRegisterController::class, 'doRegister']);
 });
 Route::middleware(['cekUserPenyewa'])->group(function () {
+    
     Route::get('penyewa', [PenyewaController::class, 'PenyewaHome']);
     Route::get('penyewa/search/{lat?}/{lng?}/{alamat?}', [PenyewaController::class, 'PenyewaSearch']);
     Route::get('penyewa/penginapan/{id}', [PenyewaController::class, 'PenginapanDetail']);
