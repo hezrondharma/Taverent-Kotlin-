@@ -6,6 +6,7 @@ use App\Models\Penginap;
 use Illuminate\Http\Request;
 use App\Models\Penginapan;
 use App\Models\Chat;
+use App\Models\Pembayaran;
 use App\Models\Pemilik;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
@@ -139,18 +140,32 @@ class PenyewaController extends Controller
     }
     public function doPenginapanDetail(Request $request)
     {
+        $request->validate([
+            "date" => ["required"],
+            "bulan" => ["required"],
+        ]);
         $param = [];
-        $param["harga"]
+        $param["harga"] = $request->hargaakhir*$request->bulan;
+        $param["tanggal_mulai"] = $request->date;
+        $param["tanggal_selesai"] = $request->date;
+        $param["id_penginap"] = Session::get("penyewa")->id;
+        $param["id_penginapan"] = $request->id_penginapan;
+        return redirect()->route("pembayaran",$param);
     }
     public function Pembayaran(Request $request)
     {
         $param = [];
-        $param["order_id"] = "";
-        $param["gross_amount"] = "";
-        $param["first_name"] = "";
-        $param["last_name"] = "";
-        $param["email"] = "";
-        $param["phone"] = "";
+        $param["order_id"] = "TESTTAVARENT";
+        if (Pembayaran::max("id")==null){
+            $param["order_id"] = $param["order_id"]. "1";
+        }else{
+            $param["order_id"] = $param["order_id"].(Pembayaran::max("id")+1);
+        }
+        $param["gross_amount"] = $request->harga;
+        $param["first_name"] = substr(Session::get("penyewa")->nama_lengkap,0,strpos(Session::get("penyewa")->nama_lengkap,' '));
+        $param["last_name"] = substr(Session::get("penyewa")->nama_lengkap,strpos(Session::get("penyewa")->nama_lengkap,' '),strlen(Session::get("penyewa")->nama_lengkap)-1);;
+        $param["email"] = Session::get("penyewa")->email;
+        $param["phone"] = Session::get("penyewa")->no_telp;
         $param["java"] = "<script>start();</script>";
         
         return view("penyewa.payment",$param);

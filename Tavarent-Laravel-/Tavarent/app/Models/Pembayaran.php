@@ -16,9 +16,7 @@ class Pembayaran extends Model
         "tanggal_mulai",
         "tanggal_selesai",
         "id_penginap",
-        "id_penginapan",
-        "id_kupon",
-        "id_promo",
+        "id_penginapan"
     ];
     public $timestamps = false;
 

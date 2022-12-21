@@ -128,11 +128,12 @@
         </div>
         <div class="right" style="float:left;width:40%;margin-top:40px;padding-left:20px;">
             <div class="kotakbeli" style="box-shadow:2px 2px 5px 0px;padding:10px;border-radius:20px;overflow:hidden">
-                
+            <form action="" method="post">@csrf
                 @php
                     $promo = $penginapan->Promo()->get();
                     if (count($promo)==0){
                         echo '<p style="margin-top:20px;font-size:15pt;font-weight:bold;text-align:center">Rp. '.number_format($penginapan->harga) .'</p>';
+                        echo '<input type="hidden" name="hargaakhir" value="'.$penginapan->harga.'">';
                     }else{
                         echo '<p style="text-decoration:line-through;margin-bottom:0px;text-align:center;">Rp. '.number_format($penginapan->harga).'</p>';
                     
@@ -145,21 +146,29 @@
                             $hargaakhir = $penginapan->harga-$pro->jumlah;
                         }
                         echo '<p style="margin-top:5px;font-size:15pt;font-weight:bold;text-align:center">Rp. '.number_format($hargaakhir).'</p>';
-
+                        echo '<input type="hidden" name="hargaakhir" value="'.$hargaakhir.'">';
                         }
                     }
                 
                 
                 @endphp
-                <form action="" method="post">
+                
                 <div style="width: 100%;">
                     <p class="hint" style="width: 45%;float:left;">Tanggal Mulai</p>
                     <p class="hint" style="width: 45%;float:left;margin-left:10%;">Berapa Bulan?</p>
                 </div>
+                <input type="hidden" name="id_penginapan" value="{{$penginapan->id}}">
                 <div style="width: 100%;margin-top:20px;">
+                    
                     <input type="date" name="date" class="form-date" id="" style="width: 45%;float:left;border-radius:10px;margin-right:5%;padding:5px;">
                     <input type="number" name="bulan" id="" style="width: 45%;float:left;border-radius:10px;margin-left:5%;padding:5px;">
                 </div>
+                @error("date")
+                    <p class="text-danger">{{$message}}</p>
+                @enderror
+                @error("bulan")
+                    <p class="text-danger">{{$message}}</p>
+                @enderror
                 <input type="submit" value="Sewa Penginapan" id="pay-button" class="btn btn-success" style="width:100%;margin-top:30px;">
                 </form>
             </div>
