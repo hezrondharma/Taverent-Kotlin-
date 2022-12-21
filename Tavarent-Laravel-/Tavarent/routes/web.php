@@ -23,6 +23,8 @@ Route::get('/ts', function () {
 Route::get('/terms', function () {
     return view('terms');
 });
+
+Route::get('closeAdmin', [AdminController::class, 'destroyadmin']);
 Route::post('logout', [LoginRegisterController::class, 'logout']);
 Route::middleware(['cekLogin'])->group(function () {
     Route::get('/', function () {

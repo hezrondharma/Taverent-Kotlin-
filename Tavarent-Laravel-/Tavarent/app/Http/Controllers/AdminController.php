@@ -23,10 +23,13 @@ class AdminController extends Controller
 
     }
 
-    function logoutadmin(){
+    function destroyadmin(){
         setcookie('cekRawUser','',time()-3600);
         Session::forget('cekuser');
-        return redirect('/login');
+        return redirect('login');
+    }
+    function logoutadmin(){
+        return redirect('/closeAdmin');
     }
     function AdminListPenginap(){
         $param = [];
