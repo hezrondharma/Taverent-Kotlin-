@@ -20,6 +20,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/ts', function () {
     return view('ts');
 });
+Route::get('/terms', function () {
+    return view('terms');
+});
 Route::post('logout', [LoginRegisterController::class, 'logout']);
 Route::middleware(['cekLogin'])->group(function () {
     Route::get('/', function () {
