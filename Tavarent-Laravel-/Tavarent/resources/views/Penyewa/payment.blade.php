@@ -49,26 +49,35 @@
         // Trigger snap popup. @TODO: Replace TRANSACTION_TOKEN_HERE with your transaction token
         window.snap.pay('$snapToken', {
           onSuccess: function(result){
-            /* You may add your own implementation here */
+            var total = $('#total').val();
+            var tanggal_mulai = $('#tanggal_mulai').val();
+            var bulan = $('#bulan').val();
+            var id_penginapan = $('#id_penginapan').val();
+            window.location.href = '/penyewa/insertpembayaran?total='+total+'&tanggal_mulai='+tanggal_mulai+'&bulan='+bulan+'&id_penginapan='+id_penginapan;
           },
-          onPending: function(result){
-            /* You may add your own implementation here */
-          },
-          onError: function(result){
-            /* You may add your own implementation here */
-          },
-          onClose: function(){
-            /* You may add your own implementation here */
-          }
+          
         })
       });
     }
     </script>";
     @endphp
-    <br><br><br><br><br><br><br>
-    <button id="pay-button">Pay!</button>
+    <div class="container-fluid" style="background-image:url( {{asset('/img/housebg.jpg')}} );background-position-y:center;background-size:cover;height:100vh;padding-top:100px;">
+    <div style="background-color:white; width:500px ; height:95%;padding:30px;border-radius:30px;margin-left:5%;box-shadow:0px 0px 10px 1px gray;opacity:0.95; ">
+    <h4>Total</h4>
+    <p class="hint" style="margin-top:0px;margin-bottom:10%;">Rp. {{number_format($gross_amount)}}</p>
+    <h4>Tanggal Mulai</h4>
+    <p class="hint" style="margin-top:0px;margin-bottom:10%;">{{$tanggal_mulai}}</p>
+    <h4>Tanggal_Selesai</h4>
+    <p class="hint" style="margin-top:0px;margin-bottom:10%;">{{$tanggal_selesai}}</p>
     
- 
+    <button class="btn btn-secondary" style="width:100%;" id="pay-button">Pay!</button>
+    
+    <input type="hidden" id="total" value="{{$gross_amount}}">
+    <input type="hidden" id="tanggal_mulai" value="{{$tanggal_mulai}}">
+    <input type="hidden" id="bulan" value="{{$bulan}}">
+    <input type="hidden" id="id_penginapan" value="{{$id_penginapan}}">
+    </div>
+    </div>
     
     @php
       echo $java;

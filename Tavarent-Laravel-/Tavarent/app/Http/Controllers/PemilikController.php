@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Models\Penginapan;
+use App\Models\Pengumuman;
 use App\Models\Promo;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Validation\Rule;
@@ -215,5 +216,12 @@ class PemilikController extends Controller
     {
         $promo = Promo::find($request->id)->delete();
         return redirect()->back();
+    }
+    public function PemilikNotifikasi(Request $request)
+    {
+        $param = [];
+        $param["pengumuman"] = Pengumuman::where("tipe","=",1)->get();
+
+        return view("penyewa.notifikasi",$param);
     }
 }

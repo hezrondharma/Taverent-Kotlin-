@@ -28,7 +28,7 @@
             </div>
             <div class="product-details">
                 <span class="product-catagory">{{$p->jk_boleh}}</span>
-                <h4><a href="/pemilik/penginapan/{{$p->id}}">{{$p->nama}}</a></h4>
+                <h4><a href="/penyewa/penginapan/{{$p->id}}">{{$p->nama}}</a></h4>
                 <p style="height:100px;">
                     @php
                         if (strlen($p->deskripsi)>100){

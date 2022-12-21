@@ -8,6 +8,7 @@ use App\Models\Penginapan;
 use App\Models\Chat;
 use App\Models\Pembayaran;
 use App\Models\Pemilik;
+use App\Models\Pengumuman;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
@@ -147,15 +148,17 @@ class PenyewaController extends Controller
         $param = [];
         $param["harga"] = $request->hargaakhir*$request->bulan;
         $param["tanggal_mulai"] = $request->date;
-        $param["tanggal_selesai"] = $request->date;
+        $param["bulan"] = $request->bulan;
         $param["id_penginap"] = Session::get("penyewa")->id;
         $param["id_penginapan"] = $request->id_penginapan;
+
+        
         return redirect()->route("pembayaran",$param);
     }
     public function Pembayaran(Request $request)
     {
         $param = [];
-        $param["order_id"] = "TESTTAVARENT";
+        $param["order_id"] = "TESTTAVARENT0";
         if (Pembayaran::max("id")==null){
             $param["order_id"] = $param["order_id"]. "1";
         }else{
@@ -166,9 +169,41 @@ class PenyewaController extends Controller
         $param["last_name"] = substr(Session::get("penyewa")->nama_lengkap,strpos(Session::get("penyewa")->nama_lengkap,' '),strlen(Session::get("penyewa")->nama_lengkap)-1);;
         $param["email"] = Session::get("penyewa")->email;
         $param["phone"] = Session::get("penyewa")->no_telp;
+        $param["tanggal_mulai"] = $request->tanggal_mulai;
+        $param["bulan"] = $request->bulan;
+        $param["id_penginapan"] = $request->id_penginapan;
+        $param["tanggal_selesai"] = date("Y-m-d",strtotime("+".$request->bulan." months",strtotime($request->tanggal_selesai)));
+
         $param["java"] = "<script>start();</script>";
 
         return view("penyewa.payment",$param);
+    }
+    public function insertPembayaran(Request $request)
+    {
+        $tanggalselesai = date("Y-m-d",strtotime("+".$request->bulan." months",strtotime($request->tanggal_mulai)));
+
+        $pembayaran = Pembayaran::create(array(
+            "total" => $request->total,
+            "tanggal_mulai" => $request->tanggal_mulai,
+            "tanggal_selesai" => $tanggalselesai,
+            "id_penginap" => Session::get("penyewa")->id,
+            "id_penginapan" => $request->id_penginapan
+        ));
+        return redirect("/penyewa");
+    }
+    public function PenyewaKosSaya(Request $request)
+    {
+        $param = [];
+        $pembayaran = Pembayaran::where("id_penginap","=",Session::get("penyewa")->id)->get();
+        $param["pembayaran"] = $pembayaran;
+        return view("penyewa.kossaya",$param);
+    }
+    public function PenyewaNotifikasi(Request $request)
+    {
+        $param = [];
+        $param["pengumuman"] = Pengumuman::where("tipe","=",0)->get();
+
+        return view("penyewa.notifikasi",$param);
     }
 }
 
