@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
@@ -14,15 +15,19 @@ class BeritaMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $user;
+    public $deskripsi;
+    public $email;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct($pUser,$pDeskripsi)
+    public function __construct($pUser,$pDeskripsi,$pEmail)
     {
         $this->user = $pUser;
         $this->deskripsi = $pDeskripsi;
+        $this->email = $pEmail;
     }
 
     /**
@@ -46,8 +51,13 @@ class BeritaMail extends Mailable
     public function content()
     {
         return new Content(
-            view: 'view.name',
-            text: $this->deskripsi,
+            view: 'Admin.mail',
+            with:[
+                'user' =>$this->user,
+                'email' =>$this->email,
+                'deskripsi' => $this->deskripsi,
+                'tanggal' => Carbon::now()->isoFormat('DD MMM YYYY')
+            ]
         );
     }
 

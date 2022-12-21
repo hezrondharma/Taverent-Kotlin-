@@ -13,7 +13,9 @@ use App\Models\Rating;
 use App\Models\Pembayaran;
 use App\Models\Chat;
 use App\Http\Controllers\Controller;
+use App\Mail\BeritaMail;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
 
 class AdminController extends Controller
@@ -24,7 +26,7 @@ class AdminController extends Controller
     }
 
     function logoutadmin(){
-        setcookie('cekRawUser','',time()-3600);
+        setcookie("cekRawUser","",time()-3600);
         Session::forget('cekuser');
         return redirect('/login');
     }
@@ -172,12 +174,35 @@ class AdminController extends Controller
         }
     }
 
-    function AdminLaporan(){
+    function AdminMail(){
         $param =[];
-        $laporan = Pembayaran::all();
+        $penginap = Penginap::all();
+        $pemilik = Pemilik::all();
+        $user = $penginap->merge($pemilik);
 
-        $param["pembayaran"] = $laporan;
-        return view('Admin.laporan',$param);
+
+        $param["user"] = $user;
+        return view('Admin.mail',$param);
+    }
+    public function doAdminMail(Request $request)
+    {
+        $request->validate([
+            "subject" => "required",
+            "email" => ["required"],
+            "deskripsi" => "required",
+        ]);
+
+        $penginap = Penginap::where("email","=",$request->email)->first();
+        $pemilik = Pemilik::where("email","=",$request->email)->first();
+        if (empty($penginap)){
+            Mail::to($request->email)
+        ->send(new BeritaMail("$pemilik->username - $pemilik->nama_lengkap",$request->deskripsi,$request->email));
+        }else{
+            Mail::to($request->email)
+        ->send(new BeritaMail("$penginap->username - $penginap->nama_lengkap",$request->deskripsi,$request->email));
+        }
+        return redirect()->back();
+        
     }
     function AdminListNotifikasi(){
         $param =[];

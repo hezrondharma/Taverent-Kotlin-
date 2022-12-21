@@ -45,14 +45,13 @@
                 </a>
             </li>
 
-            <li class="has-subnav">
-                <a href="/admin/laporan">
-                    <i class="fa fa-bar-chart-o fa-2x"></i>
+            <li>
+                <a href="/admin/mail">
+                    <i class="bi bi-envelope-fill fa-2x"></i>
                     <span class="nav-text">
-                        Laporan
+                        Send Mail
                     </span>
                 </a>
-
             </li>
 
         </ul>
@@ -113,7 +112,7 @@
                 <td>{{ $penginapans->harga }}</td>
                 <td>{{ $penginapans->Pemilik->nama_lengkap }}</td>
                 <td>
-                    <a href="{{ url("admin/listpenginapan/ubah/$penginapans->id") }}" class="btn btn-primary">Ubah</a>
+                    
                     @if($penginapans->trashed())
                     <a href="{{ url("admin/listpenginapan/hapus/$penginapans->id") }}" class="btn btn-success">Unban</a>
                     @else

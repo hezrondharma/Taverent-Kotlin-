@@ -44,14 +44,13 @@
                 </a>
             </li>
 
-            <li class="has-subnav">
-                <a href="/admin/laporan">
-                    <i class="fa fa-bar-chart-o fa-2x"></i>
+            <li>
+                <a href="/admin/mail">
+                    <i class="fa fa-envelope fa-2x"></i>
                     <span class="nav-text">
-                        Laporan
+                        Send Mail
                     </span>
                 </a>
-
             </li>
         </ul>
 

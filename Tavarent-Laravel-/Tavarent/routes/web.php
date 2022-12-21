@@ -85,7 +85,8 @@ Route::middleware(['cekUserAdmin'])->group(function () {
     Route::get('admin/listpenginapan/hapus/{id}', [AdminController::class, 'AdminHapusListPenginapan']);
     Route::get('admin/listpenginapan/ubah/{id}',[AdminController::class,'AdminUbahListPenginapan']);
     Route::post('admin/listpenginapan/ubah/{id}',[AdminController::class,'AdmindoUbahListPenginapan']);
-    Route::get('admin/laporan', [AdminController::class, 'AdminLaporan']);
+    Route::get('admin/mail', [AdminController::class, 'AdminMail']);
+    Route::post('admin/mail', [AdminController::class, 'doAdminMail']);
     Route::get('admin/listnotifikasi', [AdminController::class, 'AdminListNotifikasi']);
     Route::post('admin/listnotifikasi', [AdminController::class, 'AdminTambahNotifikasi']);
     Route::get('admin/listnotifikasi/hapus/{id}', [AdminController::class, 'AdminHapusNotifikasi']);

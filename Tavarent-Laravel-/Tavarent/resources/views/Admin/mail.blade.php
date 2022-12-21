@@ -44,14 +44,13 @@
                 </a>
             </li>
 
-            <li class="has-subnav">
-                <a href="/admin/laporan">
-                    <i class="fa fa-bar-chart-o fa-2x"></i>
+            <li>
+                <a href="/admin/mail">
+                    <i class="fa fa-envelope fa-2x"></i>
                     <span class="nav-text">
-                        Laporan
+                        Send Mail
                     </span>
                 </a>
-
             </li>
         </ul>
 
@@ -70,35 +69,33 @@
 @endsection
 @section('content')
 <div class="area">
-    @if ($laporan !== null)
-        <table class="table">
-            <tr>
-                <th>ID</th>
-                <th>Total Pembayaran</th>
-                <th>Tanggal Mulai</th>
-                <th>Tanggal Selesai</th>
-                <th>Id Penginap</th>
-            </tr>
-            @foreach ($notifikasi as $notif)
-                <tr>
-                    <td>{{ $notif->id }}</td>
-                    <td>{{ $notif->judul }}</td>
-                    <td>{{ $notif->isi }}</td>
-                    <td>{{ $notif->tipe }}</td>
-                    <td>
-                        <a href="{{ url("") }}" class="btn btn-primary">Ubah</a>
-                        @if($pemiliks->trashed())
-                        <a href="{{ url("") }}" class="btn btn-success">Recover</a>
-                        @else
-                        <a href="{{ url("") }}" class="btn btn-danger">Hapus</a>
-                        @endif
-                    </td>
-                </tr>
-            @endforeach
-        </table>
-    @else
-    <h1>tidak ada daftar pemilik</h1>
-    @endif
+    <form action="" method="post">@csrf
+    <h1>Send Mail</h1>
+    <h4>Subject</h4>
+    <input type="text" name="subject" id="" class="form-control">
+    @error("subject")
+        <p class="label-danger">{{$message}}</p>
+    @enderror
+    <h4>User</h4>
+    <select name="email" class="form-select">
+        @if(is_array($user)||is_object($user))
+        @foreach($user as $u)
+        <option value="{{$u->email}}">{{$u->username}} - {{$u->nama_lengkap}}</option>
+        @endforeach
+        @else
+        <option value="">{{$user}}</option>
+        @endif
+    </select>
+    @error("id")
+        <p class="label-danger">{{$message}}</p>
+    @enderror
+    <h4>Deskripsi</h4>
+    <textarea name="deskripsi" id="" cols="30" rows="10" class="form-control"></textarea>
+    <input type="submit" value="Send Mail" class="btn btn-success">
+    @error("deskripsi")
+        <p class="label-danger">{{$message}}</p>
+    @enderror
+    </form>
 </div>
 
 @endsection
