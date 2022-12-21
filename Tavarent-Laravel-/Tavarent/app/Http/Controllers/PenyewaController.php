@@ -80,7 +80,7 @@ class PenyewaController extends Controller
 
         return view("penyewa.favorit",$param);
     }
-    
+
     public function PenyewaChatPemilik(Request $request)
     {
         $param = [];
@@ -167,7 +167,7 @@ class PenyewaController extends Controller
         $param["email"] = Session::get("penyewa")->email;
         $param["phone"] = Session::get("penyewa")->no_telp;
         $param["java"] = "<script>start();</script>";
-        
+
         return view("penyewa.payment",$param);
     }
 }

@@ -52,6 +52,9 @@ class Kernel extends HttpKernel
         'cekUserPenyewa' => [
             \App\Http\Middleware\cekUserPenyewa::class,
         ],
+        'cekUserAdmin' => [
+            \App\Http\Middleware\cekUserAdmin::class,
+        ],
     ];
 
     /**

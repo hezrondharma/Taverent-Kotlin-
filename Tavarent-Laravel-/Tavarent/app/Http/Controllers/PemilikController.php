@@ -16,6 +16,7 @@ use Illuminate\Validation\Rule;
 class PemilikController extends Controller
 {
     function logoutpemilik(){
+        setcookie('cekRawUser','',time()-3600);
         Session::forget('cekuser');
         return redirect('/login');
     }
@@ -37,7 +38,7 @@ class PemilikController extends Controller
         return $return_data;
     }
     function doPemilikKelola(Request $request){
-        
+
         $request->validate([
             "nproperti" => ["required"],
             "alamat" =>["required"],
@@ -177,7 +178,7 @@ class PemilikController extends Controller
         $param["penginapan"] = $penginapan;
         $param["photos"] = Storage::disk('public')->files('imagesPenginapan');
         $param["java"] = "<script>start();</script>";
-        
+
         return view("pemilik.penginapan",$param);
     }
     public function PemilikPromo(Request $request)

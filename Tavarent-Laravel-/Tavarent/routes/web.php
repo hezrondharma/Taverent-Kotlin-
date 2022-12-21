@@ -71,26 +71,29 @@ Route::middleware(['cekUserPemilik'])->group(function () {
     Route::get('logout', [PemilikController::class, 'logoutpemilik']);
 });
 
-Route::get('admin', [AdminController::class, 'AdminListPenginap']);
-Route::get('admin/listpenginap', [AdminController::class, 'AdminListPenginap']);
-Route::get('admin/listpenginap/hapus/{id}', [AdminController::class, 'AdminHapusListPenginap']);
-Route::get('admin/listpenginap/ubah/{id}',[AdminController::class,'AdminUbahListPenginap']);
-Route::post('admin/listpenginap/ubah/{id}',[AdminController::class,'AdmindoUbahListPenginap']);
-Route::get('admin/listpemilik', [AdminController::class, 'AdminListPemilik']);
-Route::get('admin/listpemilik/hapus/{id}', [AdminController::class, 'AdminHapusListPemilik']);
-Route::get('admin/listpemilik/ubah/{id}',[AdminController::class,'AdminUbahListPemilik']);
-Route::post('admin/listpemilik/ubah/{id}',[AdminController::class,'AdmindoUbahListPemilik']);
-Route::get('admin/listpenginapan', [AdminController::class, 'AdminListPenginapan']);
-Route::get('admin/listpenginapan/hapus/{id}', [AdminController::class, 'AdminHapusListPenginapan']);
-Route::get('admin/listpenginapan/ubah/{id}',[AdminController::class,'AdminUbahListPenginapan']);
-Route::post('admin/listpenginapan/ubah/{id}',[AdminController::class,'AdmindoUbahListPenginapan']);
-Route::get('admin/laporan', [AdminController::class, 'AdminLaporan']);
-Route::get('admin/listnotifikasi', [AdminController::class, 'AdminListNotifikasi']);
-Route::post('admin/listnotifikasi', [AdminController::class, 'AdminTambahNotifikasi']);
-Route::get('admin/listnotifikasi/hapus/{id}', [AdminController::class, 'AdminHapusNotifikasi']);
-Route::get('admin/listnotifikasi/ubah/{id}',[AdminController::class,'AdminUbahNotifikasi']);
-Route::post('admin/listnotifikasi/ubah/{id}',[AdminController::class,'AdmindoUbahNotifikasi']);
-Route::get('testing', [AdminController::class,'testing']);
+Route::middleware(['cekUserAdmin'])->group(function () {
+    Route::get('admin', [AdminController::class, 'AdminListPenginap']);
+    Route::get('admin/listpenginap', [AdminController::class, 'AdminListPenginap']);
+    Route::get('admin/listpenginap/hapus/{id}', [AdminController::class, 'AdminHapusListPenginap']);
+    Route::get('admin/listpenginap/ubah/{id}',[AdminController::class,'AdminUbahListPenginap']);
+    Route::post('admin/listpenginap/ubah/{id}',[AdminController::class,'AdmindoUbahListPenginap']);
+    Route::get('admin/listpemilik', [AdminController::class, 'AdminListPemilik']);
+    Route::get('admin/listpemilik/hapus/{id}', [AdminController::class, 'AdminHapusListPemilik']);
+    Route::get('admin/listpemilik/ubah/{id}',[AdminController::class,'AdminUbahListPemilik']);
+    Route::post('admin/listpemilik/ubah/{id}',[AdminController::class,'AdmindoUbahListPemilik']);
+    Route::get('admin/listpenginapan', [AdminController::class, 'AdminListPenginapan']);
+    Route::get('admin/listpenginapan/hapus/{id}', [AdminController::class, 'AdminHapusListPenginapan']);
+    Route::get('admin/listpenginapan/ubah/{id}',[AdminController::class,'AdminUbahListPenginapan']);
+    Route::post('admin/listpenginapan/ubah/{id}',[AdminController::class,'AdmindoUbahListPenginapan']);
+    Route::get('admin/laporan', [AdminController::class, 'AdminLaporan']);
+    Route::get('admin/listnotifikasi', [AdminController::class, 'AdminListNotifikasi']);
+    Route::post('admin/listnotifikasi', [AdminController::class, 'AdminTambahNotifikasi']);
+    Route::get('admin/listnotifikasi/hapus/{id}', [AdminController::class, 'AdminHapusNotifikasi']);
+    Route::get('admin/listnotifikasi/ubah/{id}',[AdminController::class,'AdminUbahNotifikasi']);
+    Route::post('admin/listnotifikasi/ubah/{id}',[AdminController::class,'AdmindoUbahNotifikasi']);
+    Route::get('admin/logout',[AdminController::class,'logoutadmin']);
+    Route::get('testing', [AdminController::class,'testing']);
+});
 
 Route::prefix("galeri")->group(function(){
     Route::get('upload', [GaleriController::class, "upload"]);

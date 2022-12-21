@@ -20,8 +20,8 @@
     </div>
     <div class="form-group mb-3">
     <div class="form-check">
-        <input type="checkbox" class="form-check-input" name="remember">
-        <label class="form-check-label" for="remember">Remember me</label>
+        <input type="checkbox" class="form-check-input" name="rbremember" value="true">
+        <label class="form-check-label" for="remember" >Remember me</label>
     </div>
     <div class="form-group mb-3">
         <button type="submit" class="button form-control rounded px-3" >Login</button>

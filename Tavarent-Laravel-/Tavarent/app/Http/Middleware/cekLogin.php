@@ -24,6 +24,20 @@ class cekLogin
             }if(Session::get('cekuser')=="penginap"){
                 return redirect('/penyewa');
             }
+            if(Session::get('cekuser')=="admin"){
+                return redirect('/admin');
+            }
+        }
+        if(isset($_COOKIE['cekRawUser'])){
+            if(hash('sha256', 'pemilik')==$_COOKIE['cekRawUser']){
+                return redirect('/pemilik');
+            }
+            if(hash('sha256', 'penginap')==$_COOKIE['cekRawUser']){
+                return redirect('/penyewa');
+            }
+            if(hash('sha256', 'admin')==$_COOKIE['cekRawUser']){
+                return redirect('/admin');
+            }
         }
         return $next($request);
     }
