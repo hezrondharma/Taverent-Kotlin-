@@ -57,16 +57,21 @@
                 <tbody>
                     @forelse($promo as $idx => $p)
                         <tr>
+                            @php
+                            
+                            $penginapan = App\Models\Penginapan::find($p->id_penginapan);
+                            @endphp
                             <td>{{$idx+1}}</td>
                             
-                            <td>{{$p->Penginapan->nama}}</td>
-                            <td>{{number_format($p->Penginapan->harga)}}</td>
+                            <td>{{$penginapan->nama}}</td>
+                            <td>{{number_format($penginapan->harga)}}</td>
                             <td>
                             @php
+                            
                             if ($p->jenis=="diskon"){
-                                $hargaakhir = $p->Penginapan->harga*(100-$p->jumlah)/100;
+                                $hargaakhir = $penginapan->harga*(100-$p->jumlah)/100;
                             }else{
-                                $hargaakhir = $p->Penginapan->harga-$p->jumlah;
+                                $hargaakhir = $penginapan->harga-$p->jumlah;
                             }
                             echo 'Rp. '.number_format($hargaakhir);
                             @endphp
