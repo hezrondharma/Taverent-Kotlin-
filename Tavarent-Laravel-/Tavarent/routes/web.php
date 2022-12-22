@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\LoginRegisterController;
 use App\Http\Controllers\PemilikController;
 use App\Http\Controllers\PenyewaController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -117,3 +118,6 @@ Route::get('testing', [AdminController::class,'testing']);
 
 
 
+Route::get('/link', function () {
+    Artisan::call('storage:link');
+});

@@ -14,7 +14,7 @@
 			<div class="row justify-content-center">
 				<div class="col-lg-10 col-md-12 mt-5 mb-5">
 					<div class="wrap d-md-flex rounded-4" style="background-color:#D9D9D9">
-						<div class="img rounded-left" style="width:50%; background-size:cover; background-image:url('img/logo.png')"></div>
+						<div class="img rounded-left" style="width:50%; background-repeat:no-repeat; background-image:url('img/tavarentlogo-removebg-big.png');background-position-y:50%;background-position-x:50%;object-fit:contain;"></div>
 						<div class="login-wrap pt-4 pb-4 p-md-5" style="width: 50%">
                             <div class="d-flex">
                                 <div class="w-100">
