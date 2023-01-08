@@ -20,7 +20,7 @@ class LoginChoose1 : Fragment() {
 
     private lateinit var binding: FragmentLoginChoose1Binding
     var WS_HOST = ""
-
+    var network = false
     var pemiliks: ArrayList<Pemilik> = ArrayList()
     var penginaps: ArrayList<Penginap> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -45,7 +45,6 @@ class LoginChoose1 : Fragment() {
         refreshPemilik(view)
         refreshPenginap(view)
 
-
         binding.imageButton.setOnClickListener {
             val fragment  = LoginChoose2()
             val bundle = Bundle()
@@ -59,6 +58,8 @@ class LoginChoose1 : Fragment() {
         binding.textView.setText("Selamat Kembali $tipe")
         if (tipe!=null) {
             binding.btnLogin.setOnClickListener {
+                refreshPemilik(view)
+                refreshPenginap(view)
                 val email = binding.etEmail.text.toString().trim()
                 val password = binding.etPassword.text.toString().trim()
                 if (email != "" && password != "") {
@@ -67,6 +68,7 @@ class LoginChoose1 : Fragment() {
                         activity?.runOnUiThread { startActivity(intent) }
                     }else{
                         var exist = false
+
                         if (tipe == "pemilik") {
                             for (i in 0 until pemiliks.size) {
                                 if (pemiliks[i].email == email) {
@@ -87,7 +89,12 @@ class LoginChoose1 : Fragment() {
                                     break
                                 }
                             }
-                            if (!exist) {
+                            if(!network){
+                                Toast.makeText(view.context,
+                                    "No internet Access",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+                            else if (!exist) {
                                 Toast.makeText(view.context,
                                     "Email not registered",
                                     Toast.LENGTH_SHORT).show()
@@ -112,7 +119,12 @@ class LoginChoose1 : Fragment() {
                                     break
                                 }
                             }
-                            if (!exist) {
+                            if(!network){
+                                Toast.makeText(view.context,
+                                    "No internet Access",
+                                    Toast.LENGTH_SHORT).show()
+                            }
+                            else if (!exist) {
                                 Toast.makeText(view.context,
                                     "Email not registered",
                                     Toast.LENGTH_SHORT).show()
@@ -124,6 +136,8 @@ class LoginChoose1 : Fragment() {
                         "Fill all fields",
                         Toast.LENGTH_SHORT).show()
                 }
+                pemiliks.clear()
+                penginaps.clear()
             }
         }
     }
@@ -131,6 +145,7 @@ class LoginChoose1 : Fragment() {
         val strReq = object : StringRequest(
             Method.GET,"$WS_HOST/pemilik/list",
             Response.Listener {
+                network = true
                 val obj: JSONArray = JSONArray(it)
                 pemiliks.clear()
                 for (i in 0 until obj.length()){
@@ -151,7 +166,7 @@ class LoginChoose1 : Fragment() {
                 }
             },
             Response.ErrorListener {
-                Toast.makeText(view.context, "WS_ERROR2", Toast.LENGTH_SHORT).show()
+                network = false
             }
         ){}
         val queue: RequestQueue = Volley.newRequestQueue(view.context)
@@ -161,6 +176,7 @@ class LoginChoose1 : Fragment() {
         val strReq = object : StringRequest(
             Method.GET,"$WS_HOST/penginap/list",
             Response.Listener {
+                network = true
                 val obj: JSONArray = JSONArray(it)
                 penginaps.clear()
                 for (i in 0 until obj.length()){
@@ -181,7 +197,7 @@ class LoginChoose1 : Fragment() {
                 }
             },
             Response.ErrorListener {
-                Toast.makeText(view.context, "WS_ERROR1", Toast.LENGTH_SHORT).show()
+                network = false
             }
         ){}
         val queue: RequestQueue = Volley.newRequestQueue(view.context)
