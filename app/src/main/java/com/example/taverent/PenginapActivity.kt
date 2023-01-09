@@ -15,7 +15,6 @@ class PenginapActivity : AppCompatActivity() {
         binding = ActivityPenginapBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
-
         penginap = intent.getParcelableExtra<Penginap>("penginap") as Penginap
         val fragment = PenginapCariFragment()
         val bundle = Bundle()
@@ -86,11 +85,7 @@ class PenginapActivity : AppCompatActivity() {
         eBuilder.setMessage("Are you sure you want to Exit ?, Press back again to abort")
         eBuilder.setPositiveButton("Yes"){
                 Dialog, whichButton ->
-            val intent = Intent(Intent.ACTION_MAIN)
-            intent.addCategory(Intent.CATEGORY_HOME)
-            intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP //***Change Here***
-            startActivity(intent)
-            finish()
+            this.finishAffinity();
         }.show()
     }
 }

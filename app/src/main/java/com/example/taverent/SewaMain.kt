@@ -7,6 +7,7 @@ import android.os.ConditionVariable
 import android.util.Log
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import com.android.volley.RequestQueue
 import com.android.volley.Response
@@ -118,6 +119,16 @@ class SewaMain : AppCompatActivity() {
         }
 
 
+    }
+    override fun onBackPressed() {
+        val eBuilder = AlertDialog.Builder(this)
+        eBuilder.setTitle("Exit")
+        eBuilder.setIcon(R.drawable.ic_baseline_warning_24)
+        eBuilder.setMessage("Are you sure you want to Exit ?, Press back again to abort")
+        eBuilder.setPositiveButton("Yes"){
+                Dialog, whichButton ->
+            this.finishAffinity();
+        }.show()
     }
 
 
