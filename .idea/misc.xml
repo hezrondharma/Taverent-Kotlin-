@@ -3,6 +3,9 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_penginap.xml" value="0.11904761904761904" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_penginap_profile.xml" value="0.2" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_profil_sewa.xml" value="0.264" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_profile_sewa.xml" value="0.22826086956521738" />
