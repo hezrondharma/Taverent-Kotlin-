@@ -40,6 +40,9 @@ class PenginapAccountFragment : Fragment() {
             intent.putExtra("id_penginap",id_penginap)
             activity?.runOnUiThread { startActivity(intent) }
         }
-
+        binding.imsetting.setOnClickListener {
+            val intent = Intent(view.context, LoginActivity::class.java)
+            activity?.runOnUiThread { startActivity(intent) }
+        }
     }
 }

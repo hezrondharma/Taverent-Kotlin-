@@ -46,12 +46,17 @@ class AkunSewa : Fragment() {
         var nama_pemilik = ""
         id_pemilik = arguments?.getString("id_pemilik").toString()
         nama_pemilik = arguments?.getString("nama_pemilik").toString()
+        val logout = view.findViewById<ImageView>(R.id.imageView17)
         val btneditprofilSewa = view.findViewById<LinearLayout>(R.id.btneditprofilSewa)
         val txOwnerUsername1 = view.findViewById<TextView>(R.id.txOwnerUsername)
         txOwnerUsername1.setText(nama_pemilik)
         btneditprofilSewa.setOnClickListener {
             val intent = Intent(view.context,ProfileSewa::class.java)
             intent.putExtra("id_pemilik",id_pemilik)
+            activity?.runOnUiThread { startActivity(intent) }
+        }
+        logout.setOnClickListener{
+            val intent = Intent(view.context,LoginActivity::class.java)
             activity?.runOnUiThread { startActivity(intent) }
         }
 
