@@ -16,17 +16,32 @@ interface UserDao {
     @Insert
     suspend fun insert(user:UserEntity)
 
+    @Insert
+    suspend fun insert(Guest:PenginapanEntity)
+
+    @Insert
+    suspend fun insert(Chat:ChatEntity)
+
     @Delete
     suspend fun delete(user:UserEntity)
 
     @Query("DELETE FROM users")
     suspend fun deleteUserTable()
 
-    @Query("DELETE FROM users where username = :username")
-    suspend fun deleteQuery(username: String)
+    @Query("DELETE FROM penginapans")
+    suspend fun deleteLGuestTable()
+
+    @Query("DELETE FROM chats")
+    suspend fun deleteChatTable()
 
     @Query("SELECT * FROM users")
     suspend fun fetch():List<UserEntity>
+
+    @Query("SELECT * FROM penginapans")
+    suspend fun fetchLGuest():List<PenginapanEntity>
+
+    @Query("SELECT * FROM chats")
+    suspend fun fetchChat():List<ChatEntity>
 
     @Query("SELECT * FROM users where username = :username")
     suspend fun unique(username:String):UserEntity?

@@ -76,6 +76,8 @@ class AkunSewa : Fragment() {
                 Response.Listener {
                     coroutine.launch {
                         db.userDao.deleteUserTable()
+                        db.userDao.deleteChatTable()
+                        db.userDao.deleteLGuestTable()
                     }
                     val intent = Intent(view.context, LoginActivity::class.java)
                     activity?.runOnUiThread { startActivity(intent) }

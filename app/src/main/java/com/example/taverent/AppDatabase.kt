@@ -18,6 +18,8 @@ class .kt. Jadi semua Entity yang hendak digunakan dan disimpan dalam database d
  */
 @Database(entities = [
     UserEntity::class,
+    PenginapanEntity::class,
+    ChatEntity::class,
 ],version=1)
 abstract class AppDatabase : RoomDatabase(){
     abstract val userDao: UserDao
