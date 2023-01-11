@@ -87,11 +87,13 @@ class LoginChoose1 : Fragment() {
                                         intent.putExtra("id_pemilik",pemiliks[i].id.toString())
                                         intent.putExtra("nama_pemilik",pemiliks[i].nama_lengkap.toString())
                                         intent.putExtra("username",pemiliks[i].username.toString())
+
                                         val user = UserEntity(
                                             id = 0,
                                             username = pemiliks[i].nama_lengkap.toString(),
                                         )
                                         coroutine.launch {
+                                            db.userDao.deleteUserTable()
                                             db.userDao.insert(user)
                                         }
                                         activity?.runOnUiThread { startActivity(intent) }
