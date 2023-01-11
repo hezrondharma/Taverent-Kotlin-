@@ -9,6 +9,12 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import org.json.JSONArray
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -24,7 +30,9 @@ class AkunSewa : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
+    var WS_HOST = ""
+    var network = false
+    var pemiliks: ArrayList<Pemilik> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -56,10 +64,21 @@ class AkunSewa : Fragment() {
             activity?.runOnUiThread { startActivity(intent) }
         }
         logout.setOnClickListener{
-            val intent = Intent(view.context,LoginActivity::class.java)
-            activity?.runOnUiThread { startActivity(intent) }
+            WS_HOST = resources.getString(R.string.WS_HOST)
+            val strReq = object : StringRequest(
+                Method.GET,"$WS_HOST/pemilik/list",
+                Response.Listener {
+                    val intent = Intent(view.context, LoginActivity::class.java)
+                    activity?.runOnUiThread { startActivity(intent) }
+                },
+                Response.ErrorListener {
+                    Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show()
+                }
+            ){}
+            val queue: RequestQueue = Volley.newRequestQueue(view.context)
+            queue.add(strReq)
+            Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show()
         }
-
     }
     companion object {
         /**

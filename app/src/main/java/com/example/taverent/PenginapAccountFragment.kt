@@ -8,13 +8,18 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
 import com.example.taverent.databinding.FragmentAdminAnnounceBinding
 import com.example.taverent.databinding.FragmentPenginapAccountBinding
 import com.example.taverent.databinding.FragmentPenginapCariBinding
 
 class PenginapAccountFragment : Fragment() {
     private lateinit var binding: FragmentPenginapAccountBinding
-
+    var WS_HOST = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -41,8 +46,20 @@ class PenginapAccountFragment : Fragment() {
             activity?.runOnUiThread { startActivity(intent) }
         }
         binding.imsetting.setOnClickListener {
-            val intent = Intent(view.context, LoginActivity::class.java)
-            activity?.runOnUiThread { startActivity(intent) }
+            WS_HOST = resources.getString(R.string.WS_HOST)
+            val strReq = object : StringRequest(
+                Method.GET,"$WS_HOST/pemilik/list",
+                Response.Listener {
+                    val intent = Intent(view.context, LoginActivity::class.java)
+                    activity?.runOnUiThread { startActivity(intent) }
+                },
+                Response.ErrorListener {
+                    Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show()
+                }
+            ){}
+            val queue: RequestQueue = Volley.newRequestQueue(view.context)
+            queue.add(strReq)
+            Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show()
         }
     }
 }

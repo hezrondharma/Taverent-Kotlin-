@@ -13,12 +13,18 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.taverent.databinding.ActivityLoginBinding
 import com.example.taverent.databinding.FragmentLoginChoose1Binding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 
 
 class LoginChoose1 : Fragment() {
 
     private lateinit var binding: FragmentLoginChoose1Binding
+    private lateinit var db: AppDatabase
+    private lateinit var users: MutableList<UserEntity>
+    private val coroutine = CoroutineScope(Dispatchers.IO)
     var WS_HOST = ""
     var network = false
     var pemiliks: ArrayList<Pemilik> = ArrayList()
@@ -34,6 +40,8 @@ class LoginChoose1 : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = FragmentLoginChoose1Binding.inflate(layoutInflater)
+        db = AppDatabase.build(context)
+        users = mutableListOf()
         val view = binding.root
         return view
     }
@@ -79,6 +87,13 @@ class LoginChoose1 : Fragment() {
                                         intent.putExtra("id_pemilik",pemiliks[i].id.toString())
                                         intent.putExtra("nama_pemilik",pemiliks[i].nama_lengkap.toString())
                                         intent.putExtra("username",pemiliks[i].username.toString())
+                                        val user = UserEntity(
+                                            id = 0,
+                                            username = pemiliks[i].nama_lengkap.toString(),
+                                        )
+                                        coroutine.launch {
+                                            db.userDao.insert(user)
+                                        }
                                         activity?.runOnUiThread { startActivity(intent) }
                                     } else {
                                         Toast.makeText(view.context,
