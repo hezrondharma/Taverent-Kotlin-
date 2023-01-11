@@ -16,9 +16,14 @@ import com.android.volley.toolbox.Volley
 import com.example.taverent.databinding.FragmentAdminAnnounceBinding
 import com.example.taverent.databinding.FragmentPenginapAccountBinding
 import com.example.taverent.databinding.FragmentPenginapCariBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 class PenginapAccountFragment : Fragment() {
     private lateinit var binding: FragmentPenginapAccountBinding
+    private lateinit var db: AppDatabase
+    private val coroutine = CoroutineScope(Dispatchers.IO)
     var WS_HOST = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,6 +41,7 @@ class PenginapAccountFragment : Fragment() {
     }
     var id_penginap = ""
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        db = AppDatabase.build(context)
         super.onViewCreated(view, savedInstanceState)
         var nama_pemilik = ""
         id_penginap = arguments?.getString("id_penginap").toString()
@@ -50,6 +56,9 @@ class PenginapAccountFragment : Fragment() {
             val strReq = object : StringRequest(
                 Method.GET,"$WS_HOST/pemilik/list",
                 Response.Listener {
+                    coroutine.launch {
+                        db.userDao.deleteUserTable()
+                    }
                     val intent = Intent(view.context, LoginActivity::class.java)
                     activity?.runOnUiThread { startActivity(intent) }
                 },
@@ -59,7 +68,6 @@ class PenginapAccountFragment : Fragment() {
             ){}
             val queue: RequestQueue = Volley.newRequestQueue(view.context)
             queue.add(strReq)
-            Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show()
         }
     }
 }

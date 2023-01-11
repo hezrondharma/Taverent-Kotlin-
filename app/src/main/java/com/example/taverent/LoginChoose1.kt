@@ -2,6 +2,7 @@ package com.example.taverent
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -42,6 +43,11 @@ class LoginChoose1 : Fragment() {
         binding = FragmentLoginChoose1Binding.inflate(layoutInflater)
         db = AppDatabase.build(context)
         users = mutableListOf()
+        coroutine.launch {
+            users.clear()
+            users.addAll(db.userDao.fetch().toMutableList())
+            Log.i("USER", users.toString())
+        }
         val view = binding.root
         return view
     }
@@ -90,7 +96,15 @@ class LoginChoose1 : Fragment() {
 
                                         val user = UserEntity(
                                             id = 0,
-                                            username = pemiliks[i].nama_lengkap.toString(),
+                                            id_user= pemiliks[i].id,
+                                            username= pemiliks[i].username,
+                                            password=pemiliks[i].password,
+                                            nama_lengkap=pemiliks[i].nama_lengkap,
+                                            email=pemiliks[i].email,
+                                            no_telp=pemiliks[i].no_telp,
+                                            deleted_at=pemiliks[i].deleted_at,
+                                            saldo=pemiliks[i].saldo,
+                                            jenis = "pemilik"
                                         )
                                         coroutine.launch {
                                             db.userDao.deleteUserTable()
@@ -126,6 +140,22 @@ class LoginChoose1 : Fragment() {
                                         intent.putExtra("penginap",penginaps[i])
                                         intent.putExtra("id_penginap",penginaps[i].id.toString())
                                         Toast.makeText(view.context, penginaps[i].id.toString(), Toast.LENGTH_SHORT).show()
+                                        val user = UserEntity(
+                                            id = 0,
+                                            id_user= penginaps[i].id,
+                                            username= penginaps[i].username,
+                                            password=penginaps[i].password,
+                                            nama_lengkap=penginaps[i].nama_lengkap,
+                                            email=penginaps[i].email,
+                                            no_telp=penginaps[i].no_telp,
+                                            deleted_at=penginaps[i].deleted_at,
+                                            saldo=penginaps[i].saldo,
+                                            jenis = "penginap"
+                                        )
+                                        coroutine.launch {
+                                            db.userDao.deleteUserTable()
+                                            db.userDao.insert(user)
+                                        }
                                         activity?.runOnUiThread { startActivity(intent) }
                                     } else {
                                         Toast.makeText(view.context,

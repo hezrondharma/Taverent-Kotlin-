@@ -14,6 +14,9 @@ import com.android.volley.RequestQueue
 import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 
 // TODO: Rename parameter arguments, choose names that match
@@ -28,6 +31,8 @@ private const val ARG_PARAM2 = "param2"
  */
 class AkunSewa : Fragment() {
     // TODO: Rename and change types of parameters
+    private lateinit var db: AppDatabase
+    private val coroutine = CoroutineScope(Dispatchers.IO)
     private var param1: String? = null
     private var param2: String? = null
     var WS_HOST = ""
@@ -52,6 +57,7 @@ class AkunSewa : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var nama_pemilik = ""
+        db = AppDatabase.build(context)
         id_pemilik = arguments?.getString("id_pemilik").toString()
         nama_pemilik = arguments?.getString("nama_pemilik").toString()
         val logout = view.findViewById<ImageView>(R.id.imageView17)
@@ -68,6 +74,9 @@ class AkunSewa : Fragment() {
             val strReq = object : StringRequest(
                 Method.GET,"$WS_HOST/pemilik/list",
                 Response.Listener {
+                    coroutine.launch {
+                        db.userDao.deleteUserTable()
+                    }
                     val intent = Intent(view.context, LoginActivity::class.java)
                     activity?.runOnUiThread { startActivity(intent) }
                 },
@@ -77,7 +86,6 @@ class AkunSewa : Fragment() {
             ){}
             val queue: RequestQueue = Volley.newRequestQueue(view.context)
             queue.add(strReq)
-            Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show()
         }
     }
     companion object {
