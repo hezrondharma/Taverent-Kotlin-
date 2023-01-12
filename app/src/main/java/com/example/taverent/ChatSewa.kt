@@ -1,6 +1,10 @@
 package com.example.taverent
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,6 +20,9 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.taverent.databinding.FragmentChatSewaBinding
 import com.example.taverent.databinding.FragmentPenginapChatBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 
 class ChatSewa : Fragment() {
@@ -35,6 +42,9 @@ class ChatSewa : Fragment() {
         return view
     }
     var WS_HOST = ""
+    private lateinit var db: AppDatabase
+    private lateinit var Chats: MutableList<ChatEntity>
+    private val coroutine = CoroutineScope(Dispatchers.IO)
     private lateinit var rvChatPenginap: RVChatPenginap
     var chats:ArrayList<Chat> = ArrayList()
     var chatsLatest:ArrayList<Chat> = ArrayList()
@@ -44,7 +54,8 @@ class ChatSewa : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         WS_HOST = resources.getString(R.string.WS_HOST)
         pemilik = arguments?.getParcelable<Pemilik>("pemilik") as Pemilik
-
+        db = AppDatabase.build(context)
+        Chats = mutableListOf()
         val byResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
             refreshChat(view,pemilik.id)
             rvChatPenginap.notifyDataSetChanged()
@@ -56,7 +67,33 @@ class ChatSewa : Fragment() {
             intent.putExtra("pemilik",chats[idx].id_pemilik)
             byResult.launch(intent)
         }
+        if (checkForInternet(requireContext())) {
 
+        } else {
+            coroutine.launch {
+                Chats.clear()
+                Chats.addAll(db.userDao.fetchChat().toMutableList())
+                Log.i("USER", Chats.toString())
+
+                activity?.runOnUiThread(Runnable {
+                    for (i in 0 until Chats.size) {
+                        val id = Chats[i].id
+                        val pesan = Chats[i].pesan
+                        val id_penginap = Chats[i].id_penginap
+                        val username_penginap = Chats[i].username_penginap
+                        val id_pemilik = Chats[i].id_pemilik
+                        var username_pemilik = Chats[i].username_pemilik
+                        var created_at = Chats[i].created_at
+                        var status = Chats[i].status
+                        var sender = Chats[i].sender
+                        val p = Chat(id,pesan,id_penginap,username_penginap,id_pemilik,username_pemilik,created_at,status,sender)
+                        chats.add(p)
+                        rvChatPenginap.notifyDataSetChanged()
+                    }
+                    findlatest()
+                })
+            }
+        }
         refreshChat(view,pemilik.id)
 
         binding.rvChatPenginap.adapter = rvChatPenginap
@@ -88,6 +125,9 @@ class ChatSewa : Fragment() {
             Response.Listener {
                 val obj: JSONArray = JSONArray(it)
                 chats.clear()
+                coroutine.launch {
+                    db.userDao.deleteChatTable()
+                }
                 for (i in 0 until obj.length()) {
                     val o = obj.getJSONObject(i)
                     val id = o.getInt("id")
@@ -109,6 +149,20 @@ class ChatSewa : Fragment() {
                         status,
                         sender
                     )
+                    val c = ChatEntity(
+                        id = id,
+                        pesan = pesan,
+                        id_penginap = id_penginap,
+                        username_penginap = username_penginap,
+                        id_pemilik = id_pemilik,
+                        username_pemilik = username_pemilik,
+                        created_at = created_at,
+                        status = status,
+                        sender = sender,
+                    )
+                    coroutine.launch {
+                        db.userDao.insert(c)
+                    }
                     chats.add(p)
                     rvChatPenginap.notifyDataSetChanged()
                 }
@@ -128,6 +182,24 @@ class ChatSewa : Fragment() {
         queue.add(strReq)
     }
 
+    private fun checkForInternet(context: Context): Boolean {
+
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        } else {
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
+    }
 
 
 }
