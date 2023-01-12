@@ -10,7 +10,7 @@
 </head>
 <body>
     <section class="ftco-section">
-		<div class="container">
+		<div class="container" style="height:90vh;">
 			<div class="row justify-content-center">
 				<div class="col-lg-10 col-md-12 mt-5 mb-5">
 					<div class="wrap d-md-flex rounded-4" style="background-color:#D9D9D9">

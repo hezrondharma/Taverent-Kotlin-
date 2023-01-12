@@ -145,7 +145,7 @@ class SearchResultActivity : AppCompatActivity() {
             koor1.substring(koor1.indexOf(',')+1,koor1.length-1).toDouble()
         )
         val geoCoordinates2 = GeoCoordinates(
-            koor2.substring(0,koor1.indexOf(',')).toDouble(),
+            koor2.substring(0,koor2.indexOf(',')).toDouble(),
             koor2.substring(koor2.indexOf(',')+1,koor2.length-1).toDouble()
         )
 

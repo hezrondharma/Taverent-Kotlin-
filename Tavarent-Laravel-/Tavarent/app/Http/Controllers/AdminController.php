@@ -22,7 +22,7 @@ class AdminController extends Controller
 {
     public function testing()
     {
-
+        
     }
 
     function destroyadmin(){

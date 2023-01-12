@@ -2,16 +2,28 @@ package com.example.taverent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.View
+import android.widget.Toast
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.example.taverent.CurrencyUtils.toRupiah
 import com.example.taverent.databinding.ActivityPenginapBinding
+import org.json.JSONObject
 
 class PenginapActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPenginapBinding
     private lateinit var penginap: Penginap
+    var WS_HOST = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityPenginapBinding.inflate(layoutInflater)
         val view = binding.root
         setContentView(view)
+        WS_HOST = resources.getString(R.string.WS_HOST)
+
 
         penginap = intent.getParcelableExtra<Penginap>("penginap") as Penginap
         val fragment = PenginapCariFragment()
@@ -26,6 +38,7 @@ class PenginapActivity : AppCompatActivity() {
         binding.bottomNavPenginap.setOnItemSelectedListener {
             when(it.itemId){
                 R.id.searchitem->{
+                    refreshPenginap()
                     val fragment = PenginapCariFragment()
                     val bundle = Bundle()
                     bundle.putParcelable("penginap",penginap)
@@ -74,5 +87,39 @@ class PenginapActivity : AppCompatActivity() {
             }
             return@setOnItemSelectedListener true
         }
+    }
+    fun refreshPenginap(){
+        val strReq = object : StringRequest(
+            Method.POST,"$WS_HOST/penginap/find",
+            Response.Listener {
+                val o = JSONObject(it)
+                val id = o.getInt("id")
+                val username = o.getString("username")
+                val password = o.getString("password")
+                val nama_lengkap = o.getString("nama_lengkap")
+                val email = o.getString("email")
+                val no_telp = o.getString("no_telp")
+                val saldo = o.getInt("saldo")
+                var deleted_at = ""
+                if (o.has("deleted_at")) {
+                    deleted_at = o.getString("deleted_at")
+                }
+                Log.e("saldo",saldo.toRupiah())
+
+                penginap.saldo = saldo
+
+            },
+            Response.ErrorListener {
+                Toast.makeText(this, "WS_ERROR2", Toast.LENGTH_SHORT).show()
+            }
+        ){
+            override fun getParams(): MutableMap<String, String>? {
+                val params = HashMap<String, String>()
+                params["id_penginap"] = penginap.id.toString()
+                return params
+            }
+        }
+        val queue: RequestQueue = Volley.newRequestQueue(this)
+        queue.add(strReq)
     }
 }

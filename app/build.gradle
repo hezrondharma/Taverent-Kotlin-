@@ -7,6 +7,14 @@ plugins {
 apply plugin: "kotlin-kapt"
 
 android {
+    signingConfigs {
+        release {
+        storeFile file('D:\\Johans\\Kuliah\\Semester 5\\TAVARENT\\Tavarent App\\tavarentkey.jks')
+            storePassword '123456'
+            keyAlias 'key0'
+            keyPassword '123456'
+        }
+    }
     compileSdk 32
 
     defaultConfig {
@@ -17,6 +25,7 @@ android {
         versionName "1.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        signingConfig signingConfigs.debug
     }
 
     buildTypes {
@@ -42,6 +51,8 @@ android {
 
 }
 
+
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -54,13 +65,15 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
     implementation("androidx.viewpager2:viewpager2:1.0.0")
     implementation 'androidx.core:core-splashscreen:1.0.0-beta02'
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0'
+
 
 
     //local database/room
-implementation "androidx.room:room-runtime:2.4.3"
-kapt "androidx.room:room-compiler:2.4.3"
-implementation "androidx.room:room-ktx:2.4.3"
-implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
+    implementation "androidx.room:room-runtime:2.4.3"
+    kapt "androidx.room:room-compiler:2.4.3"
+    implementation "androidx.room:room-ktx:2.4.3"
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
 
     //connect laravel
     implementation 'com.android.volley:volley:1.2.1'
@@ -77,5 +90,6 @@ implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.5.0'
 
     //heremaps
     implementation fileTree(dir: 'libs', include: ['*.aar', '*.jar'], exclude : ['*mock*.jar'])
-
+    implementation 'com.midtrans:uikit:1.27.0-SANDBOX'
+    implementation 'com.koushikdutta.ion:ion:3.1.0'
 }

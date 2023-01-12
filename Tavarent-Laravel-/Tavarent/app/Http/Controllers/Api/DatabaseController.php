@@ -232,6 +232,12 @@ class DatabaseController extends Controller
         ->get();
         return response()->json($pembayaran,201);
     }
+    public function countpembayaran(Request $request)
+    {
+        $pembayaran = Pembayaran::selectRaw("count(pembayaran.id) as count")
+        ->get();
+        return response()->json($pembayaran,201);
+    }
 
     public function insertpembayaran(Request $request)
     {
@@ -244,6 +250,10 @@ class DatabaseController extends Controller
             "id_kupon" => $request->id_kupon,
             "id_promo" => $request->id_promo,
         ));
+        $pemilik = Penginapan::find($request->id_penginapan)->Pemilik()->first();
+        $pemilik->saldo += $request->total;
+        $pemilik->save();
         return response()->json($pembayaran,201);
     }
+    
 }

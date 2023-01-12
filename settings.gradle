@@ -1,3 +1,5 @@
+import org.gradle.api.initialization.resolve.RepositoriesMode
+
 pluginManagement {
     repositories {
         gradlePluginPortal()
@@ -6,7 +8,7 @@ pluginManagement {
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         google()
         mavenCentral()
@@ -16,6 +18,11 @@ dependencyResolutionManagement {
         maven{
             url "https://maven.pkg.jetbrains.space/data2viz/p/maven/public"
         }
+        jcenter()
+        mavenLocal()
+        // Add the midtrans repository into the list of repositories
+        maven { url "https://dl.bintray.com/pt-midtrans/maven" }
+        maven { url "https://jitpack.io" }
     }
 }
 rootProject.name = "TAVERENT"

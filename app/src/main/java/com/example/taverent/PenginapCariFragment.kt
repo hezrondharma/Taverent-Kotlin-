@@ -1,8 +1,10 @@
 package com.example.taverent
 
 import android.app.ActionBar
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +13,7 @@ import android.widget.AdapterView
 import android.widget.LinearLayout
 import android.widget.Spinner
 import android.widget.Toast
+import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -103,15 +106,25 @@ class PenginapCariFragment : Fragment() {
     }
 
     val byresult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
-        refreshPenginap(binding.root)
+            result: ActivityResult ->
+        if (result.resultCode== Activity.RESULT_OK) {
+            refreshPenginap(binding.root)
+            val data = result.data
+            if (data != null) {
+                penginap = data.getParcelableExtra<Penginap>("penginap") as Penginap
+                binding.tvCurrency.text = penginap.saldo.toRupiah()
+
+            }
+        }
     }
     fun filterPenginapan(){
         penginapansSearch.clear()
         for (i in 0 until penginapans.size){
-            if (penginapans[i].jk_boleh==binding.spinner.selectedItem.toString()){
+            if (penginapans[i].jk_boleh.toString().equals(binding.spinner.selectedItem.toString(),true)){
                 penginapansSearch.add(penginapans[i])
             }
         }
+
         if (penginapansSearch.size>0){
             binding.linearbelumada.visibility = View.GONE
         }else{
@@ -166,7 +179,9 @@ class PenginapCariFragment : Fragment() {
                 if (o.has("deleted_at")) {
                     deleted_at = o.getString("deleted_at")
                 }
-                penginap = Penginap(id,username,password,nama_lengkap,email,no_telp,deleted_at,saldo)
+                Log.e("saldo",saldo.toRupiah())
+
+                penginap.saldo = saldo
                 binding.tvCurrency.text = penginap.saldo.toRupiah()
 
             },
