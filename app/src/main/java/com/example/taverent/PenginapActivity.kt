@@ -1,6 +1,6 @@
 package com.example.taverent
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -10,8 +10,11 @@ import com.android.volley.Response
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.taverent.CurrencyUtils.toRupiah
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import com.example.taverent.databinding.ActivityPenginapBinding
 import org.json.JSONObject
+
 
 class PenginapActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPenginapBinding
@@ -121,5 +124,16 @@ class PenginapActivity : AppCompatActivity() {
         }
         val queue: RequestQueue = Volley.newRequestQueue(this)
         queue.add(strReq)
+    }
+
+    override fun onBackPressed() {
+        val eBuilder = AlertDialog.Builder(this)
+        eBuilder.setTitle("Exit")
+        eBuilder.setIcon(R.drawable.ic_baseline_warning_24)
+        eBuilder.setMessage("Are you sure you want to Exit ?, Press back again to abort")
+        eBuilder.setPositiveButton("Yes"){
+                Dialog, whichButton ->
+            this.finishAffinity();
+        }.show()
     }
 }

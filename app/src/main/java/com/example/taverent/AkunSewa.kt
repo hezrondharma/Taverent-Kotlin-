@@ -9,6 +9,15 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
+import com.android.volley.RequestQueue
+import com.android.volley.Response
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import org.json.JSONArray
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -22,9 +31,13 @@ private const val ARG_PARAM2 = "param2"
  */
 class AkunSewa : Fragment() {
     // TODO: Rename and change types of parameters
+    private lateinit var db: AppDatabase
+    private val coroutine = CoroutineScope(Dispatchers.IO)
     private var param1: String? = null
     private var param2: String? = null
-
+    var WS_HOST = ""
+    var network = false
+    var pemiliks: ArrayList<Pemilik> = ArrayList()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -44,8 +57,10 @@ class AkunSewa : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         var nama_pemilik = ""
+        db = AppDatabase.build(context)
         id_pemilik = arguments?.getString("id_pemilik").toString()
         nama_pemilik = arguments?.getString("nama_pemilik").toString()
+        val logout = view.findViewById<ImageView>(R.id.imageView17)
         val btneditprofilSewa = view.findViewById<LinearLayout>(R.id.btneditprofilSewa)
         val txOwnerUsername1 = view.findViewById<TextView>(R.id.txOwnerUsername)
         txOwnerUsername1.setText(nama_pemilik)
@@ -54,7 +69,26 @@ class AkunSewa : Fragment() {
             intent.putExtra("id_pemilik",id_pemilik)
             activity?.runOnUiThread { startActivity(intent) }
         }
-
+        logout.setOnClickListener{
+            WS_HOST = resources.getString(R.string.WS_HOST)
+            val strReq = object : StringRequest(
+                Method.GET,"$WS_HOST/pemilik/list",
+                Response.Listener {
+                    coroutine.launch {
+                        db.userDao.deleteUserTable()
+                        db.userDao.deleteChatTable()
+                        db.userDao.deleteLGuestTable()
+                    }
+                    val intent = Intent(view.context, LoginActivity::class.java)
+                    activity?.runOnUiThread { startActivity(intent) }
+                },
+                Response.ErrorListener {
+                    Toast.makeText(context, "Check your internet connection", Toast.LENGTH_SHORT).show()
+                }
+            ){}
+            val queue: RequestQueue = Volley.newRequestQueue(view.context)
+            queue.add(strReq)
+        }
     }
     companion object {
         /**

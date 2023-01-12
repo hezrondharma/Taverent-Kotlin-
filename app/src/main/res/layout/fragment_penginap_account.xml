@@ -103,7 +103,7 @@
             android:id="@+id/imsetting"
             android:layout_width="55dp"
             android:layout_height="54dp"
-            android:src="@drawable/ic_baseline_settings_24"
+            android:src="@drawable/ic_baseline_logout_24"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"

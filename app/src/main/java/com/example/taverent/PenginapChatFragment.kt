@@ -18,6 +18,9 @@ import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.example.taverent.databinding.FragmentPenginapCariBinding
 import com.example.taverent.databinding.FragmentPenginapChatBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 
 class PenginapChatFragment : Fragment() {
@@ -38,7 +41,9 @@ class PenginapChatFragment : Fragment() {
         val view = binding.root
         return view
     }
-
+    private lateinit var db: AppDatabase
+    private lateinit var Chats: MutableList<ChatEntity>
+    private val coroutine = CoroutineScope(Dispatchers.IO)
     var WS_HOST = ""
     private lateinit var rvChatPenginap: RVChatPenginap
     var chats:ArrayList<Chat> = ArrayList()
@@ -48,6 +53,8 @@ class PenginapChatFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         WS_HOST = resources.getString(R.string.WS_HOST)
+        db = AppDatabase.build(context)
+        Chats = mutableListOf()
         penginap = arguments?.getParcelable<Penginap>("penginap") as Penginap
 
         rvChatPenginap = RVChatPenginap(chatsLatest,"penginap"){view: View, idx: Int ->
@@ -57,7 +64,29 @@ class PenginapChatFragment : Fragment() {
             intent.putExtra("pemilik",chats[idx].id_pemilik)
             byResult.launch(intent)
         }
+        coroutine.launch {
+            Chats.clear()
+            Chats.addAll(db.userDao.fetchChat().toMutableList())
+            Log.i("USER", Chats.toString())
 
+            activity?.runOnUiThread(Runnable {
+                for (i in 0 until Chats.size) {
+                    val id = Chats[i].id
+                    val pesan = Chats[i].pesan
+                    val id_penginap = Chats[i].id_penginap
+                    val username_penginap = Chats[i].username_penginap
+                    val id_pemilik = Chats[i].id_pemilik
+                    var username_pemilik = Chats[i].username_pemilik
+                    var created_at = Chats[i].created_at
+                    var status = Chats[i].status
+                    var sender = Chats[i].sender
+                    val p = Chat(id,pesan,id_penginap,username_penginap,id_pemilik,username_pemilik,created_at,status,sender)
+                    chats.add(p)
+                    rvChatPenginap.notifyDataSetChanged()
+                }
+                findlatest()
+            })
+        }
         refreshChat(view,penginap.id)
 
         binding.rvChatPenginap.adapter = rvChatPenginap
@@ -89,6 +118,9 @@ class PenginapChatFragment : Fragment() {
             Response.Listener {
                 val obj: JSONArray = JSONArray(it)
                 chats.clear()
+                coroutine.launch {
+                    db.userDao.deleteChatTable()
+                }
                 for (i in 0 until obj.length()) {
                     val o = obj.getJSONObject(i)
                     val id = o.getInt("id")
@@ -110,6 +142,20 @@ class PenginapChatFragment : Fragment() {
                         status,
                         sender
                     )
+                    val c = ChatEntity(
+                        id = id,
+                        pesan = pesan,
+                        id_penginap = id_penginap,
+                        username_penginap = username_penginap,
+                        id_pemilik = id_pemilik,
+                        username_pemilik = username_pemilik,
+                        created_at = created_at,
+                        status = status,
+                        sender = sender,
+                    )
+                    coroutine.launch {
+                        db.userDao.insert(c)
+                    }
                     chats.add(p)
                     rvChatPenginap.notifyDataSetChanged()
                 }

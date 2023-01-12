@@ -2,6 +2,7 @@ package com.example.taverent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import androidx.appcompat.app.AlertDialog
 import com.example.taverent.databinding.ActivityAdminBinding
 
 class AdminActivity : AppCompatActivity() {
@@ -52,6 +53,16 @@ class AdminActivity : AppCompatActivity() {
             }
             return@setOnItemSelectedListener true
         }
+    }
+    override fun onBackPressed() {
+        val eBuilder = AlertDialog.Builder(this)
+        eBuilder.setTitle("Exit")
+        eBuilder.setIcon(R.drawable.ic_baseline_warning_24)
+        eBuilder.setMessage("Are you sure you want to Exit ?, Press back again to abort")
+        eBuilder.setPositiveButton("Yes"){
+                Dialog, whichButton ->
+            this.finishAffinity();
+        }.show()
     }
 
 

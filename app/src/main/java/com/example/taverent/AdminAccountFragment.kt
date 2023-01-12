@@ -1,5 +1,6 @@
 package com.example.taverent
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,7 +35,8 @@ class AdminAccountFragment : Fragment() {
 
         }
         binding.button9.setOnClickListener {
-
+            val intent = Intent(view.context,LoginActivity::class.java)
+            activity?.runOnUiThread { startActivity(intent) }
         }
     }
 }
