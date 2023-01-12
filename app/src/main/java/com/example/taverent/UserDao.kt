@@ -22,6 +22,12 @@ interface UserDao {
     @Insert
     suspend fun insert(Chat:ChatEntity)
 
+    @Insert
+    suspend fun insert(Pembayaran:PembayaranEntity)
+
+    @Insert
+    suspend fun insert(HGuest:HomepenginapEntity)
+
     @Delete
     suspend fun delete(user:UserEntity)
 
@@ -34,6 +40,12 @@ interface UserDao {
     @Query("DELETE FROM chats")
     suspend fun deleteChatTable()
 
+    @Query("DELETE FROM homepenginapan")
+    suspend fun deleteHpenginapanTable()
+
+    @Query("DELETE FROM pembayaran")
+    suspend fun deletePembayaranTable()
+
     @Query("SELECT * FROM users")
     suspend fun fetch():List<UserEntity>
 
@@ -42,6 +54,12 @@ interface UserDao {
 
     @Query("SELECT * FROM chats")
     suspend fun fetchChat():List<ChatEntity>
+
+    @Query("SELECT * FROM homepenginapan")
+    suspend fun fetchHpenginapant():List<HomepenginapEntity>
+
+    @Query("SELECT * FROM pembayaran")
+    suspend fun fetchPembayaran():List<PembayaranEntity>
 
     @Query("SELECT * FROM users where username = :username")
     suspend fun unique(username:String):UserEntity?

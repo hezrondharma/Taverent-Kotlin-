@@ -88,6 +88,9 @@ class PenginapFavoritFragment : Fragment() {
             Response.Listener {
                 val obj: JSONArray = JSONArray(it)
                 penginapans.clear()
+                coroutine.launch {
+                    db.userDao.deleteLGuestTable()
+                }
                 for (i in 0 until obj.length()){
                     val o = obj.getJSONObject(i)
                     val id = o.getInt("id")
@@ -114,7 +117,6 @@ class PenginapFavoritFragment : Fragment() {
                         id_pemilik = id_pemilik,
                     )
                     coroutine.launch {
-                        db.userDao.deleteLGuestTable()
                         db.userDao.insert(penginapan)
                     }
                     penginapans.add(p)

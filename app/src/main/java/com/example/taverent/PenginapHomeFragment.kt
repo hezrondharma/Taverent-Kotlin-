@@ -1,6 +1,7 @@
 package com.example.taverent
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,6 +17,9 @@ import com.example.taverent.databinding.FragmentAdminAnnounceBinding
 import com.example.taverent.databinding.FragmentPenginapCariBinding
 import com.example.taverent.databinding.FragmentPenginapChatBinding
 import com.example.taverent.databinding.FragmentPenginapHomeBinding
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import org.json.JSONArray
 
 class PenginapHomeFragment : Fragment() {
@@ -36,7 +40,10 @@ class PenginapHomeFragment : Fragment() {
         val view = binding.root
         return view
     }
-
+    private lateinit var db: AppDatabase
+    private lateinit var Lguest: MutableList<HomepenginapEntity>
+    private lateinit var Pembs: MutableList<PembayaranEntity>
+    private val coroutine = CoroutineScope(Dispatchers.IO)
     var pembayarans: ArrayList<Pembayaran> = ArrayList()
     var penginapans: ArrayList<Penginapan> = ArrayList()
 
@@ -45,15 +52,52 @@ class PenginapHomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         WS_HOST = resources.getString(R.string.WS_HOST)
-
+        db = AppDatabase.build(context)
+        Pembs= mutableListOf()
+        Lguest = mutableListOf()
         penginap = arguments?.getParcelable<Penginap>("penginap") as Penginap
+//        coroutine.launch {
+//            Lguest.clear()
+//            Lguest.addAll(db.userDao.fetchHpenginapant().toMutableList())
+//            Log.i("USER", Lguest.toString())
+//            Pembs.clear()
+//            Pembs.addAll(db.userDao.fetchPembayaran().toMutableList())
+//            Log.i("USER", Pembs.toString())
+//            activity?.runOnUiThread(Runnable {
+//                for (i in 0 until Lguest.size) {
+//                    val id = Lguest[i].id
+//                    val nama = Lguest[i].nama
+//                    val alamat = Lguest[i].alamat
+//                    val deskripsi = Lguest[i].deskripsi
+//                    val fasilitas = Lguest[i].fasilitas
+//                    var jk_boleh = Lguest[i].jk_boleh
+//                    var tipe = Lguest[i].tipe
+//                    var harga = Lguest[i].harga
+//                    var koordinat = Lguest[i].koordinat
+//                    var id_pemilik =Lguest[i].id_pemilik
+//                    val p = Penginapan(id,nama,alamat,deskripsi,fasilitas,jk_boleh,tipe,harga,koordinat,id_pemilik)
+//                    penginapans.add(p)
+//                }
+//                for (i in 0 until Pembs.size) {
+//                    var id = Pembs[i].id
+//                    var total = Pembs[i].total
+//                    var tanggal_mulai = Pembs[i].tanggal_mulai
+//                    var tanggal_selesai = Pembs[i].tanggal_selesai
+//                    var id_penginap = Pembs[i].id_penginap
+//                    var id_penginapan = Pembs[i].id_penginapan
+//                    var id_kupon = Pembs[i].id_kupon
+//                    var id_promo = Pembs[i].id_promo
+//                    var nama_penginapan = Pembs[i].nama_penginapan
+//                    val p = Pembayaran(id,total,tanggal_mulai,tanggal_selesai,id_penginap,id_penginapan,id_kupon,id_promo,nama_penginapan)
+//                    pembayarans.add(p)
+//                }
+//            })
+//        }
         refreshPenginapan(view)
         refreshPembayaran(view)
-
         rvPembayaran = RVPembayaran(pembayarans)
         binding.rvPembayaran.adapter = rvPembayaran
         binding.rvPembayaran.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
-
     }
 
     fun refreshPembayaran(view:View){
@@ -80,6 +124,20 @@ class PenginapHomeFragment : Fragment() {
                     }
                     val nama = o.getString("nama")
                     val p = Pembayaran(id,total,tanggal_mulai,tanggal_selesai,id_penginap,id_penginapan,id_kupon,id_promo,nama)
+//                    val pemb = PembayaranEntity(
+//                        id=id,
+//                        total= total,
+//                        tanggal_mulai= tanggal_mulai,
+//                        tanggal_selesai= tanggal_selesai,
+//                        id_penginap= id_penginap,
+//                        id_penginapan= id_penginapan,
+//                        id_kupon=id_kupon,
+//                        id_promo=id_promo,
+//                        nama_penginapan=nama
+//                    )
+//                    coroutine.launch {
+//                        db.userDao.insert(pemb)
+//                    }
                     pembayarans.add(p)
                 }
                 if(pembayarans.size==0){
@@ -121,6 +179,22 @@ class PenginapHomeFragment : Fragment() {
                     var koordinat = o.getString("koordinat")
                     var id_pemilik = o.getInt("id_pemilik")
                     val p = Penginapan(id,nama,alamat,deskripsi,fasilitas,jk_boleh,tipe,harga,koordinat,id_pemilik)
+//                    val penginapan = HomepenginapEntity(
+//                        id=id,
+//                        nama = nama,
+//                        alamat = alamat,
+//                        deskripsi = deskripsi,
+//                        fasilitas = fasilitas,
+//                        jk_boleh = jk_boleh,
+//                        tipe = tipe,
+//                        harga = harga,
+//                        koordinat = koordinat,
+//                        id_pemilik = id_pemilik,
+//                    )
+//                    coroutine.launch {
+//                        db.userDao.deleteHpenginapanTable()
+//                        db.userDao.insert(penginapan)
+//                    }
                     penginapans.add(p)
                 }
             },

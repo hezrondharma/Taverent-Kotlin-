@@ -118,6 +118,9 @@ class PenginapChatFragment : Fragment() {
             Response.Listener {
                 val obj: JSONArray = JSONArray(it)
                 chats.clear()
+                coroutine.launch {
+                    db.userDao.deleteChatTable()
+                }
                 for (i in 0 until obj.length()) {
                     val o = obj.getJSONObject(i)
                     val id = o.getInt("id")
@@ -151,7 +154,6 @@ class PenginapChatFragment : Fragment() {
                         sender = sender,
                     )
                     coroutine.launch {
-                        db.userDao.deleteChatTable()
                         db.userDao.insert(c)
                     }
                     chats.add(p)
