@@ -78,30 +78,6 @@ class SewaMain : AppCompatActivity() {
                         R.id.frag4, fragreplace
                     ).setReorderingAllowed(true).commit()
                 }
-                R.id.btnKelolaSewa -> {
-                    val fragreplace = KelolaSewa()
-                    val bundle = Bundle()
-                    bundle.putParcelable("pemilik", pemilik)
-                    bundle.putString("id_pemilik", id_pemilik)
-                    bundle.putString("nama_pemilik", nama_pemilik)
-                    bundle.putString("username", username)
-                    fragreplace.arguments = bundle
-                    val transaction = supportFragmentManager.beginTransaction().replace(
-                        R.id.frag4, fragreplace
-                    ).setReorderingAllowed(true).commit()
-                }
-                R.id.btnStatistikSewa -> {
-                    val fragreplace = StatistikSewa()
-                    val bundle = Bundle()
-                    bundle.putParcelable("pemilik", pemilik)
-                    bundle.putString("id_pemilik", id_pemilik)
-                    bundle.putString("nama_pemilik", nama_pemilik)
-                    bundle.putString("username", username)
-                    fragreplace.arguments = bundle
-                    val transaction = supportFragmentManager.beginTransaction().replace(
-                        R.id.frag4, fragreplace
-                    ).setReorderingAllowed(true).commit()
-                }
                 R.id.btnAkunSewa -> {
                     val fragreplace = AkunSewa()
                     val bundle = Bundle()
