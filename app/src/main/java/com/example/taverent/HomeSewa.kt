@@ -16,6 +16,7 @@ import androidx.activity.result.ActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.taverent.CurrencyUtils.toRupiah
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -42,16 +43,24 @@ class HomeSewa : Fragment() {
         val username = arguments?.getString("username").toString()
         pemilik = arguments?.getParcelable<Pemilik>("pemilik") as Pemilik
 
+        val btnNotifikasi = view.findViewById<ImageView>(R.id.imageView18)
         val txOwnerUsername1 = view.findViewById<TextView>(R.id.txOwnerUsername1)
         val txOwnerUsername2 = view.findViewById<TextView>(R.id.txOwnerUsername2)
+        val tvSaldo = view.findViewById<TextView>(R.id.txsaldoSewa)
         val btnpindah = view.findViewById<ImageView>(R.id.btnTambahKosApartmen)
         var Temp =""
+        tvSaldo.text = pemilik.saldo.toRupiah()
         txOwnerUsername1.setText(nama_pemilik)
         txOwnerUsername2.setText(username)
         btnpindah.setOnClickListener {
             val intent = Intent(view.context,TambahProperti::class.java)
             intent.putExtra("id_pemilik",id_pemilik)
             activity?.runOnUiThread { byResult.launch(intent) }
+        }
+        btnNotifikasi.setOnClickListener {
+            val intent = Intent(view.context, NotificationActivity::class.java)
+            intent.putExtra("tipe",1)
+            startActivity(intent)
         }
     }
     val byResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){

@@ -61,7 +61,11 @@ class PenginapCariFragment : Fragment() {
         binding.tvHalo.text = "Halo "+ penginap.username
         binding.tvCurrency.text = penginap.saldo.toRupiah()
 
-
+        binding.btnNotifikasi.setOnClickListener {
+            val intent = Intent(view.context, NotificationActivity::class.java)
+            intent.putExtra("tipe",0)
+            startActivity(intent)
+        }
         binding.btnAddCurrency.setOnClickListener {
             val intent = Intent(view.context,AddSaldoActivity::class.java)
             intent.putExtra("penginap",penginap)

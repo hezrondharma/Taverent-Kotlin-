@@ -53,6 +53,7 @@ Route::get("/promo/list",[DatabaseController::class, "listpromo"]);
 Route::get("/rating/list",[DatabaseController::class, "listrating"]);
 
 Route::post("/pembayaran/list",[DatabaseController::class, "listpembayaran"]);
+Route::get("/pembayaran/list/semua",[DatabaseController::class, "listpembayaransemua"]);
 Route::post("/pembayaran/list/count",[DatabaseController::class, "countpembayaran"]);
 Route::post("/pembayaran/insert",[DatabaseController::class, "insertpembayaran"]);
 Route::post("/pembayaran/list/penginapan",[DatabaseController::class, "listpembayaranpenginapan"]);

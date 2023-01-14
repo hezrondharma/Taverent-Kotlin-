@@ -225,6 +225,11 @@ class DatabaseController extends Controller
         $pembayaran = Pembayaran::find($request->id_penginap)->get();
         return response()->json($pembayaran,201);
     }
+
+    public function listpembayaransemua(Request $request)
+    {
+        return response()->json(Pembayaran::all(),200);
+    }
     public function listpembayaranpenginapan(Request $request)
     {
         $pembayaran = Pembayaran::where("id_penginap","=",$request->id_penginap)

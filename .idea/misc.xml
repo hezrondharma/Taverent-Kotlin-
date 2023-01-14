@@ -3,20 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.1" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_penginap.xml" value="0.11904761904761904" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_penginap_profile.xml" value="0.2" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_profil_sewa.xml" value="0.264" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_profile_sewa.xml" value="0.22826086956521738" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_sewa_main.xml" value="0.11904761904761904" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/activity_tambah_properti.xml" value="0.264" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_admin_account.xml" value="0.11930091185410334" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_admin_announce.xml" value="0.11930091185410334" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_admin_game.xml" value="0.11930091185410334" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_akun_sewa.xml" value="0.12158054711246201" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_home_sewa.xml" value="0.1" />
-        <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_kelola_sewa.xml" value="0.1" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_login_choose1.xml" value="0.12158054711246201" />
         <entry key="..\:/File Penting/Taverent-Kotlin-/app/src/main/res/layout/fragment_penginap_account.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/drawable/circle.xml" value="0.2305" />
@@ -40,6 +32,7 @@
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_chat.xml" value="0.2984189723320158" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_login.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_map.xml" value="0.264" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_notification.xml" value="0.24814814814814815" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_pembayaran.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_penginap.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/activity_penginapan_detail.xml" value="0.176" />
@@ -53,7 +46,7 @@
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_admin_list.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_akun_sewa.xml" value="0.1265625" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_chat_sewa.xml" value="0.2" />
-        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_home_sewa.xml" value="0.2" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_home_sewa.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_kelola_sewa.xml" value="0.2" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_login_choose1.xml" value="0.27447916666666666" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/fragment_login_choose2.xml" value="0.27447916666666666" />
@@ -73,9 +66,11 @@
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_penginapan_favorit.xml" value="0.4" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_penginapan_penginap_cari.xml" value="0.13796296296296295" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_penginapan_user_home.xml" value="0.27447916666666666" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_pengumuman.xml" value="0.264" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/rv_pesan.xml" value="0.2" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/layout/testing.xml" value="0.264" />
-        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/menu/adminbottomnav.xml" value="0.1265625" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/menu/adminbottomnav.xml" value="0.264" />
+        <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/menu/pemilikbottomnav.xml" value="0.24814814814814815" />
         <entry key="..\:/Johans/Kuliah/Semester 5/TAVARENT/Taverent-Kotlin-/app/src/main/res/menu/penginapbottomnav.xml" value="0.16" />
         <entry key="..\:/Users/ASUS/Documents/GitHub/Taverent-Kotlin-/app/src/main/res/layout/fragment_admin_announce.xml" value="0.1" />
       </map>

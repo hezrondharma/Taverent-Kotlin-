@@ -35,9 +35,9 @@ class AdminActivity : AppCompatActivity() {
                         R.id.frag2,fragment
                     ).setReorderingAllowed(true).commit()
                 }
-                R.id.gameitem->{
-
-                }
+//                R.id.gameitem->{
+//
+//                }
                 R.id.notifitem->{
                     val fragment = AdminAnnounceFragment()
                     supportFragmentManager.beginTransaction().replace(
