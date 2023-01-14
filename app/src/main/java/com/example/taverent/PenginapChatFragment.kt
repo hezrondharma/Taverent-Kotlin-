@@ -1,6 +1,10 @@
 package com.example.taverent
 
+import android.content.Context
 import android.content.Intent
+import android.net.ConnectivityManager
+import android.net.NetworkCapabilities
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -64,28 +68,33 @@ class PenginapChatFragment : Fragment() {
             intent.putExtra("pemilik",chats[idx].id_pemilik)
             byResult.launch(intent)
         }
-        coroutine.launch {
-            Chats.clear()
-            Chats.addAll(db.userDao.fetchChat().toMutableList())
-            Log.i("USER", Chats.toString())
 
-            activity?.runOnUiThread(Runnable {
-                for (i in 0 until Chats.size) {
-                    val id = Chats[i].id
-                    val pesan = Chats[i].pesan
-                    val id_penginap = Chats[i].id_penginap
-                    val username_penginap = Chats[i].username_penginap
-                    val id_pemilik = Chats[i].id_pemilik
-                    var username_pemilik = Chats[i].username_pemilik
-                    var created_at = Chats[i].created_at
-                    var status = Chats[i].status
-                    var sender = Chats[i].sender
-                    val p = Chat(id,pesan,id_penginap,username_penginap,id_pemilik,username_pemilik,created_at,status,sender)
-                    chats.add(p)
-                    rvChatPenginap.notifyDataSetChanged()
-                }
-                findlatest()
-            })
+        if (checkForInternet(requireContext())) {
+
+        } else {
+            coroutine.launch {
+                Chats.clear()
+                Chats.addAll(db.userDao.fetchChat().toMutableList())
+                Log.i("USER", Chats.toString())
+
+                activity?.runOnUiThread(Runnable {
+                    for (i in 0 until Chats.size) {
+                        val id = Chats[i].id
+                        val pesan = Chats[i].pesan
+                        val id_penginap = Chats[i].id_penginap
+                        val username_penginap = Chats[i].username_penginap
+                        val id_pemilik = Chats[i].id_pemilik
+                        var username_pemilik = Chats[i].username_pemilik
+                        var created_at = Chats[i].created_at
+                        var status = Chats[i].status
+                        var sender = Chats[i].sender
+                        val p = Chat(id,pesan,id_penginap,username_penginap,id_pemilik,username_pemilik,created_at,status,sender)
+                        chats.add(p)
+                        rvChatPenginap.notifyDataSetChanged()
+                    }
+                    findlatest()
+                })
+            }
         }
         refreshChat(view,penginap.id)
 
@@ -173,6 +182,25 @@ class PenginapChatFragment : Fragment() {
         }
         val queue: RequestQueue = Volley.newRequestQueue(view.context)
         queue.add(strReq)
+    }
+
+    private fun checkForInternet(context: Context): Boolean {
+
+        val connectivityManager = context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            val network = connectivityManager.activeNetwork ?: return false
+            val activeNetwork = connectivityManager.getNetworkCapabilities(network) ?: return false
+            return when {
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> true
+                activeNetwork.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> true
+                else -> false
+            }
+        } else {
+            @Suppress("DEPRECATION") val networkInfo =
+                connectivityManager.activeNetworkInfo ?: return false
+            @Suppress("DEPRECATION")
+            return networkInfo.isConnected
+        }
     }
 
     val byResult = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){

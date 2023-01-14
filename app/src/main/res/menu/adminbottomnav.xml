@@ -10,6 +10,10 @@
         android:icon="@drawable/ic_baseline_format_list_bulleted_24"
         android:title="List" />
     <item
+        android:id="@+id/gameitem"
+        android:icon="@drawable/ic_baseline_insert_chartgray_outlined_24"
+        android:title="Chart" />
+    <item
         android:id="@+id/notifitem"
         android:icon="@drawable/ic_baseline_notifications_24"
         android:title="Announce" />

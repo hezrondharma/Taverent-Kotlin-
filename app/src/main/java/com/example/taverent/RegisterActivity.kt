@@ -51,8 +51,10 @@ class RegisterActivity : AppCompatActivity() {
 
             if (email!=null&&notelp!=""&&username!=""&&namalengkap!=""&&password!=""){
                 if (tipe=="Pemilik"){
+
                     insertPemilik(email,notelp, username, namalengkap, password)
                 }else if (tipe=="Penginap"){
+
                     insertPenginap(email,notelp, username, namalengkap, password)
                 }
             }else{
