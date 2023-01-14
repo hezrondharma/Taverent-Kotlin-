@@ -69,13 +69,14 @@ class PembayaranActivity : AppCompatActivity() {
                         "id" + penginap.id + penginapan.id
             )
             if (binding.editTextNumber4.text.toString().toInt()>0) {
-                if (penginapan.harga*binding.tvJangkaWaktu.text.toString().toInt()>penginap.saldo) {
+                if (penginapan.harga*binding.tvJangkaWaktu.text.toString().toInt()<=penginap.saldo) {
                     val strReg = object : StringRequest(
                         Method.POST, "$WS_HOST/pembayaran/insert",
                         Response.Listener {
                             Toast.makeText(this, "Berhasil melakukan transaksi", Toast.LENGTH_SHORT)
                                 .show()
                             refreshPenginap(view,penginap.saldo-penginapan.harga*binding.tvJangkaWaktu.text.toString().toInt())
+                            finish()
                         },
                         Response.ErrorListener {
                             Log.e("TRACE", it.stackTraceToString())
