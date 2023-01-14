@@ -11,8 +11,8 @@
         android:title="List" />
     <item
         android:id="@+id/gameitem"
-        android:icon="@drawable/ic_baseline_videogame_asset_24"
-        android:title="Game" />
+        android:icon="@drawable/ic_baseline_insert_chartgray_outlined_24"
+        android:title="Chart" />
     <item
         android:id="@+id/notifitem"
         android:icon="@drawable/ic_baseline_notifications_24"
