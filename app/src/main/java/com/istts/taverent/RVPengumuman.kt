@@ -18,7 +18,7 @@ class RVPengumuman(
     ): CustomViewHolder {
         var itemView = LayoutInflater.from(parent.context)
         return CustomViewHolder(itemView.inflate(
-            R.layout.rv_chat, parent ,false
+            R.layout.rv_pengumuman, parent ,false
         ))
     }
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {

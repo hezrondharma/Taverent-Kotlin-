@@ -2,6 +2,7 @@ package com.istts.taverent
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.volley.RequestQueue
@@ -29,7 +30,8 @@ class NotificationActivity : AppCompatActivity() {
         setContentView(view)
 
         tipe = intent.getIntExtra("tipe",0)
-
+        judul = arrayListOf()
+        isi = arrayListOf()
         rvNotification = RVPengumuman(judul,isi)
         binding.rvNotification.adapter = rvNotification
         binding.rvNotification.layoutManager = LinearLayoutManager(this,LinearLayoutManager.VERTICAL,false)
@@ -52,6 +54,8 @@ class NotificationActivity : AppCompatActivity() {
                         judul.add(j)
                         isi.add(i)
                     }
+                    Log.e("judul",j)
+                    Log.e("isi",i)
                 }
                 rvNotification.notifyDataSetChanged()
             },
