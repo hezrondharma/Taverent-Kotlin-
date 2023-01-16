@@ -36,8 +36,7 @@
                 android:layout_width="40dp"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="20dp"
-                android:background="@drawable/rectangle_white_black_border"
-                android:src="@drawable/ic_baseline_sort_24" />
+                android:background="@drawable/ic_baseline_arrow_forward_24" />
         </LinearLayout>
 
         <RadioGroup

@@ -3,6 +3,7 @@ package com.istts.taverent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -52,7 +53,7 @@ class UsersListFragment : Fragment() {
                 penginapsSearch.add(penginaps[i])
             }
         }
-
+        Log.e("count",penginapsSearch.size.toString())
         rvPenginapAdminHome.notifyDataSetChanged()
     }
     fun searchpemilik(s:String){
@@ -71,44 +72,11 @@ class UsersListFragment : Fragment() {
 
         refreshPenginap(view)
         refreshPemilik(view)
-        rvPenginapAdminHome = RVPenginapAdminHome(penginaps,R.layout.rv_user_admin_home){ view, idx ->
-            val popup = PopupMenu(view.context,view)
-            popup.inflate(R.menu.popupmenu1)
+        rvPenginapAdminHome = RVPenginapAdminHome(penginapsSearch,R.layout.rv_user_admin_home){ view, idx ->
 
-            popup.setOnMenuItemClickListener {
-                when (it.itemId) {
-                    R.id.menudetail -> {
-//                        val intent = Intent(view.context,)
-                    }
-                    R.id.menuban -> {
-                        //ban user
-                        activity?.runOnUiThread {
-                            rvPenginapAdminHome.notifyDataSetChanged()
-                        }
-                    }
-                }
-                true
-            }
-            popup.show()
         }
         rvPemilikAdminHome = RVPemilikAdminHome(pemiliksSearch,R.layout.rv_user_admin_home){ view, idx ->
-            val popup = PopupMenu(view.context,view)
-            popup.inflate(R.menu.popupmenu1)
 
-            popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
-                when (it.itemId){
-                    R.id.menudetail->{
-//                        val intent = Intent(view.context,)
-                    }
-                    R.id.menuban->{
-                        //ban user
-                        activity?.runOnUiThread {
-                            rvPenginapAdminHome.notifyDataSetChanged()}
-                    }
-                }
-                true
-            })
-            popup.show()
         }
         binding.radioButton3.isChecked = true
         binding.rvPenginapan.adapter  = rvPenginapAdminHome
@@ -126,21 +94,11 @@ class UsersListFragment : Fragment() {
                 rvPemilikAdminHome.notifyDataSetChanged()
             }
         }
-        binding.editTextTextPersonName.addTextChangedListener {object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
 
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                searchpenginap(binding.editTextTextPersonName.text.toString())
-                searchpemilik(binding.editTextTextPersonName.text.toString())
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                TODO("Not yet implemented")
-            }
-        }}
-
+        binding.imageButton5.setOnClickListener {
+            searchpenginap(binding.editTextTextPersonName.text.toString())
+            searchpemilik(binding.editTextTextPersonName.text.toString())
+        }
         binding.rvPenginapan.layoutManager = LinearLayoutManager(view.context,LinearLayoutManager.VERTICAL,false)
 
     }

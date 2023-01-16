@@ -3,10 +3,12 @@ package com.istts.taverent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.LinearLayout
 import android.widget.PopupMenu
 import android.widget.Toast
 import androidx.core.widget.addTextChangedListener
@@ -49,47 +51,21 @@ class PenginapanListFragment : Fragment() {
         refreshPenginapan(view)
 
         rvPenginapanAdminHome = RVPenginapanAdminHome(penginapansSearch,R.layout.rv_penginapan_admin){view, idx ->
-            val popup = PopupMenu(view.context,view)
-            popup.inflate(R.menu.popupmenu1)
 
-            popup.setOnMenuItemClickListener(PopupMenu.OnMenuItemClickListener {
-                when (it.itemId){
-                    R.id.menudetail->{
-//                        val intent = Intent(view.context,)
-                    }
-                    R.id.menuban->{
-                        //ban user
-                        activity?.runOnUiThread {
-                            rvPenginapanAdminHome.notifyDataSetChanged()}
-                    }
-                }
-                true
-            })
-            popup.show()
         }
         binding.rvPenginapan.adapter = rvPenginapanAdminHome
-        binding.editTextTextPersonName.addTextChangedListener {object: TextWatcher{
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
-            }
 
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                search(binding.editTextTextPersonName.text.toString())
-            }
 
-            override fun afterTextChanged(p0: Editable?) {
-                TODO("Not yet implemented")
-            }
-        }}
+        binding.imageButton5.setOnClickListener {
+            search(binding.editTextTextPersonName.text.toString())
+        }
 
         binding.rvPenginapan.layoutManager = LinearLayoutManager(view.context,
             LinearLayoutManager.VERTICAL,false)
-
-        search("")
     }
 
     fun search(s:String){
-        penginapans.clear()
+        penginapansSearch.clear()
         for (i in 0 until penginapans.size){
             if (penginapans[i].nama!!.contains(s,true)){
                 penginapansSearch.add(penginapans[i])
@@ -117,8 +93,11 @@ class PenginapanListFragment : Fragment() {
                     var id_pemilik = o.getInt("id_pemilik")
                     val p = Penginapan(id,nama,alamat,deskripsi,fasilitas,jk_boleh,tipe,harga,koordinat,id_pemilik)
                     penginapans.add(p)
-                    rvPenginapanAdminHome.notifyDataSetChanged()
+
+                    search("")
                 }
+                Log.e("testing",penginapans.size.toString())
+
             },
             Response.ErrorListener {
                 Toast.makeText(view.context, "WS_ERROR1", Toast.LENGTH_SHORT).show()

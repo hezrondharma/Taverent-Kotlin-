@@ -30,9 +30,7 @@ class AdminAccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.button8.setOnClickListener{
 
-        }
         binding.button9.setOnClickListener {
             val intent = Intent(view.context,LoginActivity::class.java)
             activity?.runOnUiThread { startActivity(intent) }
