@@ -26,9 +26,7 @@ class RVPenginapanAdminHome(
         holder.textnamakos.text = item.nama
         holder.textjk.text = item.jk_boleh
         holder.textalamat.text = item.alamat
-        holder.imagebutton.setOnClickListener {
-            onMoreClickListener?.invoke(it,position)
-        }
+
     }
 
 
@@ -44,7 +42,6 @@ class RVPenginapanAdminHome(
         val textalamat: TextView = itemView.findViewById(R.id.tvAlamat)
         val textrating: TextView = itemView.findViewById(R.id.textView20)
         val ratingbar: RatingBar = itemView.findViewById(R.id.ratingBar)
-        val imagebutton: ImageButton = itemView.findViewById(R.id.imageButton4)
 
     }
 

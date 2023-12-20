@@ -26,10 +26,4 @@
         android:text="TextView"
         android:textSize="14sp" />
 
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:background="#00FFFFFF"
-        app:srcCompat="@drawable/ic_baseline_more_vert_24" />
 </LinearLayout>

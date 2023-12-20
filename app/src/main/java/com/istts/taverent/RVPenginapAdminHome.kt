@@ -26,9 +26,7 @@ class RVPenginapAdminHome(
     override fun onBindViewHolder(holder: CustomViewHolder, position: Int) {
         val item = songs[position]
         holder.textnama.text = item.nama_lengkap
-        holder.imagebutton.setOnClickListener {
-            onMoreClickListener?.invoke(it,position)
-        }
+
     }
 
 
@@ -39,7 +37,6 @@ class RVPenginapAdminHome(
     class CustomViewHolder(view: View): RecyclerView.ViewHolder(view) {
         val imageview: ImageView = itemView.findViewById(R.id.imageView4)
         val textnama: TextView = itemView.findViewById(R.id.textView14)
-        val imagebutton: ImageButton = itemView.findViewById(R.id.imageButton3)
 
     }
 
